@@ -1,23 +1,31 @@
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Home, CheckCircle, Globe, DollarSign, TrendingUp, Settings, Menu, X, ExternalLink } from 'lucide-react';
 import { LaunchOSLogo } from './LaunchOSLogo';
+import { useProfile } from '../contexts/ProfileContext';
 
-interface SidebarProps {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-  currentPage: string;
-  setCurrentPage: (page: string) => void;
-  onboardingComplete: boolean;
-}
+export function Sidebar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { onboardingSubmitted } = useProfile();
 
-export function Sidebar({ isOpen, setIsOpen, currentPage, setCurrentPage, onboardingComplete }: SidebarProps) {
+  // Map pathname to page identifier
+  const currentPage = location.pathname.replace('/', '') || 'dashboard';
+
   const navItems = [
     { icon: Home, label: 'Dashboard', page: 'dashboard' },
-    { icon: CheckCircle, label: 'Onboarding', page: 'onboarding', highlightGreen: !onboardingComplete },
+    { icon: CheckCircle, label: 'Onboarding', page: 'onboarding', highlightGreen: !onboardingSubmitted },
     { icon: Globe, label: 'Website', page: 'website' },
     { icon: DollarSign, label: 'Paid Marketing', page: 'paid-marketing' },
     { icon: TrendingUp, label: 'Organic Marketing', page: 'organic-marketing' },
     { icon: Settings, label: 'Settings', page: 'settings' },
   ];
+
+  const handleNavigation = (page: string) => {
+    navigate(`/${page}`);
+    setIsOpen(false);
+  };
 
   const handleCRMClick = () => {
     window.open('https://fieldd.co', '_blank');
@@ -37,7 +45,7 @@ export function Sidebar({ isOpen, setIsOpen, currentPage, setCurrentPage, onboar
       </button>
 
       {/* Sidebar */}
-      <div className={`fixed left-0 top-0 h-full bg-[#0A0A0A] border-r border-[#1A1B1E] transition-all duration-300 z-40 ${isOpen ? 'w-64 translate-x-0' : 'w-64 -translate-x-full lg:translate-x-0 lg:w-0 lg:opacity-0'}`}
+      <div className={`fixed left-0 top-0 h-full bg-[#0A0A0A] border-r border-[#1A1B1E] transition-all duration-300 z-40 w-64 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
         style={{
           backdropFilter: 'blur(20px)',
           boxShadow: '4px 0 20px rgba(0, 0, 0, 0.5)'
@@ -63,9 +71,9 @@ export function Sidebar({ isOpen, setIsOpen, currentPage, setCurrentPage, onboar
               return (
                 <button
                   key={item.label}
-                  onClick={() => setCurrentPage(item.page)}
-                  className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all $
-                    {isActive
+                  onClick={() => handleNavigation(item.page)}
+                  className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                    isActive
                       ? 'bg-[#151618] text-white'
                       : useGreenHighlight
                       ? 'bg-[#10B981]/10 text-[#10B981]'
