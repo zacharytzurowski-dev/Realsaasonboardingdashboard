@@ -69,9 +69,16 @@ const stepDefinitions = [
 export function OnboardingPage() {
   const { onboardingProgress, updateOnboardingStep } = useProfile();
   const [activeStep, setActiveStep] = useState<number | null>(null);
-  const [steps, setSteps] = useState<OnboardingStep[]>([]);
 
-  // Initialize steps from database
+  // Initialize steps with default 'not-started' status immediately
+  const [steps, setSteps] = useState<OnboardingStep[]>(
+    stepDefinitions.map((stepDef) => ({
+      ...stepDef,
+      status: 'not-started' as StepStatus,
+    }))
+  );
+
+  // Update steps status from database when onboardingProgress loads
   useEffect(() => {
     if (onboardingProgress) {
       const updatedSteps = stepDefinitions.map((stepDef) => ({
