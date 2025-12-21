@@ -46,9 +46,12 @@ function ProtectedApp() {
 
         <Sidebar />
 
-        {/* Main content - ml-64 on large screens where sidebar is visible */}
-        <div className="transition-all duration-300 ml-0 lg:ml-64">
-          <div className="max-w-7xl mx-auto p-8">
+        {/* Main content - positioned to the right of the fixed sidebar */}
+        <main
+          className="min-h-screen"
+          style={{ marginLeft: '256px' }}
+        >
+          <div className="p-8">
             <Routes>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<DashboardPage />} />
