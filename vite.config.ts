@@ -57,6 +57,11 @@
     },
     server: {
       port: 3000,
-      open: true,
+      host: '0.0.0.0',
+      strictPort: true,
+      open: false,
+      hmr: {
+        clientPort: 3000,
+      },
     },
   });
