@@ -1,4 +1,4 @@
-import { Clock, CheckCircle, Sparkles, Globe, TrendingUp, Zap, Rocket, ArrowRight, Palette, FileText, Calendar, Database, Star, Loader2, User, Briefcase, Settings, HelpCircle, LogOut, ChevronDown } from 'lucide-react';
+import { Clock, CheckCircle, Sparkles, Globe, TrendingUp, Zap, Rocket, ArrowRight, Palette, FileText, Calendar, Database, Star, Loader2, User, Briefcase, Settings, HelpCircle, LogOut, ChevronDown, Check } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { LaunchOSLogo } from '../LaunchOSLogo';
 import { DeploymentCountdown } from '../DeploymentCountdown';
@@ -12,7 +12,7 @@ interface DashboardPageProps {
 export function DashboardPage({ onNavigate }: DashboardPageProps) {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
-  const { profile } = useProfile();
+  const { profile, onboardingSubmitted } = useProfile();
   const { user } = useAuth();
 
   // Owner information from profile or auth user
@@ -298,27 +298,45 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
 
             {/* Complete Onboarding Button */}
             <div className="flex flex-col items-center">
-              <button 
-                onClick={() => onNavigate && onNavigate('onboarding')}
-                className="group relative px-12 py-4 rounded-2xl transition-all duration-300 hover:scale-[1.02] flex items-center gap-3 overflow-hidden"
-                style={{
-                  boxShadow: '0 8px 24px rgba(0, 217, 255, 0.3)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 217, 255, 0.4)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 217, 255, 0.3)';
-                }}
-              >
-                {/* Button gradient */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#00D9FF] via-[#0EA5E9] to-[#3B82F6]"></div>
-                <span className="relative text-white">Complete Onboarding</span>
-                <ArrowRight className="relative w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
-              </button>
+              {onboardingSubmitted ? (
+                // Onboarding submitted - show green completed status
+                <div
+                  className="relative px-12 py-4 rounded-2xl flex items-center gap-3 overflow-hidden cursor-default"
+                  style={{
+                    boxShadow: '0 8px 24px rgba(16, 185, 129, 0.3)'
+                  }}
+                >
+                  {/* Button gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#10B981] via-[#059669] to-[#10B981]"></div>
+                  <Check className="relative w-5 h-5 text-white" />
+                  <span className="relative text-white">Onboarding Complete</span>
+                </div>
+              ) : (
+                // Onboarding not submitted - show blue button linking to onboarding
+                <button
+                  onClick={() => onNavigate && onNavigate('onboarding')}
+                  className="group relative px-12 py-4 rounded-2xl transition-all duration-300 hover:scale-[1.02] flex items-center gap-3 overflow-hidden"
+                  style={{
+                    boxShadow: '0 8px 24px rgba(0, 217, 255, 0.3)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 217, 255, 0.4)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 217, 255, 0.3)';
+                  }}
+                >
+                  {/* Button gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#00D9FF] via-[#0EA5E9] to-[#3B82F6]"></div>
+                  <span className="relative text-white">Complete Onboarding</span>
+                  <ArrowRight className="relative w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
+                </button>
+              )}
               {/* Caption */}
               <p className="text-xs text-[#6B6C7B] mt-4 text-center max-w-md">
-                Completing onboarding unlocks your full system and deploys remaining subsystems automatically.
+                {onboardingSubmitted
+                  ? 'Your system is being deployed. Check the countdown timer above for progress.'
+                  : 'Completing onboarding unlocks your full system and deploys remaining subsystems automatically.'}
               </p>
             </div>
           </div>

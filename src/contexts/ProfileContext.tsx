@@ -17,7 +17,10 @@ interface ProfileContextType {
   loading: boolean
   systemStatus: SystemStatus
   activationDeadline: Date | null
+  onboardingSubmitted: boolean
+  submitting: boolean
   refreshProfile: () => Promise<void>
+  submitOnboarding: () => Promise<boolean>
 }
 
 const ProfileContext = createContext<ProfileContextType | undefined>(undefined)
@@ -26,6 +29,7 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth()
   const [profile, setProfile] = useState<Profile | null>(null)
   const [loading, setLoading] = useState(true)
+  const [submitting, setSubmitting] = useState(false)
 
   const fetchProfile = useCallback(async () => {
     if (!user) {
@@ -85,13 +89,52 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
     await fetchProfile()
   }
 
+  // Check if onboarding has been submitted
+  const onboardingSubmitted = profile?.onboarding_completed_at !== null && profile?.onboarding_completed_at !== undefined
+
+  // Submit onboarding: set onboarding_completed_at = NOW and activation_deadline = NOW + 72 hours
+  const submitOnboarding = async (): Promise<boolean> => {
+    if (!user) return false
+
+    setSubmitting(true)
+    try {
+      const now = new Date()
+      const deadline = new Date(now.getTime() + 72 * 60 * 60 * 1000) // NOW + 72 hours
+
+      const { error } = await supabase
+        .from('profiles')
+        .upsert({
+          id: user.id,
+          onboarding_completed_at: now.toISOString(),
+          activation_deadline: deadline.toISOString()
+        }, { onConflict: 'id' })
+
+      if (error) {
+        console.error('Error submitting onboarding:', error.message)
+        return false
+      }
+
+      // Refresh profile to get updated data
+      await fetchProfile()
+      return true
+    } catch (err) {
+      console.error('Error submitting onboarding:', err)
+      return false
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
   return (
     <ProfileContext.Provider value={{
       profile,
       loading,
       systemStatus,
       activationDeadline,
-      refreshProfile
+      onboardingSubmitted,
+      submitting,
+      refreshProfile,
+      submitOnboarding
     }}>
       {children}
     </ProfileContext.Provider>

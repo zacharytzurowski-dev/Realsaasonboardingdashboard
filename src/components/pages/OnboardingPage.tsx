@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CheckCircle2, Circle, Building2, Palette, Users, FileText, Megaphone, Database, Clock } from 'lucide-react';
+import { CheckCircle2, Circle, Building2, Palette, Users, FileText, Megaphone, Database, Clock, Check, Loader2 } from 'lucide-react';
 import { PageHero } from '../PageHero';
 import { BusinessInformationForm } from '../forms/BusinessInformationForm';
 import { BrandGuidelinesForm } from '../forms/BrandGuidelinesForm';
@@ -8,6 +8,7 @@ import { ContentPreferencesForm } from '../forms/ContentPreferencesForm';
 import { AdsTrackingForm } from '../forms/AdsTrackingForm';
 import { CRMSetupForm } from '../forms/CRMSetupForm';
 import { ReviewSubmitPage } from '../forms/ReviewSubmitPage';
+import { useProfile } from '../../contexts/ProfileContext';
 
 type StepStatus = 'completed' | 'in-progress' | 'not-started';
 
@@ -22,6 +23,7 @@ interface OnboardingStep {
 
 export function OnboardingPage() {
   const [activeStep, setActiveStep] = useState<number | null>(null);
+  const { onboardingSubmitted, submitting, submitOnboarding } = useProfile();
 
   const [steps, setSteps] = useState<OnboardingStep[]>([
     {
@@ -104,9 +106,11 @@ export function OnboardingPage() {
     setActiveStep(stepId);
   };
 
-  const handleSubmit = () => {
-    alert('Onboarding submitted successfully! 🎉');
-    setActiveStep(null);
+  const handleSubmit = async () => {
+    const success = await submitOnboarding();
+    if (success) {
+      setActiveStep(null);
+    }
   };
 
   const getStatusBadge = (status: StepStatus) => {
@@ -284,20 +288,41 @@ export function OnboardingPage() {
         </div>
       )}
 
-      {/* Help Section - Dark Gradient Card */}
-      <div className="mt-6 relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#1A1D23] rounded-xl p-6 border border-[#293038] shadow-md">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/5 to-transparent"></div>
-        <div className="relative flex items-start gap-4">
-          <div className="w-12 h-12 bg-gradient-to-br from-[#3AB8FF] to-[#00CFFF] rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-[#3AB8FF]/30">
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+      {/* Submit Onboarding Button */}
+      <div className="mt-6">
+        {onboardingSubmitted ? (
+          // Already submitted - show green completed status
+          <div className="w-full bg-gradient-to-r from-[#10B981] via-[#059669] to-[#10B981] text-white px-8 py-6 rounded-xl shadow-md shadow-[#10B981]/30 flex items-center justify-center gap-3 font-medium cursor-default">
+            <Check className="w-6 h-6" />
+            <span className="text-lg">Onboarding Complete</span>
           </div>
-          <div>
-            <h3 className="text-[#E8F1FF] font-medium mb-1">Need Help?</h3>
-            <p className="text-[#94A3B8] text-sm">Our team is here to assist you with the onboarding process. Click any step above to get started or contact support if you have questions.</p>
+        ) : allStepsCompleted ? (
+          // All steps complete - show active submit button
+          <button
+            onClick={handleSubmit}
+            disabled={submitting}
+            className="w-full bg-gradient-to-r from-[#00D9FF] via-[#0EA5E9] to-[#3B82F6] text-white px-8 py-6 rounded-xl hover:shadow-lg hover:shadow-[#00D9FF]/40 hover:-translate-y-1 transition-all shadow-md shadow-[#00D9FF]/30 flex items-center justify-center gap-3 font-medium disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+          >
+            {submitting ? (
+              <>
+                <Loader2 className="w-6 h-6 animate-spin" />
+                <span className="text-lg">Submitting...</span>
+              </>
+            ) : (
+              <>
+                <CheckCircle2 className="w-6 h-6" />
+                <span className="text-lg">Submit Onboarding</span>
+              </>
+            )}
+          </button>
+        ) : (
+          // Steps incomplete - show disabled button
+          <div className="w-full bg-[#1A1D23] text-[#64748B] px-8 py-6 rounded-xl border border-[#293038] flex items-center justify-center gap-3 font-medium cursor-not-allowed">
+            <CheckCircle2 className="w-6 h-6" />
+            <span className="text-lg">Submit Onboarding</span>
+            <span className="text-sm text-[#475569] ml-2">({completedCount}/{steps.length} steps completed)</span>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
