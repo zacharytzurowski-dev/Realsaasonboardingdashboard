@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react';
 import { CheckCircle2, Circle, Building2, Palette, Users, FileText, Megaphone, Database, Clock } from 'lucide-react';
 import { PageHero } from '../PageHero';
 import { useProfile } from '../../contexts/ProfileContext';
-import { Modal } from '../Modal';
-import { Step1BusinessInfo } from '../onboarding/Step1BusinessInfo';
-import { Step2BrandGuidelines } from '../onboarding/Step2BrandGuidelines';
-import { Step3TargetAudience } from '../onboarding/Step3TargetAudience';
-import { Step4ContentPreferences } from '../onboarding/Step4ContentPreferences';
-import { Step5Integrations } from '../onboarding/Step5Integrations';
-import { Step6ReviewLaunch } from '../onboarding/Step6ReviewLaunch';
+import { BusinessInformationForm } from '../forms/BusinessInformationForm';
+import { BrandGuidelinesForm } from '../forms/BrandGuidelinesForm';
+import { TargetAudienceForm } from '../forms/TargetAudienceForm';
+import { ContentPreferencesForm } from '../forms/ContentPreferencesForm';
+import { AdsTrackingForm } from '../forms/AdsTrackingForm';
+import { CRMSetupForm } from '../forms/CRMSetupForm';
 
 type StepStatus = 'completed' | 'in-progress' | 'not-started';
 
@@ -67,8 +66,8 @@ const stepDefinitions = [
 ];
 
 export function OnboardingPage() {
-  const { onboardingProgress, updateOnboardingStep, saveStepFormData, completeOnboarding } = useProfile();
-  const [activeStepModal, setActiveStepModal] = useState<number | null>(null);
+  const { onboardingProgress, completeOnboarding } = useProfile();
+  const [activeStep, setActiveStep] = useState<number | null>(null);
 
   // Initialize steps with default 'not-started' status immediately
   const [steps, setSteps] = useState<OnboardingStep[]>(
@@ -112,39 +111,15 @@ export function OnboardingPage() {
 
   const handleStepClick = (stepId: number) => {
     console.log('🔘 Step clicked:', stepId);
-    setActiveStepModal(stepId);
+    setActiveStep(stepId);
   };
 
-  const handleCloseModal = () => {
-    setActiveStepModal(null);
+  const handleBack = () => {
+    setActiveStep(null);
   };
 
-  const handleSaveStep = async (stepNumber: number, formData: any) => {
-    console.log('💾 Saving step:', stepNumber, formData);
-
-    try {
-      // Save form data
-      await saveStepFormData(stepNumber, formData);
-      console.log('✅ Form data saved');
-
-      // Mark step as completed
-      await updateOnboardingStep(stepNumber, 'completed');
-      console.log('✅ Step marked as completed');
-
-      // Update local state
-      setSteps(prevSteps =>
-        prevSteps.map(step =>
-          step.id === stepNumber ? { ...step, status: 'completed' as StepStatus } : step
-        )
-      );
-
-      // Close modal
-      setActiveStepModal(null);
-    } catch (error) {
-      console.error('❌ Error saving step:', error);
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      alert(`Failed to save progress: ${errorMessage}\n\nPlease check the console for details.`);
-    }
+  const handleSave = () => {
+    setActiveStep(null);
   };
 
 
@@ -173,6 +148,26 @@ export function OnboardingPage() {
         );
     }
   };
+
+  // Show full-page forms when step is active
+  if (activeStep === 1) {
+    return <BusinessInformationForm onBack={handleBack} onSave={handleSave} />;
+  }
+  if (activeStep === 2) {
+    return <BrandGuidelinesForm onBack={handleBack} onSave={handleSave} />;
+  }
+  if (activeStep === 3) {
+    return <TargetAudienceForm onBack={handleBack} onSave={handleSave} />;
+  }
+  if (activeStep === 4) {
+    return <ContentPreferencesForm onBack={handleBack} onSave={handleSave} />;
+  }
+  if (activeStep === 5) {
+    return <AdsTrackingForm onBack={handleBack} onSave={handleSave} />;
+  }
+  if (activeStep === 6) {
+    return <CRMSetupForm onBack={handleBack} onSave={handleSave} />;
+  }
 
   // Show checklist view
   return (
@@ -302,81 +297,6 @@ export function OnboardingPage() {
           </div>
         </div>
       </div>
-
-      {/* Step Modals */}
-      <Modal
-        isOpen={activeStepModal === 1}
-        onClose={handleCloseModal}
-        title="Business Information"
-      >
-        <Step1BusinessInfo
-          initialData={onboardingProgress?.form_data?.step_1}
-          onSave={(data) => handleSaveStep(1, data)}
-          onCancel={handleCloseModal}
-        />
-      </Modal>
-
-      <Modal
-        isOpen={activeStepModal === 2}
-        onClose={handleCloseModal}
-        title="Brand Guidelines"
-      >
-        <Step2BrandGuidelines
-          initialData={onboardingProgress?.form_data?.step_2}
-          onSave={(data) => handleSaveStep(2, data)}
-          onCancel={handleCloseModal}
-        />
-      </Modal>
-
-      <Modal
-        isOpen={activeStepModal === 3}
-        onClose={handleCloseModal}
-        title="Target Audience"
-      >
-        <Step3TargetAudience
-          initialData={onboardingProgress?.form_data?.step_3}
-          onSave={(data) => handleSaveStep(3, data)}
-          onCancel={handleCloseModal}
-        />
-      </Modal>
-
-      <Modal
-        isOpen={activeStepModal === 4}
-        onClose={handleCloseModal}
-        title="Content Preferences"
-      >
-        <Step4ContentPreferences
-          initialData={onboardingProgress?.form_data?.step_4}
-          onSave={(data) => handleSaveStep(4, data)}
-          onCancel={handleCloseModal}
-        />
-      </Modal>
-
-      <Modal
-        isOpen={activeStepModal === 5}
-        onClose={handleCloseModal}
-        title="Integrations"
-      >
-        <Step5Integrations
-          initialData={onboardingProgress?.form_data?.step_5}
-          onSave={(data) => handleSaveStep(5, data)}
-          onCancel={handleCloseModal}
-        />
-      </Modal>
-
-      <Modal
-        isOpen={activeStepModal === 6}
-        onClose={handleCloseModal}
-        title="Review & Launch"
-      >
-        <Step6ReviewLaunch
-          formData={onboardingProgress?.form_data || {}}
-          onConfirm={async () => {
-            await handleSaveStep(6, { confirmed: true });
-          }}
-          onCancel={handleCloseModal}
-        />
-      </Modal>
     </div>
   );
 }
