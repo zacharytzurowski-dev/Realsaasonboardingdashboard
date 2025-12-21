@@ -1,6 +1,5 @@
 import { Clock, CheckCircle, Sparkles, Globe, TrendingUp, Zap, Rocket, ArrowRight, Palette, FileText, Calendar, Database, Star, Loader2, User, Briefcase, Settings, HelpCircle, LogOut, ChevronDown } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
-import { LaunchOSLogo } from '../LaunchOSLogo';
 import { useAuth } from '../../contexts/AuthContext';
 import { useProfile } from '../../contexts/ProfileContext';
 
@@ -89,9 +88,9 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
         {/* Top Header Section - Welcome Hero */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-5">
-            {/* Logo with Glow */}
-            <LaunchOSLogo size={56} withGlow={true} />
-            
+            {/* Logo */}
+            <img src="/logo.png" alt="LaunchOS" className="h-10 w-auto" />
+
             {/* Header Text */}
             <div>
               <h1 className="text-3xl text-white tracking-tight">
