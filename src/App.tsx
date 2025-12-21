@@ -30,7 +30,7 @@ function ProtectedApp() {
     <ProfileProvider>
       <div className="min-h-screen bg-[#080808] text-white">
         <Sidebar />
-        <main className="lg:ml-64 min-h-screen overflow-y-auto p-6">
+        <main className="ml-0 lg:ml-64 min-h-screen overflow-y-auto p-6">
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<DashboardPage />} />
