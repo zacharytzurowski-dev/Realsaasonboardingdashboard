@@ -1,45 +1,23 @@
 import { Clock, CheckCircle, Sparkles, Globe, TrendingUp, Zap, Rocket, ArrowRight, Palette, FileText, Calendar, Database, Star, Loader2, User, Briefcase, Settings, HelpCircle, LogOut, ChevronDown } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { LaunchOSLogo } from '../LaunchOSLogo';
+import { DeploymentCountdown } from '../DeploymentCountdown';
+import { useProfile } from '../../contexts/ProfileContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface DashboardPageProps {
   onNavigate?: (page: string) => void;
 }
 
 export function DashboardPage({ onNavigate }: DashboardPageProps) {
-  const [currentTime, setCurrentTime] = useState(new Date());
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
-  
-  // Owner information from onboarding
-  const ownerName = 'Sarah Johnson';
-  const businessName = 'Acme Plumbing';
-  
-  // Deployment started - countdown from 72 hours
-  const deploymentStartTime = new Date('2025-12-09T00:00:00'); // Started 2 days ago
-  const totalDeploymentHours = 72;
+  const { profile } = useProfile();
+  const { user } = useAuth();
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  // Calculate countdown from 72 hours
-  const elapsedTime = currentTime.getTime() - deploymentStartTime.getTime();
-  const elapsedHours = elapsedTime / (1000 * 60 * 60);
-  const remainingHours = Math.max(0, totalDeploymentHours - elapsedHours);
-  const hoursLeft = Math.max(0, Math.ceil(remainingHours));
-  
-  // Calculate HH:MM:SS for display
-  const totalSecondsRemaining = Math.max(0, Math.floor(remainingHours * 3600));
-  const hours = Math.floor(totalSecondsRemaining / 3600);
-  const minutes = Math.floor((totalSecondsRemaining % 3600) / 60);
-  const seconds = totalSecondsRemaining % 60;
-  
-  // Calculate percentage for progress (72 hours = 100%)
-  const progressPercentage = Math.max(0, Math.min(100, (elapsedHours / totalDeploymentHours) * 100));
+  // Owner information from profile or auth user
+  const ownerName = profile?.full_name || user?.user_metadata?.full_name || 'User';
+  const businessName = profile?.business_name || 'Your Business';
 
   // Activity ticker messages
   const activities = [
@@ -228,86 +206,16 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
         </div>
 
         {/* 72-Hour Deployment Progress Module */}
-        <div 
+        <div
           className="bg-[#151618] rounded-3xl border border-[#2A2B2E]/50 p-8 overflow-hidden relative"
           style={{
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-[#00D9FF]/5 via-transparent to-[#8B5CF6]/5 pointer-events-none"></div>
-          
+
           <div className="relative">
-            {/* Status Badge */}
-            <div className="flex items-center justify-between mb-6">
-              <div 
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#00D9FF]/10 border border-[#00D9FF]/20 backdrop-blur-sm"
-                style={{
-                  boxShadow: '0 0 20px rgba(0, 217, 255, 0.1)'
-                }}
-              >
-                <div 
-                  className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-pulse"
-                  style={{
-                    boxShadow: '0 0 10px rgba(0, 217, 255, 0.5)'
-                  }}
-                ></div>
-                <span className="text-xs text-[#00D9FF] font-medium uppercase tracking-wider">System Deployment Active</span>
-              </div>
-              <div className="text-sm text-[#8B8D98]">
-                {hoursLeft} hours remaining
-              </div>
-            </div>
-
-            {/* Countdown Display */}
-            <div className="flex items-center justify-center gap-6 mb-6">
-              {/* Hours */}
-              <div className="text-center">
-                <div className="text-5xl text-white tabular-nums tracking-tight">
-                  {String(hours).padStart(2, '0')}
-                </div>
-                <div className="text-xs text-[#6B6C7B] uppercase tracking-wider mt-1">Hours</div>
-              </div>
-              
-              <div className="text-3xl text-[#2A2B2E]">•</div>
-              
-              {/* Minutes */}
-              <div className="text-center">
-                <div className="text-5xl text-white tabular-nums tracking-tight">
-                  {String(minutes).padStart(2, '0')}
-                </div>
-                <div className="text-xs text-[#6B6C7B] uppercase tracking-wider mt-1">Minutes</div>
-              </div>
-              
-              <div className="text-3xl text-[#2A2B2E]">•</div>
-              
-              {/* Seconds */}
-              <div className="text-center">
-                <div className="text-5xl text-white tabular-nums tracking-tight">
-                  {String(seconds).padStart(2, '0')}
-                </div>
-                <div className="text-xs text-[#6B6C7B] uppercase tracking-wider mt-1">Seconds</div>
-              </div>
-            </div>
-
-            {/* Progress Bar */}
-            <div className="relative">
-              <div className="h-2 bg-[#0A0A0A] rounded-full overflow-hidden border border-[#2A2B2E]/50">
-                <div 
-                  className="h-full bg-gradient-to-r from-[#00D9FF] via-[#0EA5E9] to-[#3B82F6] rounded-full transition-all duration-1000 relative"
-                  style={{ 
-                    width: `${progressPercentage}%`,
-                    boxShadow: '0 0 20px rgba(0, 217, 255, 0.4)'
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#00D9FF] to-[#3B82F6] blur-sm opacity-50"></div>
-                </div>
-              </div>
-              <div className="flex items-center justify-between mt-2 text-xs text-[#6B6C7B]">
-                <span>Started</span>
-                <span className="text-[#00D9FF]">{Math.round(progressPercentage)}% Complete</span>
-                <span>Complete</span>
-              </div>
-            </div>
+            <DeploymentCountdown showFullDisplay={true} />
           </div>
         </div>
 

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
+import { ProfileProvider } from './contexts/ProfileContext'
 import AuthPage from './components/auth/AuthPage'
 import { Sidebar } from './components/Sidebar'
 import { DashboardPage } from './components/pages/DashboardPage'
@@ -26,21 +27,23 @@ function ProtectedApp() {
   }
 
   return (
-    <div className="flex h-screen bg-[#080808] text-white overflow-hidden">
-      <Sidebar />
-      <main className="flex-1 overflow-y-auto">
-        <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/onboarding" element={<OnboardingPage />} />
-          <Route path="/website" element={<WebsitePage />} />
-          <Route path="/paid-marketing" element={<PaidMarketingPage />} />
-          <Route path="/organic-marketing" element={<OrganicMarketingPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/resources" element={<ResourcesPage />} />
-        </Routes>
-      </main>
-    </div>
+    <ProfileProvider>
+      <div className="flex h-screen bg-[#080808] text-white overflow-hidden">
+        <Sidebar />
+        <main className="flex-1 overflow-y-auto">
+          <Routes>
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/onboarding" element={<OnboardingPage />} />
+            <Route path="/website" element={<WebsitePage />} />
+            <Route path="/paid-marketing" element={<PaidMarketingPage />} />
+            <Route path="/organic-marketing" element={<OrganicMarketingPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/resources" element={<ResourcesPage />} />
+          </Routes>
+        </main>
+      </div>
+    </ProfileProvider>
   )
 }
 
