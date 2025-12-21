@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CheckCircle2, Circle, Building2, Palette, Users, FileText, Megaphone, Database, Clock, Check, Loader2 } from 'lucide-react';
 import { PageHero } from '../PageHero';
 import { BusinessInformationForm } from '../forms/BusinessInformationForm';
@@ -7,7 +8,6 @@ import { TargetAudienceForm } from '../forms/TargetAudienceForm';
 import { ContentPreferencesForm } from '../forms/ContentPreferencesForm';
 import { AdsTrackingForm } from '../forms/AdsTrackingForm';
 import { CRMSetupForm } from '../forms/CRMSetupForm';
-import { ReviewSubmitPage } from '../forms/ReviewSubmitPage';
 import { useProfile } from '../../contexts/ProfileContext';
 
 type StepStatus = 'completed' | 'in-progress' | 'not-started';
@@ -24,6 +24,7 @@ interface OnboardingStep {
 export function OnboardingPage() {
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const { onboardingSubmitted, submitting, submitOnboarding } = useProfile();
+  const navigate = useNavigate();
 
   const [steps, setSteps] = useState<OnboardingStep[]>([
     {
@@ -98,18 +99,10 @@ export function OnboardingPage() {
     setActiveStep(null);
   };
 
-  const handleReviewClick = () => {
-    setActiveStep(8); // Review & Submit page
-  };
-
-  const handleEditFromReview = (stepId: number) => {
-    setActiveStep(stepId);
-  };
-
   const handleSubmit = async () => {
     const success = await submitOnboarding();
     if (success) {
-      setActiveStep(null);
+      navigate('/dashboard');
     }
   };
 
@@ -157,9 +150,6 @@ export function OnboardingPage() {
   }
   if (activeStep === 6) {
     return <CRMSetupForm onBack={handleBack} onSave={handleSave} />;
-  }
-  if (activeStep === 8) {
-    return <ReviewSubmitPage onBack={handleBack} onEdit={handleEditFromReview} onSubmit={handleSubmit} />;
   }
 
   // Show checklist view
@@ -275,53 +265,44 @@ export function OnboardingPage() {
         })}
       </div>
 
-      {/* Review & Submit Button */}
-      {allStepsCompleted && (
-        <div className="mt-6">
-          <button
-            onClick={handleReviewClick}
-            className="w-full bg-gradient-to-r from-[#10B981] via-[#059669] to-[#10B981] text-white px-8 py-6 rounded-xl hover:shadow-lg hover:shadow-[#10B981]/40 hover:-translate-y-1 transition-all shadow-md shadow-[#10B981]/30 flex items-center justify-center gap-3 font-medium"
-          >
-            <CheckCircle2 className="w-6 h-6" />
-            <span className="text-lg">Review & Submit Onboarding</span>
-          </button>
-        </div>
-      )}
-
       {/* Submit Onboarding Button */}
-      <div className="mt-6">
+      <div className="mt-8 flex justify-center">
         {onboardingSubmitted ? (
-          // Already submitted - show green completed status
-          <div className="w-full bg-gradient-to-r from-[#10B981] via-[#059669] to-[#10B981] text-white px-8 py-6 rounded-xl shadow-md shadow-[#10B981]/30 flex items-center justify-center gap-3 font-medium cursor-default">
-            <Check className="w-6 h-6" />
-            <span className="text-lg">Onboarding Complete</span>
+          // Already submitted - show green completed badge
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#10B981]/20 border border-[#10B981]/30">
+            <Check className="w-5 h-5 text-[#10B981]" />
+            <span className="text-[#10B981] font-medium">Onboarding Complete</span>
           </div>
         ) : allStepsCompleted ? (
           // All steps complete - show active submit button
           <button
             onClick={handleSubmit}
             disabled={submitting}
-            className="w-full bg-gradient-to-r from-[#00D9FF] via-[#0EA5E9] to-[#3B82F6] text-white px-8 py-6 rounded-xl hover:shadow-lg hover:shadow-[#00D9FF]/40 hover:-translate-y-1 transition-all shadow-md shadow-[#00D9FF]/30 flex items-center justify-center gap-3 font-medium disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-[#00D9FF] via-[#0EA5E9] to-[#3B82F6] text-white font-medium hover:shadow-lg hover:shadow-[#00D9FF]/30 hover:-translate-y-0.5 transition-all disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+            style={{ boxShadow: '0 4px 14px rgba(0, 217, 255, 0.25)' }}
           >
             {submitting ? (
               <>
-                <Loader2 className="w-6 h-6 animate-spin" />
-                <span className="text-lg">Submitting...</span>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                <span>Submitting...</span>
               </>
             ) : (
               <>
-                <CheckCircle2 className="w-6 h-6" />
-                <span className="text-lg">Submit Onboarding</span>
+                <CheckCircle2 className="w-5 h-5" />
+                <span>Submit Onboarding</span>
               </>
             )}
           </button>
         ) : (
           // Steps incomplete - show disabled button
-          <div className="w-full bg-[#1A1D23] text-[#64748B] px-8 py-6 rounded-xl border border-[#293038] flex items-center justify-center gap-3 font-medium cursor-not-allowed">
-            <CheckCircle2 className="w-6 h-6" />
-            <span className="text-lg">Submit Onboarding</span>
-            <span className="text-sm text-[#475569] ml-2">({completedCount}/{steps.length} steps completed)</span>
-          </div>
+          <button
+            disabled
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-[#1A1D23] text-[#64748B] border border-[#293038] font-medium cursor-not-allowed"
+          >
+            <CheckCircle2 className="w-5 h-5" />
+            <span>Submit Onboarding</span>
+            <span className="text-sm text-[#475569]">({completedCount}/{steps.length})</span>
+          </button>
         )}
       </div>
     </div>
