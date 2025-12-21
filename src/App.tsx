@@ -28,11 +28,9 @@ function ProtectedApp() {
 
   return (
     <ProfileProvider>
-      <div className="flex min-h-screen bg-[#080808] text-white">
+      <div className="min-h-screen bg-[#080808] text-white">
         <Sidebar />
-        {/* Spacer for fixed sidebar - only visible on lg screens */}
-        <div className="hidden lg:block w-64 flex-shrink-0" />
-        <main className="flex-1 min-h-screen overflow-y-auto p-6">
+        <main className="lg:ml-64 min-h-screen overflow-y-auto p-6">
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<DashboardPage />} />
