@@ -20,6 +20,7 @@ interface OnboardingProgress {
   step_6_status: 'not_started' | 'completed';
   onboarding_completed_at?: string;
   activation_deadline?: string;
+  form_data?: Record<string, any>;
   created_at?: string;
   updated_at?: string;
 }
@@ -30,6 +31,7 @@ interface ProfileContextType {
   loading: boolean;
   refreshProfile: () => Promise<void>;
   updateOnboardingStep: (stepNumber: number, status: 'not_started' | 'completed') => Promise<void>;
+  saveStepFormData: (stepNumber: number, data: any) => Promise<void>;
   completeOnboarding: () => Promise<void>;
 }
 
@@ -229,6 +231,49 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const saveStepFormData = async (stepNumber: number, data: any) => {
+    console.log('💾 saveStepFormData called:', { stepNumber, data });
+
+    if (!user) {
+      console.error('❌ No user found in saveStepFormData');
+      throw new Error('User not authenticated');
+    }
+
+    if (!onboardingProgress) {
+      console.error('❌ No onboardingProgress found in saveStepFormData');
+      throw new Error('Onboarding progress not found');
+    }
+
+    // Merge new step data with existing form_data
+    const currentFormData = onboardingProgress.form_data || {};
+    const updatedFormData = {
+      ...currentFormData,
+      [`step_${stepNumber}`]: data,
+    };
+
+    console.log('🔵 Updating form_data:', updatedFormData);
+
+    try {
+      const { data: updatedProgress, error } = await supabase
+        .from('onboarding_progress')
+        .update({ form_data: updatedFormData })
+        .eq('id', user.id)
+        .select()
+        .single();
+
+      if (error) {
+        console.error('❌ Supabase error saving form data:', error);
+        throw error;
+      }
+
+      console.log('✅ Successfully saved form data:', updatedProgress);
+      setOnboardingProgress(updatedProgress);
+    } catch (error) {
+      console.error('❌ Error in saveStepFormData:', error);
+      throw error;
+    }
+  };
+
   const completeOnboarding = async () => {
     console.log('🎉 completeOnboarding called');
 
@@ -292,6 +337,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
         loading,
         refreshProfile,
         updateOnboardingStep,
+        saveStepFormData,
         completeOnboarding,
       }}
     >

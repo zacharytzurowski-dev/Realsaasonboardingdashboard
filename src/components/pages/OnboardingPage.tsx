@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react';
 import { CheckCircle2, Circle, Building2, Palette, Users, FileText, Megaphone, Database, Clock } from 'lucide-react';
 import { PageHero } from '../PageHero';
 import { useProfile } from '../../contexts/ProfileContext';
+import { Modal } from '../Modal';
+import { Step1BusinessInfo } from '../onboarding/Step1BusinessInfo';
+import { Step2BrandGuidelines } from '../onboarding/Step2BrandGuidelines';
+import { Step3TargetAudience } from '../onboarding/Step3TargetAudience';
+import { Step4ContentPreferences } from '../onboarding/Step4ContentPreferences';
+import { Step5Integrations } from '../onboarding/Step5Integrations';
+import { Step6ReviewLaunch } from '../onboarding/Step6ReviewLaunch';
 
 type StepStatus = 'completed' | 'in-progress' | 'not-started';
 
@@ -60,7 +67,8 @@ const stepDefinitions = [
 ];
 
 export function OnboardingPage() {
-  const { onboardingProgress, updateOnboardingStep, completeOnboarding } = useProfile();
+  const { onboardingProgress, updateOnboardingStep, saveStepFormData, completeOnboarding } = useProfile();
+  const [activeStepModal, setActiveStepModal] = useState<number | null>(null);
 
   // Initialize steps with default 'not-started' status immediately
   const [steps, setSteps] = useState<OnboardingStep[]>(
@@ -102,22 +110,38 @@ export function OnboardingPage() {
     checkAndCompleteOnboarding();
   }, [allStepsCompleted, onboardingProgress, completeOnboarding]);
 
-  const handleStepClick = async (stepId: number) => {
+  const handleStepClick = (stepId: number) => {
     console.log('🔘 Step clicked:', stepId);
+    setActiveStepModal(stepId);
+  };
+
+  const handleCloseModal = () => {
+    setActiveStepModal(null);
+  };
+
+  const handleSaveStep = async (stepNumber: number, formData: any) => {
+    console.log('💾 Saving step:', stepNumber, formData);
 
     try {
-      // Mark step as completed in database
-      await updateOnboardingStep(stepId, 'completed');
+      // Save form data
+      await saveStepFormData(stepNumber, formData);
+      console.log('✅ Form data saved');
+
+      // Mark step as completed
+      await updateOnboardingStep(stepNumber, 'completed');
       console.log('✅ Step marked as completed');
 
       // Update local state
       setSteps(prevSteps =>
         prevSteps.map(step =>
-          step.id === stepId ? { ...step, status: 'completed' as StepStatus } : step
+          step.id === stepNumber ? { ...step, status: 'completed' as StepStatus } : step
         )
       );
+
+      // Close modal
+      setActiveStepModal(null);
     } catch (error) {
-      console.error('❌ Error marking step as completed:', error);
+      console.error('❌ Error saving step:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       alert(`Failed to save progress: ${errorMessage}\n\nPlease check the console for details.`);
     }
@@ -278,6 +302,81 @@ export function OnboardingPage() {
           </div>
         </div>
       </div>
+
+      {/* Step Modals */}
+      <Modal
+        isOpen={activeStepModal === 1}
+        onClose={handleCloseModal}
+        title="Business Information"
+      >
+        <Step1BusinessInfo
+          initialData={onboardingProgress?.form_data?.step_1}
+          onSave={(data) => handleSaveStep(1, data)}
+          onCancel={handleCloseModal}
+        />
+      </Modal>
+
+      <Modal
+        isOpen={activeStepModal === 2}
+        onClose={handleCloseModal}
+        title="Brand Guidelines"
+      >
+        <Step2BrandGuidelines
+          initialData={onboardingProgress?.form_data?.step_2}
+          onSave={(data) => handleSaveStep(2, data)}
+          onCancel={handleCloseModal}
+        />
+      </Modal>
+
+      <Modal
+        isOpen={activeStepModal === 3}
+        onClose={handleCloseModal}
+        title="Target Audience"
+      >
+        <Step3TargetAudience
+          initialData={onboardingProgress?.form_data?.step_3}
+          onSave={(data) => handleSaveStep(3, data)}
+          onCancel={handleCloseModal}
+        />
+      </Modal>
+
+      <Modal
+        isOpen={activeStepModal === 4}
+        onClose={handleCloseModal}
+        title="Content Preferences"
+      >
+        <Step4ContentPreferences
+          initialData={onboardingProgress?.form_data?.step_4}
+          onSave={(data) => handleSaveStep(4, data)}
+          onCancel={handleCloseModal}
+        />
+      </Modal>
+
+      <Modal
+        isOpen={activeStepModal === 5}
+        onClose={handleCloseModal}
+        title="Integrations"
+      >
+        <Step5Integrations
+          initialData={onboardingProgress?.form_data?.step_5}
+          onSave={(data) => handleSaveStep(5, data)}
+          onCancel={handleCloseModal}
+        />
+      </Modal>
+
+      <Modal
+        isOpen={activeStepModal === 6}
+        onClose={handleCloseModal}
+        title="Review & Launch"
+      >
+        <Step6ReviewLaunch
+          formData={onboardingProgress?.form_data || {}}
+          onConfirm={async () => {
+            await handleSaveStep(6, { confirmed: true });
+          }}
+          onCancel={handleCloseModal}
+        />
+      </Modal>
     </div>
   );
 }
