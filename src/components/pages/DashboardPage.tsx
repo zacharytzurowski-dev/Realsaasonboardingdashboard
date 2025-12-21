@@ -2,20 +2,22 @@ import { Clock, CheckCircle, Sparkles, Globe, TrendingUp, Zap, Rocket, ArrowRigh
 import { useState, useEffect, useRef } from 'react';
 import { LaunchOSLogo } from '../LaunchOSLogo';
 import { useAuth } from '../../contexts/AuthContext';
+import { useProfile } from '../../contexts/ProfileContext';
 
 interface DashboardPageProps {
   onNavigate?: (page: string) => void;
 }
 
 export function DashboardPage({ onNavigate }: DashboardPageProps) {
-  const { user, signOut } = useAuth();
+  const { signOut } = useAuth();
+  const { profile } = useProfile();
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
 
-  // Get user information from auth session
-  const ownerName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User';
-  const businessName = user?.user_metadata?.business_name || 'My Business';
+  // Get user information from profile
+  const ownerName = profile?.full_name || 'User';
+  const businessName = profile?.business_name || 'My Business';
   const userInitial = ownerName.charAt(0).toUpperCase();
   
   // Deployment started - countdown from 72 hours

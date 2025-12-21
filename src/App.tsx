@@ -10,15 +10,17 @@ import { ResourcesPage } from './components/pages/ResourcesPage';
 import { SettingsPage } from './components/pages/SettingsPage';
 import { AuthPage } from './components/auth/AuthPage';
 import { useAuth } from './contexts/AuthContext';
+import { useProfile } from './contexts/ProfileContext';
 import { Loader2 } from 'lucide-react';
 
 export default function App() {
-  const { user, loading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
+  const { onboardingProgress, loading: profileLoading } = useProfile();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [currentPage, setCurrentPage] = useState('dashboard');
 
-  // Show loading state while checking auth
-  if (loading) {
+  // Show loading state while checking auth or profile
+  if (authLoading || (user && profileLoading)) {
     return (
       <div className="min-h-screen bg-[#080808] flex items-center justify-center">
         <Loader2 className="w-8 h-8 text-[#00D9FF] animate-spin" />
@@ -30,19 +32,17 @@ export default function App() {
   if (!user) {
     return <AuthPage />;
   }
-  
-  // Determine if onboarding is complete based on tasks
-  // In a real app, this would come from your data store
+
+  // Determine if onboarding is complete based on database
   const onboardingSteps = [
-    { completed: false },  // Business Information
-    { completed: false },  // Brand Guidelines
-    { completed: false }, // Target Audience
-    { completed: false }, // Content Preferences
-    { completed: false }, // Ads & Tracking Setup
-    { completed: false }, // Business Verification
-    { completed: false }, // CRM Setup
+    { completed: onboardingProgress?.step_1_status === 'completed' },
+    { completed: onboardingProgress?.step_2_status === 'completed' },
+    { completed: onboardingProgress?.step_3_status === 'completed' },
+    { completed: onboardingProgress?.step_4_status === 'completed' },
+    { completed: onboardingProgress?.step_5_status === 'completed' },
+    { completed: onboardingProgress?.step_6_status === 'completed' },
   ];
-  
+
   const onboardingComplete = onboardingSteps.every(step => step.completed);
 
   const renderPage = () => {
