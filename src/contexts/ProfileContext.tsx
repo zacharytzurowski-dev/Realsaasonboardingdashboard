@@ -12,13 +12,15 @@ interface Profile {
 
 interface OnboardingProgress {
   id: string;
-  user_id: string;
   step_1_status: 'not_started' | 'completed';
   step_2_status: 'not_started' | 'completed';
   step_3_status: 'not_started' | 'completed';
   step_4_status: 'not_started' | 'completed';
   step_5_status: 'not_started' | 'completed';
   step_6_status: 'not_started' | 'completed';
+  onboarding_completed_at?: string;
+  activation_deadline?: string;
+  created_at?: string;
   updated_at?: string;
 }
 
@@ -84,7 +86,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       const { data: progressData, error: progressError } = await supabase
         .from('onboarding_progress')
         .select('*')
-        .eq('user_id', user.id)
+        .eq('id', user.id)
         .single();
 
       if (progressError) {
@@ -95,7 +97,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
           const { data: newProgress, error: createProgressError } = await supabase
             .from('onboarding_progress')
             .insert({
-              user_id: user.id,
+              id: user.id,
               step_1_status: 'not_started',
               step_2_status: 'not_started',
               step_3_status: 'not_started',
@@ -114,7 +116,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
               const { data: retryData, error: retryError } = await supabase
                 .from('onboarding_progress')
                 .select('*')
-                .eq('user_id', user.id)
+                .eq('id', user.id)
                 .single();
 
               if (!retryError && retryData) {
@@ -158,7 +160,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
         const { data: newProgress, error: createError } = await supabase
           .from('onboarding_progress')
           .insert({
-            user_id: user.id,
+            id: user.id,
             step_1_status: 'not_started',
             step_2_status: 'not_started',
             step_3_status: 'not_started',
@@ -178,7 +180,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
             const { data: existingProgress, error: fetchError } = await supabase
               .from('onboarding_progress')
               .select('*')
-              .eq('user_id', user.id)
+              .eq('id', user.id)
               .single();
 
             if (fetchError || !existingProgress) {
@@ -203,13 +205,13 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     const stepKey = `step_${stepNumber}_status` as keyof OnboardingProgress;
     const updateData = { [stepKey]: status };
 
-    console.log('🔵 Updating Supabase with:', { stepKey, status, user_id: user.id });
+    console.log('🔵 Updating Supabase with:', { stepKey, status, id: user.id });
 
     try {
       const { data, error } = await supabase
         .from('onboarding_progress')
         .update(updateData)
-        .eq('user_id', user.id)
+        .eq('id', user.id)
         .select()
         .single();
 
