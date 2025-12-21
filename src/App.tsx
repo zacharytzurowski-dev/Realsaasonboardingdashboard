@@ -28,20 +28,39 @@ function ProtectedApp() {
 
   return (
     <ProfileProvider>
-      <div className="min-h-screen bg-[#080808] text-white">
+      <div className="min-h-screen bg-[#080808] relative overflow-hidden">
+        {/* Subtle grid pattern background */}
+        <div className="fixed inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+        />
+
+        {/* Ambient gradient glows */}
+        <div className="fixed top-0 left-1/4 w-[600px] h-[600px] bg-[#00D9FF] opacity-[0.03] blur-[120px] rounded-full pointer-events-none" />
+        <div className="fixed bottom-0 right-1/4 w-[500px] h-[500px] bg-[#8B5CF6] opacity-[0.02] blur-[120px] rounded-full pointer-events-none" />
+
         <Sidebar />
-        <main className="ml-0 lg:ml-64 min-h-screen overflow-y-auto p-6">
-          <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/onboarding" element={<OnboardingPage />} />
-            <Route path="/website" element={<WebsitePage />} />
-            <Route path="/paid-marketing" element={<PaidMarketingPage />} />
-            <Route path="/organic-marketing" element={<OrganicMarketingPage />} />
-            <Route path="/settings" element={<SettingsPage />} />
-            <Route path="/resources" element={<ResourcesPage />} />
-          </Routes>
-        </main>
+
+        {/* Main content - ml-64 on large screens where sidebar is visible */}
+        <div className="transition-all duration-300 ml-0 lg:ml-64">
+          <div className="max-w-7xl mx-auto p-8">
+            <Routes>
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/onboarding" element={<OnboardingPage />} />
+              <Route path="/website" element={<WebsitePage />} />
+              <Route path="/paid-marketing" element={<PaidMarketingPage />} />
+              <Route path="/organic-marketing" element={<OrganicMarketingPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/resources" element={<ResourcesPage />} />
+            </Routes>
+          </div>
+        </div>
       </div>
     </ProfileProvider>
   )
