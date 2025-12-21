@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { CheckCircle2, Circle, Building2, Palette, Users, FileText, Megaphone, Database, Clock } from 'lucide-react';
+import { CheckCircle2, Circle, Building2, Users, FileText, Megaphone, Database, Clock } from 'lucide-react';
 import { PageHero } from '../PageHero';
 import { useProfile } from '../../contexts/ProfileContext';
 import { BusinessInformationForm } from '../forms/BusinessInformationForm';
-import { BrandGuidelinesForm } from '../forms/BrandGuidelinesForm';
 import { TargetAudienceForm } from '../forms/TargetAudienceForm';
 import { ContentPreferencesForm } from '../forms/ContentPreferencesForm';
 import { AdsTrackingForm } from '../forms/AdsTrackingForm';
@@ -20,6 +19,16 @@ interface OnboardingStep {
   color: string;
 }
 
+// Map UI step numbers to database column numbers (skipping step 2 - Brand Guidelines)
+const stepToDbColumn = (stepId: number): number => {
+  if (stepId === 1) return 1; // Business Information
+  if (stepId === 2) return 3; // Target Audience (was step 3)
+  if (stepId === 3) return 4; // Content Preferences (was step 4)
+  if (stepId === 4) return 5; // Ads & Tracking (was step 5)
+  if (stepId === 5) return 6; // CRM Setup (was step 6)
+  return stepId;
+};
+
 const stepDefinitions = [
   {
     id: 1,
@@ -30,34 +39,27 @@ const stepDefinitions = [
   },
   {
     id: 2,
-    title: 'Brand Guidelines',
-    description: 'Upload your logo, colors, and brand assets',
-    icon: Palette,
-    color: 'from-purple-500 to-pink-500',
-  },
-  {
-    id: 3,
     title: 'Target Audience',
     description: 'Define your ideal customer and market',
     icon: Users,
     color: 'from-green-500 to-emerald-500',
   },
   {
-    id: 4,
+    id: 3,
     title: 'Content Preferences',
     description: 'Set your messaging style and content tone',
     icon: FileText,
     color: 'from-orange-500 to-pink-500',
   },
   {
-    id: 5,
+    id: 4,
     title: 'Ads & Tracking Setup',
     description: 'Configure your advertising and analytics',
     icon: Megaphone,
     color: 'from-cyan-500 to-blue-500',
   },
   {
-    id: 6,
+    id: 5,
     title: 'CRM Setup',
     description: 'Connect your Fieldd account for lead management',
     icon: Database,
@@ -66,7 +68,7 @@ const stepDefinitions = [
 ];
 
 export function OnboardingPage() {
-  const { onboardingProgress, completeOnboarding } = useProfile();
+  const { onboardingProgress, updateOnboardingStep, completeOnboarding } = useProfile();
   const [activeStep, setActiveStep] = useState<number | null>(null);
 
   // Initialize steps with default 'not-started' status immediately
@@ -80,10 +82,13 @@ export function OnboardingPage() {
   // Update steps status from database when onboardingProgress loads
   useEffect(() => {
     if (onboardingProgress) {
-      const updatedSteps = stepDefinitions.map((stepDef) => ({
-        ...stepDef,
-        status: (onboardingProgress[`step_${stepDef.id}_status` as keyof typeof onboardingProgress] || 'not-started') as StepStatus,
-      }));
+      const updatedSteps = stepDefinitions.map((stepDef) => {
+        const dbColumn = stepToDbColumn(stepDef.id);
+        return {
+          ...stepDef,
+          status: (onboardingProgress[`step_${dbColumn}_status` as keyof typeof onboardingProgress] || 'not-started') as StepStatus,
+        };
+      });
       setSteps(updatedSteps);
     }
   }, [onboardingProgress]);
@@ -92,7 +97,7 @@ export function OnboardingPage() {
   const progressPercentage = (completedCount / steps.length) * 100;
   const allStepsCompleted = completedCount === steps.length;
 
-  // Auto-complete onboarding when all 6 steps are completed
+  // Auto-complete onboarding when all 5 steps are completed
   useEffect(() => {
     const checkAndCompleteOnboarding = async () => {
       if (allStepsCompleted && onboardingProgress && !onboardingProgress.onboarding_completed_at) {
@@ -118,8 +123,28 @@ export function OnboardingPage() {
     setActiveStep(null);
   };
 
-  const handleSave = () => {
-    setActiveStep(null);
+  const handleSave = async () => {
+    if (!activeStep) return;
+
+    const dbColumn = stepToDbColumn(activeStep);
+
+    try {
+      // Mark step as completed in database
+      await updateOnboardingStep(dbColumn, 'completed');
+
+      // Update local state
+      setSteps(prevSteps =>
+        prevSteps.map(step =>
+          step.id === activeStep ? { ...step, status: 'completed' as StepStatus } : step
+        )
+      );
+
+      // Navigate back to checklist
+      setActiveStep(null);
+    } catch (error) {
+      console.error('❌ Error saving step:', error);
+      alert('Failed to save. Please try again.');
+    }
   };
 
 
@@ -154,18 +179,15 @@ export function OnboardingPage() {
     return <BusinessInformationForm onBack={handleBack} onSave={handleSave} />;
   }
   if (activeStep === 2) {
-    return <BrandGuidelinesForm onBack={handleBack} onSave={handleSave} />;
-  }
-  if (activeStep === 3) {
     return <TargetAudienceForm onBack={handleBack} onSave={handleSave} />;
   }
-  if (activeStep === 4) {
+  if (activeStep === 3) {
     return <ContentPreferencesForm onBack={handleBack} onSave={handleSave} />;
   }
-  if (activeStep === 5) {
+  if (activeStep === 4) {
     return <AdsTrackingForm onBack={handleBack} onSave={handleSave} />;
   }
-  if (activeStep === 6) {
+  if (activeStep === 5) {
     return <CRMSetupForm onBack={handleBack} onSave={handleSave} />;
   }
 
