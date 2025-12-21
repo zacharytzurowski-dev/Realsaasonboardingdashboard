@@ -1,19 +1,22 @@
 import { Clock, CheckCircle, Sparkles, Globe, TrendingUp, Zap, Rocket, ArrowRight, Palette, FileText, Calendar, Database, Star, Loader2, User, Briefcase, Settings, HelpCircle, LogOut, ChevronDown } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { LaunchOSLogo } from '../LaunchOSLogo';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface DashboardPageProps {
   onNavigate?: (page: string) => void;
 }
 
 export function DashboardPage({ onNavigate }: DashboardPageProps) {
+  const { user, signOut } = useAuth();
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
-  
-  // Owner information from onboarding
-  const ownerName = 'Sarah Johnson';
-  const businessName = 'Acme Plumbing';
+
+  // Get user information from auth session
+  const ownerName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User';
+  const businessName = user?.user_metadata?.business_name || 'My Business';
+  const userInitial = ownerName.charAt(0).toUpperCase();
   
   // Deployment started - countdown from 72 hours
   const deploymentStartTime = new Date('2025-12-09T00:00:00'); // Started 2 days ago
@@ -111,13 +114,13 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
                 <div className="text-sm text-white">{ownerName}</div>
                 <div className="text-xs text-[#8B8D98]">{businessName}</div>
               </div>
-              <div 
-                className="w-11 h-11 rounded-full bg-gradient-to-br from-[#00D9FF] to-[#0EA5E9] flex items-center justify-center text-white"
+              <div
+                className="w-11 h-11 rounded-full bg-gradient-to-br from-[#00D9FF] to-[#0EA5E9] flex items-center justify-center text-white font-semibold"
                 style={{
                   boxShadow: '0 4px 16px rgba(0, 217, 255, 0.3)'
                 }}
               >
-                S
+                {userInitial}
               </div>
               <ChevronDown className={`w-4 h-4 text-[#8B8D98] transition-transform ${isProfileDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
@@ -210,7 +213,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
                   <button
                     onClick={() => {
                       setIsProfileDropdownOpen(false);
-                      alert('Logging out...');
+                      signOut();
                     }}
                     className="group w-full flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A]/50 border border-[#2A2B2E]/30 hover:border-[#EF4444]/40 hover:bg-[#151618]/80 transition-all hover:-translate-y-0.5"
                   >

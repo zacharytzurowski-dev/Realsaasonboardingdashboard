@@ -8,10 +8,28 @@ import { PaidMarketingPage } from './components/pages/PaidMarketingPage';
 import { OrganicMarketingPage } from './components/pages/OrganicMarketingPage';
 import { ResourcesPage } from './components/pages/ResourcesPage';
 import { SettingsPage } from './components/pages/SettingsPage';
+import { AuthPage } from './components/auth/AuthPage';
+import { useAuth } from './contexts/AuthContext';
+import { Loader2 } from 'lucide-react';
 
 export default function App() {
+  const { user, loading } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [currentPage, setCurrentPage] = useState('dashboard');
+
+  // Show loading state while checking auth
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#080808] flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-[#00D9FF] animate-spin" />
+      </div>
+    );
+  }
+
+  // Show auth page if not logged in
+  if (!user) {
+    return <AuthPage />;
+  }
   
   // Determine if onboarding is complete based on tasks
   // In a real app, this would come from your data store
