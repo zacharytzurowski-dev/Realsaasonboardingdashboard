@@ -1,13 +1,6 @@
 import { useState, useEffect } from 'react';
 import { CheckCircle2, Circle, Building2, Palette, Users, FileText, Megaphone, Database, Clock } from 'lucide-react';
 import { PageHero } from '../PageHero';
-import { BusinessInformationForm } from '../forms/BusinessInformationForm';
-import { BrandGuidelinesForm } from '../forms/BrandGuidelinesForm';
-import { TargetAudienceForm } from '../forms/TargetAudienceForm';
-import { ContentPreferencesForm } from '../forms/ContentPreferencesForm';
-import { AdsTrackingForm } from '../forms/AdsTrackingForm';
-import { CRMSetupForm } from '../forms/CRMSetupForm';
-import { ReviewSubmitPage } from '../forms/ReviewSubmitPage';
 import { useProfile } from '../../contexts/ProfileContext';
 
 type StepStatus = 'completed' | 'in-progress' | 'not-started';
@@ -67,8 +60,7 @@ const stepDefinitions = [
 ];
 
 export function OnboardingPage() {
-  const { onboardingProgress, updateOnboardingStep } = useProfile();
-  const [activeStep, setActiveStep] = useState<number | null>(null);
+  const { onboardingProgress, updateOnboardingStep, completeOnboarding } = useProfile();
 
   // Initialize steps with default 'not-started' status immediately
   const [steps, setSteps] = useState<OnboardingStep[]>(
@@ -93,56 +85,44 @@ export function OnboardingPage() {
   const progressPercentage = (completedCount / steps.length) * 100;
   const allStepsCompleted = completedCount === steps.length;
 
-  const handleStepClick = (stepId: number) => {
-    setActiveStep(stepId);
-  };
+  // Auto-complete onboarding when all 6 steps are completed
+  useEffect(() => {
+    const checkAndCompleteOnboarding = async () => {
+      if (allStepsCompleted && onboardingProgress && !onboardingProgress.onboarding_completed_at) {
+        console.log('🎉 All steps completed! Finalizing onboarding...');
+        try {
+          await completeOnboarding();
+          console.log('✅ Onboarding finalized with completion time and activation deadline');
+        } catch (error) {
+          console.error('❌ Error finalizing onboarding:', error);
+        }
+      }
+    };
 
-  const handleBack = () => {
-    setActiveStep(null);
-  };
+    checkAndCompleteOnboarding();
+  }, [allStepsCompleted, onboardingProgress, completeOnboarding]);
 
-  const handleSave = async () => {
-    if (!activeStep) {
-      console.error('❌ No active step to save');
-      return;
-    }
-
-    console.log('💾 Saving step:', activeStep);
+  const handleStepClick = async (stepId: number) => {
+    console.log('🔘 Step clicked:', stepId);
 
     try {
-      // Update step status in database
-      console.log('🔄 Calling updateOnboardingStep...');
-      await updateOnboardingStep(activeStep, 'completed');
-      console.log('✅ Database updated successfully');
+      // Mark step as completed in database
+      await updateOnboardingStep(stepId, 'completed');
+      console.log('✅ Step marked as completed');
 
       // Update local state
       setSteps(prevSteps =>
         prevSteps.map(step =>
-          step.id === activeStep ? { ...step, status: 'completed' as StepStatus } : step
+          step.id === stepId ? { ...step, status: 'completed' as StepStatus } : step
         )
       );
-      console.log('✅ Local state updated');
-
-      setActiveStep(null);
     } catch (error) {
-      console.error('❌ Error saving step:', error);
+      console.error('❌ Error marking step as completed:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       alert(`Failed to save progress: ${errorMessage}\n\nPlease check the console for details.`);
     }
   };
 
-  const handleReviewClick = () => {
-    setActiveStep(8); // Review & Submit page
-  };
-
-  const handleEditFromReview = (stepId: number) => {
-    setActiveStep(stepId);
-  };
-
-  const handleSubmit = () => {
-    alert('Onboarding submitted successfully! 🎉');
-    setActiveStep(null);
-  };
 
   const getStatusBadge = (status: StepStatus) => {
     switch (status) {
@@ -169,29 +149,6 @@ export function OnboardingPage() {
         );
     }
   };
-
-  // Show form if a step is active
-  if (activeStep === 1) {
-    return <BusinessInformationForm onBack={handleBack} onSave={handleSave} />;
-  }
-  if (activeStep === 2) {
-    return <BrandGuidelinesForm onBack={handleBack} onSave={handleSave} />;
-  }
-  if (activeStep === 3) {
-    return <TargetAudienceForm onBack={handleBack} onSave={handleSave} />;
-  }
-  if (activeStep === 4) {
-    return <ContentPreferencesForm onBack={handleBack} onSave={handleSave} />;
-  }
-  if (activeStep === 5) {
-    return <AdsTrackingForm onBack={handleBack} onSave={handleSave} />;
-  }
-  if (activeStep === 6) {
-    return <CRMSetupForm onBack={handleBack} onSave={handleSave} />;
-  }
-  if (activeStep === 8) {
-    return <ReviewSubmitPage onBack={handleBack} onEdit={handleEditFromReview} onSubmit={handleSubmit} />;
-  }
 
   // Show checklist view
   return (
@@ -305,19 +262,6 @@ export function OnboardingPage() {
           );
         })}
       </div>
-
-      {/* Review & Submit Button */}
-      {allStepsCompleted && (
-        <div className="mt-6">
-          <button
-            onClick={handleReviewClick}
-            className="w-full bg-gradient-to-r from-[#10B981] via-[#059669] to-[#10B981] text-white px-8 py-6 rounded-xl hover:shadow-lg hover:shadow-[#10B981]/40 hover:-translate-y-1 transition-all shadow-md shadow-[#10B981]/30 flex items-center justify-center gap-3 font-medium"
-          >
-            <CheckCircle2 className="w-6 h-6" />
-            <span className="text-lg">Review & Submit Onboarding</span>
-          </button>
-        </div>
-      )}
 
       {/* Help Section - Dark Gradient Card */}
       <div className="mt-6 relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#1A1D23] rounded-xl p-6 border border-[#293038] shadow-md">

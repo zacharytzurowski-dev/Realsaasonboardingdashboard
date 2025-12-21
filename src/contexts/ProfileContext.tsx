@@ -30,6 +30,7 @@ interface ProfileContextType {
   loading: boolean;
   refreshProfile: () => Promise<void>;
   updateOnboardingStep: (stepNumber: number, status: 'not_started' | 'completed') => Promise<void>;
+  completeOnboarding: () => Promise<void>;
 }
 
 const ProfileContext = createContext<ProfileContextType | undefined>(undefined);
@@ -228,6 +229,51 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const completeOnboarding = async () => {
+    console.log('🎉 completeOnboarding called');
+
+    if (!user) {
+      console.error('❌ No user found in completeOnboarding');
+      throw new Error('User not authenticated');
+    }
+
+    if (!onboardingProgress) {
+      console.error('❌ No onboardingProgress found in completeOnboarding');
+      throw new Error('Onboarding progress not found');
+    }
+
+    const now = new Date().toISOString();
+    const activationDeadline = new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString(); // 72 hours from now
+
+    console.log('🔵 Completing onboarding with:', {
+      onboarding_completed_at: now,
+      activation_deadline: activationDeadline
+    });
+
+    try {
+      const { data, error } = await supabase
+        .from('onboarding_progress')
+        .update({
+          onboarding_completed_at: now,
+          activation_deadline: activationDeadline,
+        })
+        .eq('id', user.id)
+        .select()
+        .single();
+
+      if (error) {
+        console.error('❌ Supabase error completing onboarding:', error);
+        throw error;
+      }
+
+      console.log('✅ Successfully completed onboarding:', data);
+      setOnboardingProgress(data);
+    } catch (error) {
+      console.error('❌ Error in completeOnboarding:', error);
+      throw error;
+    }
+  };
+
   useEffect(() => {
     if (user) {
       console.log('👤 User authenticated, fetching profile...');
@@ -246,6 +292,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
         loading,
         refreshProfile,
         updateOnboardingStep,
+        completeOnboarding,
       }}
     >
       {children}
