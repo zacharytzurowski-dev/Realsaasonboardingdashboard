@@ -80,6 +80,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       }
 
       // Fetch onboarding progress
+      console.log('🔍 Fetching onboarding progress for user:', user.id);
       const { data: progressData, error: progressError } = await supabase
         .from('onboarding_progress')
         .select('*')
@@ -87,9 +88,10 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
         .single();
 
       if (progressError) {
-        console.error('Error fetching onboarding progress:', progressError);
+        console.error('❌ Error fetching onboarding progress:', progressError);
         // Create onboarding progress if it doesn't exist
         if (progressError.code === 'PGRST116') {
+          console.log('📝 Creating new onboarding progress record...');
           const { data: newProgress, error: createProgressError } = await supabase
             .from('onboarding_progress')
             .insert({
@@ -105,12 +107,14 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
             .single();
 
           if (createProgressError) {
-            console.error('Error creating onboarding progress:', createProgressError);
+            console.error('❌ Error creating onboarding progress:', createProgressError);
           } else {
+            console.log('✅ Created onboarding progress:', newProgress);
             setOnboardingProgress(newProgress);
           }
         }
       } else {
+        console.log('✅ Fetched onboarding progress:', progressData);
         setOnboardingProgress(progressData);
       }
     } catch (error) {
@@ -126,26 +130,40 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
   };
 
   const updateOnboardingStep = async (stepNumber: number, status: 'not_started' | 'completed') => {
-    if (!user || !onboardingProgress) return;
+    console.log('🔵 updateOnboardingStep called:', { stepNumber, status, userId: user?.id });
+
+    if (!user) {
+      console.error('❌ No user found in updateOnboardingStep');
+      throw new Error('User not authenticated');
+    }
+
+    if (!onboardingProgress) {
+      console.error('❌ No onboardingProgress found in updateOnboardingStep');
+      throw new Error('Onboarding progress not loaded');
+    }
 
     const stepKey = `step_${stepNumber}_status` as keyof OnboardingProgress;
+    const updateData = { [stepKey]: status };
+
+    console.log('🔵 Updating Supabase with:', { stepKey, status, user_id: user.id });
 
     try {
       const { data, error } = await supabase
         .from('onboarding_progress')
-        .update({ [stepKey]: status })
+        .update(updateData)
         .eq('user_id', user.id)
         .select()
         .single();
 
       if (error) {
-        console.error('Error updating onboarding step:', error);
+        console.error('❌ Supabase error updating onboarding step:', error);
         throw error;
       }
 
+      console.log('✅ Successfully updated onboarding step in database:', data);
       setOnboardingProgress(data);
     } catch (error) {
-      console.error('Error in updateOnboardingStep:', error);
+      console.error('❌ Error in updateOnboardingStep:', error);
       throw error;
     }
   };

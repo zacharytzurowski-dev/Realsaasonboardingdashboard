@@ -102,11 +102,18 @@ export function OnboardingPage() {
   };
 
   const handleSave = async () => {
-    if (!activeStep) return;
+    if (!activeStep) {
+      console.error('❌ No active step to save');
+      return;
+    }
+
+    console.log('💾 Saving step:', activeStep);
 
     try {
       // Update step status in database
+      console.log('🔄 Calling updateOnboardingStep...');
       await updateOnboardingStep(activeStep, 'completed');
+      console.log('✅ Database updated successfully');
 
       // Update local state
       setSteps(prevSteps =>
@@ -114,10 +121,13 @@ export function OnboardingPage() {
           step.id === activeStep ? { ...step, status: 'completed' as StepStatus } : step
         )
       );
+      console.log('✅ Local state updated');
+
       setActiveStep(null);
     } catch (error) {
-      console.error('Error saving step:', error);
-      alert('Failed to save progress. Please try again.');
+      console.error('❌ Error saving step:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      alert(`Failed to save progress: ${errorMessage}\n\nPlease check the console for details.`);
     }
   };
 
