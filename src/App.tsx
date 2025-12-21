@@ -63,7 +63,7 @@ function ProtectedApp() {
               <Route path="/resources" element={<ResourcesPage />} />
             </Routes>
           </div>
-        </div>
+        </main>
       </div>
     </ProfileProvider>
   )
