@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle2, Circle, Building2, Palette, Users, FileText, Megaphone, Database, Clock, Check, Loader2 } from 'lucide-react';
+import { CheckCircle2, Circle, Building2, Palette, Users, FileText, Megaphone, Database, Clock, Check, Loader2, ClipboardList } from 'lucide-react';
 import { PageHero } from '../PageHero';
 import { BusinessInformationForm } from '../forms/BusinessInformationForm';
-import { BrandGuidelinesForm } from '../forms/BrandGuidelinesForm';
+import { BrandIdentityForm } from '../forms/BrandIdentityForm';
 import { TargetAudienceForm } from '../forms/TargetAudienceForm';
-import { ContentPreferencesForm } from '../forms/ContentPreferencesForm';
+import { ContentMessagingForm } from '../forms/ContentMessagingForm';
+import { ExistingAssetsAuditForm } from '../forms/ExistingAssetsAuditForm';
 import { AdsTrackingForm } from '../forms/AdsTrackingForm';
 import { CRMSetupForm } from '../forms/CRMSetupForm';
 import { useProfile } from '../../contexts/ProfileContext';
@@ -37,7 +38,7 @@ export function OnboardingPage() {
     },
     {
       id: 2,
-      title: 'Brand Guidelines',
+      title: 'Brand & Identity',
       description: 'Upload your logo, colors, and brand assets',
       icon: Palette,
       status: 'not-started',
@@ -53,7 +54,7 @@ export function OnboardingPage() {
     },
     {
       id: 4,
-      title: 'Content Preferences',
+      title: 'Content & Messaging',
       description: 'Set your messaging style and content tone',
       icon: FileText,
       status: 'not-started',
@@ -61,6 +62,14 @@ export function OnboardingPage() {
     },
     {
       id: 5,
+      title: 'Existing Assets Audit',
+      description: 'Review your current website, ads, and online presence',
+      icon: ClipboardList,
+      status: 'not-started',
+      color: 'from-amber-500 to-orange-500',
+    },
+    {
+      id: 6,
       title: 'Ads & Tracking Setup',
       description: 'Configure your advertising and analytics',
       icon: Megaphone,
@@ -68,7 +77,7 @@ export function OnboardingPage() {
       color: 'from-cyan-500 to-blue-500',
     },
     {
-      id: 6,
+      id: 7,
       title: 'CRM Setup',
       description: 'Connect your Fieldd account for lead management',
       icon: Database,
@@ -137,18 +146,21 @@ export function OnboardingPage() {
     return <BusinessInformationForm onBack={handleBack} onSave={handleSave} />;
   }
   if (activeStep === 2) {
-    return <BrandGuidelinesForm onBack={handleBack} onSave={handleSave} />;
+    return <BrandIdentityForm onBack={handleBack} onSave={handleSave} />;
   }
   if (activeStep === 3) {
     return <TargetAudienceForm onBack={handleBack} onSave={handleSave} />;
   }
   if (activeStep === 4) {
-    return <ContentPreferencesForm onBack={handleBack} onSave={handleSave} />;
+    return <ContentMessagingForm onBack={handleBack} onSave={handleSave} />;
   }
   if (activeStep === 5) {
-    return <AdsTrackingForm onBack={handleBack} onSave={handleSave} />;
+    return <ExistingAssetsAuditForm onBack={handleBack} onSave={handleSave} />;
   }
   if (activeStep === 6) {
+    return <AdsTrackingForm onBack={handleBack} onSave={handleSave} />;
+  }
+  if (activeStep === 7) {
     return <CRMSetupForm onBack={handleBack} onSave={handleSave} />;
   }
 
