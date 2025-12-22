@@ -9,7 +9,6 @@ interface CRMSetupFormProps {
 export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
   const [selectedPlan, setSelectedPlan] = useState('');
   const [hasPurchased, setHasPurchased] = useState('');
-  const [credentialsConfirmed, setCredentialsConfirmed] = useState(false);
 
   const inputClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] placeholder:text-[#64748B] focus:border-[#8B5CF6] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]/20 transition-all";
   const labelClasses = "flex items-center gap-2 text-[#94A3B8] text-sm mb-2";
@@ -44,7 +43,7 @@ export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
               <h1 className="text-3xl font-bold bg-gradient-to-r from-[#E8F1FF] to-[#94A3B8] bg-clip-text text-transparent">
                 CRM Setup
               </h1>
-              <p className="text-sm text-[#94A3B8] mt-1">Step 7 of 7</p>
+              <p className="text-sm text-[#94A3B8] mt-1">Step 6 of 6</p>
             </div>
           </div>
         </div>
@@ -148,66 +147,6 @@ export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
                   <label className={labelClasses}>Fieldd Account Password *</label>
                   <input type="password" placeholder="Enter your password" className={inputClasses} />
                   <p className="text-[#64748B] text-xs mt-2">We will securely set up your entire Fieldd system for you.</p>
-                </div>
-
-                {/* Confirm Credentials Work */}
-                <div>
-                  <label className="flex items-center gap-3 cursor-pointer group">
-                    <div className="relative">
-                      <input
-                        type="checkbox"
-                        checked={credentialsConfirmed}
-                        onChange={(e) => setCredentialsConfirmed(e.target.checked)}
-                        className="sr-only"
-                      />
-                      <div className={`w-6 h-6 rounded-lg border-2 transition-all flex items-center justify-center ${
-                        credentialsConfirmed
-                          ? 'bg-[#8B5CF6] border-[#8B5CF6]'
-                          : 'border-[#293038] group-hover:border-[#8B5CF6]/50'
-                      }`}>
-                        {credentialsConfirmed && (
-                          <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                          </svg>
-                        )}
-                      </div>
-                    </div>
-                    <span className="text-[#E8F1FF] text-sm">I confirm these login credentials work *</span>
-                  </label>
-                </div>
-
-                {/* Booking Preference */}
-                <div>
-                  <label className={labelClasses}>Booking Preference *</label>
-                  <select className={selectClasses}>
-                    <option value="">Select...</option>
-                    <option value="widget">Booking Widget</option>
-                    <option value="direct-link">Direct Link</option>
-                    <option value="phone">Phone Only</option>
-                  </select>
-                </div>
-
-                {/* Deposit Preference */}
-                <div>
-                  <label className={labelClasses}>Deposit Preference <span className="text-[#64748B]">(Optional)</span></label>
-                  <select className={selectClasses}>
-                    <option value="">Select...</option>
-                    <option value="none">None</option>
-                    <option value="fixed">Fixed Amount</option>
-                    <option value="percentage">Percentage</option>
-                  </select>
-                </div>
-
-                {/* Calendar Sync */}
-                <div>
-                  <label className={labelClasses}>Calendar Sync <span className="text-[#64748B]">(Optional)</span></label>
-                  <select className={selectClasses}>
-                    <option value="">Select...</option>
-                    <option value="google">Google Calendar</option>
-                    <option value="apple">Apple Calendar</option>
-                    <option value="outlook">Outlook</option>
-                    <option value="none">None</option>
-                  </select>
                 </div>
               </>
             )}

@@ -76,7 +76,7 @@ export function BusinessInformationForm({ onBack, onSave }: BusinessInformationF
               <h1 className="text-3xl font-bold bg-gradient-to-r from-[#E8F1FF] to-[#94A3B8] bg-clip-text text-transparent">
                 Business Information
               </h1>
-              <p className="text-sm text-[#94A3B8] mt-1">Step 1 of 7</p>
+              <p className="text-sm text-[#94A3B8] mt-1">Step 1 of 6</p>
             </div>
           </div>
         </div>
@@ -177,10 +177,10 @@ export function BusinessInformationForm({ onBack, onSave }: BusinessInformationF
               <input type="url" placeholder="https://www.yourbusiness.com" className={inputClasses} />
             </div>
 
-            {/* Insurance Expiration Date */}
+            {/* Insurance Document Link */}
             <div>
-              <label className={labelClasses}>Insurance Expiration Date *</label>
-              <input type="date" className={inputClasses} />
+              <label className={labelClasses}>Insurance Document Link *</label>
+              <input type="text" placeholder="Paste Google Drive or Dropbox link to your insurance document" className={inputClasses} />
             </div>
 
             {/* Monthly Revenue Range */}

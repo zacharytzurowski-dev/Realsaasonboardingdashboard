@@ -63,7 +63,7 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
               <h1 className="text-3xl font-bold bg-gradient-to-r from-[#E8F1FF] to-[#94A3B8] bg-clip-text text-transparent">
                 Existing Assets Audit
               </h1>
-              <p className="text-sm text-[#94A3B8] mt-1">Step 5 of 7</p>
+              <p className="text-sm text-[#94A3B8] mt-1">Step 5 of 6</p>
             </div>
           </div>
         </div>

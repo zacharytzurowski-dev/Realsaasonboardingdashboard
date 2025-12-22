@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle2, Circle, Building2, Palette, Users, FileText, Megaphone, Database, Clock, Check, Loader2, ClipboardList } from 'lucide-react';
+import { CheckCircle2, Circle, Building2, Palette, Users, FileText, Database, Clock, Check, Loader2, ClipboardList } from 'lucide-react';
 import { PageHero } from '../PageHero';
 import { BusinessInformationForm } from '../forms/BusinessInformationForm';
 import { BrandIdentityForm } from '../forms/BrandIdentityForm';
 import { TargetAudienceForm } from '../forms/TargetAudienceForm';
 import { ContentMessagingForm } from '../forms/ContentMessagingForm';
 import { ExistingAssetsAuditForm } from '../forms/ExistingAssetsAuditForm';
-import { AdsTrackingForm } from '../forms/AdsTrackingForm';
 import { CRMSetupForm } from '../forms/CRMSetupForm';
 import { useProfile } from '../../contexts/ProfileContext';
 
@@ -70,14 +69,6 @@ export function OnboardingPage() {
     },
     {
       id: 6,
-      title: 'Ads & Tracking Setup',
-      description: 'Configure your advertising and analytics',
-      icon: Megaphone,
-      status: 'not-started',
-      color: 'from-cyan-500 to-blue-500',
-    },
-    {
-      id: 7,
       title: 'CRM Setup',
       description: 'Connect your Fieldd account for lead management',
       icon: Database,
@@ -158,9 +149,6 @@ export function OnboardingPage() {
     return <ExistingAssetsAuditForm onBack={handleBack} onSave={handleSave} />;
   }
   if (activeStep === 6) {
-    return <AdsTrackingForm onBack={handleBack} onSave={handleSave} />;
-  }
-  if (activeStep === 7) {
     return <CRMSetupForm onBack={handleBack} onSave={handleSave} />;
   }
 
@@ -216,10 +204,6 @@ export function OnboardingPage() {
             'from-orange-500 to-pink-500': { 
               gradient: 'from-[#F59E0B] to-[#EC4899]', 
               shadow: 'shadow-[#F59E0B]/30' 
-            },
-            'from-cyan-500 to-blue-500': { 
-              gradient: 'from-[#00CFFF] to-[#3AB8FF]', 
-              shadow: 'shadow-[#00CFFF]/30' 
             },
             'from-indigo-500 to-purple-500': { 
               gradient: 'from-[#6366F1] to-[#8B5CF6]', 

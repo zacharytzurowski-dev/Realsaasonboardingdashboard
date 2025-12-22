@@ -1,5 +1,4 @@
 import { Users, ChevronLeft } from 'lucide-react';
-import { useState } from 'react';
 
 interface TargetAudienceFormProps {
   onBack: () => void;
@@ -7,26 +6,9 @@ interface TargetAudienceFormProps {
 }
 
 export function TargetAudienceForm({ onBack, onSave }: TargetAudienceFormProps) {
-  const [jobTypes, setJobTypes] = useState<string[]>([]);
-
-  const toggleJobType = (type: string) => {
-    setJobTypes(prev =>
-      prev.includes(type) ? prev.filter(t => t !== type) : [...prev, type]
-    );
-  };
-
   const inputClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] placeholder:text-[#64748B] focus:border-[#10B981] focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 transition-all";
   const labelClasses = "flex items-center gap-2 text-[#94A3B8] text-sm mb-2";
   const selectClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] focus:border-[#10B981] focus:outline-none focus:ring-2 focus:ring-[#10B981]/20 transition-all";
-
-  const jobTypeOptions = [
-    'Basic Washes',
-    'Ceramic Coating',
-    'PPF',
-    'Fleet/Commercial',
-    'Dealership Work',
-    'Other'
-  ];
 
   return (
     <div className="min-h-screen bg-[#0A0B0D] relative">
@@ -55,7 +37,7 @@ export function TargetAudienceForm({ onBack, onSave }: TargetAudienceFormProps) 
               <h1 className="text-3xl font-bold bg-gradient-to-r from-[#E8F1FF] to-[#94A3B8] bg-clip-text text-transparent">
                 Target Audience
               </h1>
-              <p className="text-sm text-[#94A3B8] mt-1">Step 3 of 7</p>
+              <p className="text-sm text-[#94A3B8] mt-1">Step 3 of 6</p>
             </div>
           </div>
         </div>
@@ -149,27 +131,6 @@ export function TargetAudienceForm({ onBack, onSave }: TargetAudienceFormProps) 
             <div>
               <label className={labelClasses}>ZIP Codes to Exclude <span className="text-[#64748B]">(Optional)</span></label>
               <input type="text" placeholder="e.g., 30301, 30302, 30303" className={inputClasses} />
-            </div>
-
-            {/* Types of Jobs Wanted */}
-            <div>
-              <label className={labelClasses}>Types of Jobs Wanted *</label>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {jobTypeOptions.map((type) => (
-                  <button
-                    key={type}
-                    type="button"
-                    onClick={() => toggleJobType(type)}
-                    className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
-                      jobTypes.includes(type)
-                        ? 'bg-[#10B981]/20 border-[#10B981] text-[#10B981]'
-                        : 'bg-[#0D1114] border-[#293038] text-[#94A3B8] hover:border-[#10B981]/50'
-                    }`}
-                  >
-                    {type}
-                  </button>
-                ))}
-              </div>
             </div>
 
             {/* Minimum Job Value */}
