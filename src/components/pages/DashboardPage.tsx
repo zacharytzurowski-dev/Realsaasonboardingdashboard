@@ -1,6 +1,6 @@
 import { Clock, CheckCircle, Sparkles, Globe, TrendingUp, Zap, Rocket, ArrowRight, Palette, FileText, Calendar, Database, Star, Loader2, User, Briefcase, Settings, HelpCircle, LogOut, ChevronDown, Check } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
-import { LaunchOSLogo } from '../LaunchOSLogo';
+import { useNavigate } from 'react-router-dom';
 import { DeploymentCountdown } from '../DeploymentCountdown';
 import { useProfile } from '../../contexts/ProfileContext';
 import { useAuth } from '../../contexts/AuthContext';
@@ -14,6 +14,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
   const profileDropdownRef = useRef<HTMLDivElement>(null);
   const { profile, onboardingSubmitted } = useProfile();
   const { user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   // Owner information from profile or auth user
   const ownerName = profile?.full_name || user?.user_metadata?.full_name || 'User';
@@ -63,7 +64,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-5">
             {/* Logo with Glow */}
-            <LaunchOSLogo size={56} withGlow={true} />
+            <img src="/logo.png" alt="LaunchOS" className="h-10 w-auto" />
             
             {/* Header Text */}
             <div>
@@ -314,7 +315,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
               ) : (
                 // Onboarding not submitted - show blue button linking to onboarding
                 <button
-                  onClick={() => onNavigate && onNavigate('onboarding')}
+                  onClick={() => navigate('/onboarding')}
                   className="group relative px-12 py-4 rounded-2xl transition-all duration-300 hover:scale-[1.02] flex items-center gap-3 overflow-hidden"
                   style={{
                     boxShadow: '0 8px 24px rgba(0, 217, 255, 0.3)'

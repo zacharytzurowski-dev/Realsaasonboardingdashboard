@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Home, CheckCircle, Globe, DollarSign, TrendingUp, Settings, Menu, X, ExternalLink } from 'lucide-react';
-import { LaunchOSLogo } from './LaunchOSLogo';
 import { useProfile } from '../contexts/ProfileContext';
 
 export function Sidebar() {
@@ -54,7 +53,7 @@ export function Sidebar() {
         <div className="p-6 h-full flex flex-col">
           {/* Logo */}
           <div className="flex items-center gap-3 mb-10">
-            <LaunchOSLogo size={40} />
+            <img src="/logo.png" alt="LaunchOS" className="h-8 w-auto" />
             <div>
               <h2 className="text-white tracking-tight">LaunchOS</h2>
               <p className="text-[#6B6C7B] text-xs">System Control</p>
