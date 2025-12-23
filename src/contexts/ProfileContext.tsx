@@ -12,7 +12,7 @@ interface Profile {
 }
 
 interface OnboardingProgress {
-  user_id: string
+  id: string
   step_1_status: StepStatus | null
   step_2_status: StepStatus | null
   step_3_status: StepStatus | null
@@ -173,14 +173,15 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
       // Fetch onboarding progress with all fields
       const { data: progressData, error: progressError } = await supabase
         .from('onboarding_progress')
-        .select('user_id, step_1_status, step_2_status, step_3_status, step_4_status, step_5_status, step_6_status, form_data, onboarding_completed_at, activation_deadline')
-        .eq('user_id', user.id)
+        .select('id, step_1_status, step_2_status, step_3_status, step_4_status, step_5_status, step_6_status, form_data, onboarding_completed_at, activation_deadline')
+        .eq('id', user.id)
         .single()
 
       if (progressError) {
         console.log('Onboarding progress fetch error (may not exist yet):', progressError.message)
         setOnboardingProgress(null)
       } else {
+        console.log('Onboarding progress loaded:', progressData)
         setOnboardingProgress(progressData)
       }
     } catch (err) {
@@ -239,7 +240,12 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
 
   // Save step data to Supabase
   const saveStepData = async (stepNumber: number, data: any): Promise<boolean> => {
-    if (!user) return false
+    console.log('saveStepData called:', { stepNumber, data, userId: user?.id })
+
+    if (!user) {
+      console.error('saveStepData: No user found')
+      return false
+    }
 
     try {
       // Map step number to form data key
@@ -253,7 +259,10 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
       }
 
       const stepKey = stepKeys[stepNumber]
-      if (!stepKey) return false
+      if (!stepKey) {
+        console.error('saveStepData: Invalid step number', stepNumber)
+        return false
+      }
 
       // Merge with existing form data
       const existingFormData = onboardingProgress?.form_data || {}
@@ -262,28 +271,33 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
         [stepKey]: data
       }
 
-      // Build the update object
+      // Build the update object - use 'id' as the primary key (which IS the user id)
       const stepStatusField = `step_${stepNumber}_status`
       const updateData: any = {
-        user_id: user.id,
+        id: user.id,
         form_data: newFormData,
         [stepStatusField]: 'completed'
       }
 
-      const { error } = await supabase
+      console.log('saveStepData: Upserting data:', updateData)
+
+      const { data: result, error } = await supabase
         .from('onboarding_progress')
-        .upsert(updateData, { onConflict: 'user_id' })
+        .upsert(updateData, { onConflict: 'id' })
+        .select()
 
       if (error) {
-        console.error('Error saving step data:', error.message)
+        console.error('saveStepData: Supabase error:', error)
         return false
       }
+
+      console.log('saveStepData: Success, result:', result)
 
       // Refresh data
       await fetchProfile()
       return true
     } catch (err) {
-      console.error('Error saving step data:', err)
+      console.error('saveStepData: Exception:', err)
       return false
     }
   }
@@ -307,31 +321,43 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
 
   // Submit onboarding: set onboarding_completed_at = NOW and activation_deadline = NOW + 72 hours
   const submitOnboarding = async (): Promise<boolean> => {
-    if (!user) return false
+    console.log('submitOnboarding called:', { userId: user?.id })
+
+    if (!user) {
+      console.error('submitOnboarding: No user found')
+      return false
+    }
 
     setSubmitting(true)
     try {
       const now = new Date()
       const deadline = new Date(now.getTime() + 72 * 60 * 60 * 1000) // NOW + 72 hours
 
-      const { error } = await supabase
+      const updateData = {
+        id: user.id,
+        onboarding_completed_at: now.toISOString(),
+        activation_deadline: deadline.toISOString()
+      }
+
+      console.log('submitOnboarding: Upserting data:', updateData)
+
+      const { data: result, error } = await supabase
         .from('onboarding_progress')
-        .upsert({
-          user_id: user.id,
-          onboarding_completed_at: now.toISOString(),
-          activation_deadline: deadline.toISOString()
-        }, { onConflict: 'user_id' })
+        .upsert(updateData, { onConflict: 'id' })
+        .select()
 
       if (error) {
-        console.error('Error submitting onboarding:', error.message)
+        console.error('submitOnboarding: Supabase error:', error)
         return false
       }
+
+      console.log('submitOnboarding: Success, result:', result)
 
       // Refresh data to get updated values
       await fetchProfile()
       return true
     } catch (err) {
-      console.error('Error submitting onboarding:', err)
+      console.error('submitOnboarding: Exception:', err)
       return false
     } finally {
       setSubmitting(false)

@@ -93,6 +93,7 @@ export function BusinessInformationForm({ onBack, onSave }: BusinessInformationF
   };
 
   const handleSubmit = async () => {
+    console.log('BusinessInformationForm: handleSubmit called');
     setSaving(true);
 
     const formData: Step1FormData = {
