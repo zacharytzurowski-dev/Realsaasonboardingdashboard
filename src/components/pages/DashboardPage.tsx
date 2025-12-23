@@ -13,7 +13,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
   const { profile, onboardingSubmitted } = useProfile();
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
 
   // Owner information from profile or auth user
   const ownerName = profile?.full_name || user?.user_metadata?.full_name || 'User';
@@ -186,9 +186,9 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
 
                   {/* Log Out */}
                   <button
-                    onClick={() => {
+                    onClick={async () => {
                       setIsProfileDropdownOpen(false);
-                      alert('Logging out...');
+                      await signOut();
                     }}
                     className="group w-full flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A]/50 border border-[#2A2B2E]/30 hover:border-[#EF4444]/40 hover:bg-[#151618]/80 transition-all hover:-translate-y-0.5"
                   >
