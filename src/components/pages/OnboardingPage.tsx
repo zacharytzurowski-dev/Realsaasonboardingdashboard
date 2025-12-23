@@ -8,74 +8,71 @@ import { TargetAudienceForm } from '../forms/TargetAudienceForm';
 import { ContentMessagingForm } from '../forms/ContentMessagingForm';
 import { ExistingAssetsAuditForm } from '../forms/ExistingAssetsAuditForm';
 import { CRMSetupForm } from '../forms/CRMSetupForm';
-import { useProfile } from '../../contexts/ProfileContext';
+import { useProfile, StepStatus } from '../../contexts/ProfileContext';
 
-type StepStatus = 'completed' | 'in-progress' | 'not-started';
-
-interface OnboardingStep {
+interface OnboardingStepConfig {
   id: number;
   title: string;
   description: string;
   icon: any;
-  status: StepStatus;
   color: string;
 }
 
+const stepConfigs: OnboardingStepConfig[] = [
+  {
+    id: 1,
+    title: 'Business Information',
+    description: 'Tell us about your business, location, and services',
+    icon: Building2,
+    color: 'from-blue-500 to-cyan-500',
+  },
+  {
+    id: 2,
+    title: 'Brand & Identity',
+    description: 'Upload your logo, colors, and brand assets',
+    icon: Palette,
+    color: 'from-purple-500 to-pink-500',
+  },
+  {
+    id: 3,
+    title: 'Target Audience',
+    description: 'Define your ideal customer and market',
+    icon: Users,
+    color: 'from-green-500 to-emerald-500',
+  },
+  {
+    id: 4,
+    title: 'Content & Messaging',
+    description: 'Set your messaging style and content tone',
+    icon: FileText,
+    color: 'from-orange-500 to-pink-500',
+  },
+  {
+    id: 5,
+    title: 'Existing Assets Audit',
+    description: 'Review your current website, ads, and online presence',
+    icon: ClipboardList,
+    color: 'from-amber-500 to-orange-500',
+  },
+  {
+    id: 6,
+    title: 'CRM Setup',
+    description: 'Connect your Fieldd account for lead management',
+    icon: Database,
+    color: 'from-violet-500 to-purple-500',
+  },
+];
+
 export function OnboardingPage() {
   const [activeStep, setActiveStep] = useState<number | null>(null);
-  const { onboardingSubmitted, submitting, submitOnboarding } = useProfile();
+  const { onboardingSubmitted, submitting, submitOnboarding, stepStatuses } = useProfile();
   const navigate = useNavigate();
 
-  const [steps, setSteps] = useState<OnboardingStep[]>([
-    {
-      id: 1,
-      title: 'Business Information',
-      description: 'Tell us about your business, location, and services',
-      icon: Building2,
-      status: 'not-started',
-      color: 'from-blue-500 to-cyan-500',
-    },
-    {
-      id: 2,
-      title: 'Brand & Identity',
-      description: 'Upload your logo, colors, and brand assets',
-      icon: Palette,
-      status: 'not-started',
-      color: 'from-purple-500 to-pink-500',
-    },
-    {
-      id: 3,
-      title: 'Target Audience',
-      description: 'Define your ideal customer and market',
-      icon: Users,
-      status: 'not-started',
-      color: 'from-green-500 to-emerald-500',
-    },
-    {
-      id: 4,
-      title: 'Content & Messaging',
-      description: 'Set your messaging style and content tone',
-      icon: FileText,
-      status: 'not-started',
-      color: 'from-orange-500 to-pink-500',
-    },
-    {
-      id: 5,
-      title: 'Existing Assets Audit',
-      description: 'Review your current website, ads, and online presence',
-      icon: ClipboardList,
-      status: 'not-started',
-      color: 'from-amber-500 to-orange-500',
-    },
-    {
-      id: 6,
-      title: 'CRM Setup',
-      description: 'Connect your Fieldd account for lead management',
-      icon: Database,
-      status: 'not-started',
-      color: 'from-violet-500 to-purple-500',
-    },
-  ]);
+  // Combine step configs with statuses from DB
+  const steps = stepConfigs.map(config => ({
+    ...config,
+    status: stepStatuses[config.id] || 'not-started' as StepStatus
+  }));
 
   const completedCount = steps.filter(step => step.status === 'completed').length;
   const progressPercentage = (completedCount / steps.length) * 100;
@@ -90,12 +87,8 @@ export function OnboardingPage() {
   };
 
   const handleSave = () => {
-    // Update step status to completed
-    setSteps(prevSteps =>
-      prevSteps.map(step =>
-        step.id === activeStep ? { ...step, status: 'completed' as StepStatus } : step
-      )
-    );
+    // Data is saved within the form component
+    // Just close the form and return to checklist
     setActiveStep(null);
   };
 
@@ -186,37 +179,37 @@ export function OnboardingPage() {
       <div className="space-y-3">
         {steps.map((step) => {
           const Icon = step.icon;
-          
+
           // Map colors to dark theme gradients
           const colorMap: { [key: string]: { gradient: string; shadow: string } } = {
-            'from-blue-500 to-cyan-500': { 
-              gradient: 'from-[#3AB8FF] to-[#00CFFF]', 
-              shadow: 'shadow-[#3AB8FF]/30' 
+            'from-blue-500 to-cyan-500': {
+              gradient: 'from-[#3AB8FF] to-[#00CFFF]',
+              shadow: 'shadow-[#3AB8FF]/30'
             },
-            'from-purple-500 to-pink-500': { 
-              gradient: 'from-[#8B5CF6] to-[#EC4899]', 
-              shadow: 'shadow-[#8B5CF6]/30' 
+            'from-purple-500 to-pink-500': {
+              gradient: 'from-[#8B5CF6] to-[#EC4899]',
+              shadow: 'shadow-[#8B5CF6]/30'
             },
-            'from-green-500 to-emerald-500': { 
-              gradient: 'from-[#10B981] to-[#059669]', 
-              shadow: 'shadow-[#10B981]/30' 
+            'from-green-500 to-emerald-500': {
+              gradient: 'from-[#10B981] to-[#059669]',
+              shadow: 'shadow-[#10B981]/30'
             },
-            'from-orange-500 to-pink-500': { 
-              gradient: 'from-[#F59E0B] to-[#EC4899]', 
-              shadow: 'shadow-[#F59E0B]/30' 
+            'from-orange-500 to-pink-500': {
+              gradient: 'from-[#F59E0B] to-[#EC4899]',
+              shadow: 'shadow-[#F59E0B]/30'
             },
-            'from-indigo-500 to-purple-500': { 
-              gradient: 'from-[#6366F1] to-[#8B5CF6]', 
-              shadow: 'shadow-[#6366F1]/30' 
+            'from-indigo-500 to-purple-500': {
+              gradient: 'from-[#6366F1] to-[#8B5CF6]',
+              shadow: 'shadow-[#6366F1]/30'
             },
-            'from-violet-500 to-purple-500': { 
-              gradient: 'from-[#7C3AED] to-[#8B5CF6]', 
-              shadow: 'shadow-[#7C3AED]/30' 
+            'from-violet-500 to-purple-500': {
+              gradient: 'from-[#7C3AED] to-[#8B5CF6]',
+              shadow: 'shadow-[#7C3AED]/30'
             },
           };
-          
+
           const colorTheme = colorMap[step.color] || { gradient: 'from-[#3AB8FF] to-[#00CFFF]', shadow: 'shadow-[#3AB8FF]/30' };
-          
+
           return (
             <button
               key={step.id}

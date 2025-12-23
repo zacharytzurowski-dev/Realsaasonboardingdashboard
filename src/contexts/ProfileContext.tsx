@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase'
 import { useAuth } from './AuthContext'
 
 export type SystemStatus = 'optimizing' | 'active'
+export type StepStatus = 'completed' | 'in-progress' | 'not-started'
 
 interface Profile {
   id: string
@@ -12,8 +13,114 @@ interface Profile {
 
 interface OnboardingProgress {
   user_id: string
+  step_1_status: StepStatus | null
+  step_2_status: StepStatus | null
+  step_3_status: StepStatus | null
+  step_4_status: StepStatus | null
+  step_5_status: StepStatus | null
+  step_6_status: StepStatus | null
+  form_data: Record<string, any> | null
   onboarding_completed_at: string | null
   activation_deadline: string | null
+}
+
+// Form data types
+export interface Step1FormData {
+  businessName: string
+  legalName: string
+  businessPhone: string
+  businessEmail: string
+  businessAddress: string
+  yearEstablished: string
+  businessType: string
+  servicesPricing: string
+  primaryCity: string
+  serviceRadius: string
+  excludedAreas: string
+  hoursOfOperation: string
+  websiteUrl: string
+  insuranceDocumentLink: string
+  monthlyRevenueRange: string
+  teamSize: string
+  teamMembers: Array<{ id: string; name: string; role: string }>
+}
+
+export interface Step2FormData {
+  logoLink: string
+  workPhotosLink: string
+  teamPhotosLink: string
+  businessTagline: string
+  usps: string
+  brandPersonality: string
+  primaryColor: string
+  secondaryColor: string
+}
+
+export interface Step3FormData {
+  customerType: string
+  ageRangeFrom: string
+  ageRangeTo: string
+  householdIncome: string
+  targetRadius: string
+  highValueNeighborhoods: string
+  excludedZipCodes: string
+  minimumJobValue: string
+  keyCustomerProblems: string
+  idealCustomerDescription: string
+}
+
+export interface Step4FormData {
+  toneVoice: string
+  usps: string
+  servicesOffered: string
+  pricingStructure: string
+  competitorWebsites: string
+  exampleWebsites: string
+  hasProfessionalPhotos: string
+  additionalNotes: string
+}
+
+export interface Step5FormData {
+  hasWebsite: string
+  websiteUrl: string
+  hasDomainAccess: string
+  domainProvider: string
+  hasGBP: string
+  gbpEmail: string
+  gbpSuspended: string
+  hasGoogleAds: string
+  googleAdsEmail: string
+  googleAdsSuspended: string
+  hasLSA: string
+  lsaEmail: string
+  lsaRejectionReason: string
+  backgroundCheckReady: string
+  hasFacebook: string
+  facebookUrl: string
+  hasInstagram: string
+  instagramUrl: string
+  hasNextdoor: string
+  hasYelp: string
+  yelpUrl: string
+  hasCRM: string
+  crmName: string
+}
+
+export interface Step6FormData {
+  selectedPlan: string
+  hasPurchased: string
+  purchaseConfirmationLink: string
+  fielddEmail: string
+  fielddPassword: string
+}
+
+export interface AllFormData {
+  step1_business_info?: Step1FormData
+  step2_brand_identity?: Step2FormData
+  step3_target_audience?: Step3FormData
+  step4_content_messaging?: Step4FormData
+  step5_existing_assets?: Step5FormData
+  step6_crm_setup?: Step6FormData
 }
 
 interface ProfileContextType {
@@ -23,8 +130,12 @@ interface ProfileContextType {
   activationDeadline: Date | null
   onboardingSubmitted: boolean
   submitting: boolean
+  stepStatuses: Record<number, StepStatus>
+  formData: AllFormData
   refreshProfile: () => Promise<void>
   submitOnboarding: () => Promise<boolean>
+  saveStepData: (stepNumber: number, data: any) => Promise<boolean>
+  getStepData: <T>(stepNumber: number) => T | null
 }
 
 const ProfileContext = createContext<ProfileContextType | undefined>(undefined)
@@ -59,10 +170,10 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
         setProfile(profileData)
       }
 
-      // Fetch onboarding progress
+      // Fetch onboarding progress with all fields
       const { data: progressData, error: progressError } = await supabase
         .from('onboarding_progress')
-        .select('user_id, onboarding_completed_at, activation_deadline')
+        .select('user_id, step_1_status, step_2_status, step_3_status, step_4_status, step_5_status, step_6_status, form_data, onboarding_completed_at, activation_deadline')
         .eq('user_id', user.id)
         .single()
 
@@ -84,6 +195,19 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     fetchProfile()
   }, [fetchProfile])
+
+  // Compute step statuses from onboarding progress
+  const stepStatuses: Record<number, StepStatus> = {
+    1: (onboardingProgress?.step_1_status as StepStatus) || 'not-started',
+    2: (onboardingProgress?.step_2_status as StepStatus) || 'not-started',
+    3: (onboardingProgress?.step_3_status as StepStatus) || 'not-started',
+    4: (onboardingProgress?.step_4_status as StepStatus) || 'not-started',
+    5: (onboardingProgress?.step_5_status as StepStatus) || 'not-started',
+    6: (onboardingProgress?.step_6_status as StepStatus) || 'not-started',
+  }
+
+  // Get form data
+  const formData: AllFormData = (onboardingProgress?.form_data as AllFormData) || {}
 
   // Compute activation deadline as Date
   const activationDeadline = onboardingProgress?.activation_deadline
@@ -112,6 +236,74 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
 
   // Check if onboarding has been submitted
   const onboardingSubmitted = onboardingProgress?.onboarding_completed_at !== null && onboardingProgress?.onboarding_completed_at !== undefined
+
+  // Save step data to Supabase
+  const saveStepData = async (stepNumber: number, data: any): Promise<boolean> => {
+    if (!user) return false
+
+    try {
+      // Map step number to form data key
+      const stepKeys: Record<number, string> = {
+        1: 'step1_business_info',
+        2: 'step2_brand_identity',
+        3: 'step3_target_audience',
+        4: 'step4_content_messaging',
+        5: 'step5_existing_assets',
+        6: 'step6_crm_setup',
+      }
+
+      const stepKey = stepKeys[stepNumber]
+      if (!stepKey) return false
+
+      // Merge with existing form data
+      const existingFormData = onboardingProgress?.form_data || {}
+      const newFormData = {
+        ...existingFormData,
+        [stepKey]: data
+      }
+
+      // Build the update object
+      const stepStatusField = `step_${stepNumber}_status`
+      const updateData: any = {
+        user_id: user.id,
+        form_data: newFormData,
+        [stepStatusField]: 'completed'
+      }
+
+      const { error } = await supabase
+        .from('onboarding_progress')
+        .upsert(updateData, { onConflict: 'user_id' })
+
+      if (error) {
+        console.error('Error saving step data:', error.message)
+        return false
+      }
+
+      // Refresh data
+      await fetchProfile()
+      return true
+    } catch (err) {
+      console.error('Error saving step data:', err)
+      return false
+    }
+  }
+
+  // Get step data from form_data
+  const getStepData = <T,>(stepNumber: number): T | null => {
+    const stepKeys: Record<number, keyof AllFormData> = {
+      1: 'step1_business_info',
+      2: 'step2_brand_identity',
+      3: 'step3_target_audience',
+      4: 'step4_content_messaging',
+      5: 'step5_existing_assets',
+      6: 'step6_crm_setup',
+    }
+
+    const stepKey = stepKeys[stepNumber]
+    if (!stepKey) return null
+
+    return (formData[stepKey] as T) || null
+  }
 
   // Submit onboarding: set onboarding_completed_at = NOW and activation_deadline = NOW + 72 hours
   const submitOnboarding = async (): Promise<boolean> => {
@@ -154,8 +346,12 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
       activationDeadline,
       onboardingSubmitted,
       submitting,
+      stepStatuses,
+      formData,
       refreshProfile,
-      submitOnboarding
+      submitOnboarding,
+      saveStepData,
+      getStepData
     }}>
       {children}
     </ProfileContext.Provider>

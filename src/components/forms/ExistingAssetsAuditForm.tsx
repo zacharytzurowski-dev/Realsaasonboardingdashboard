@@ -1,5 +1,6 @@
-import { ClipboardList, ChevronLeft, AlertTriangle } from 'lucide-react';
-import { useState } from 'react';
+import { ClipboardList, ChevronLeft, AlertTriangle, Loader2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useProfile, Step5FormData } from '../../contexts/ProfileContext';
 
 interface ExistingAssetsAuditFormProps {
   onBack: () => void;
@@ -7,22 +8,108 @@ interface ExistingAssetsAuditFormProps {
 }
 
 export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditFormProps) {
+  const { getStepData, saveStepData } = useProfile();
+  const [saving, setSaving] = useState(false);
+
   // Website state
   const [hasWebsite, setHasWebsite] = useState('');
+  const [websiteUrl, setWebsiteUrl] = useState('');
   const [hasDomainAccess, setHasDomainAccess] = useState('');
+  const [domainProvider, setDomainProvider] = useState('');
 
   // GBP state
   const [hasGBP, setHasGBP] = useState('');
+  const [gbpEmail, setGbpEmail] = useState('');
   const [gbpSuspended, setGbpSuspended] = useState('');
 
   // Google Ads state
   const [hasGoogleAds, setHasGoogleAds] = useState('');
+  const [googleAdsEmail, setGoogleAdsEmail] = useState('');
   const [googleAdsSuspended, setGoogleAdsSuspended] = useState('');
 
   // LSA state
   const [hasLSA, setHasLSA] = useState('');
+  const [lsaEmail, setLsaEmail] = useState('');
   const [lsaRejectionReason, setLsaRejectionReason] = useState('');
   const [backgroundCheckReady, setBackgroundCheckReady] = useState('');
+
+  // Social state
+  const [hasFacebook, setHasFacebook] = useState('');
+  const [facebookUrl, setFacebookUrl] = useState('');
+  const [hasInstagram, setHasInstagram] = useState('');
+  const [instagramUrl, setInstagramUrl] = useState('');
+  const [hasNextdoor, setHasNextdoor] = useState('');
+  const [hasYelp, setHasYelp] = useState('');
+  const [yelpUrl, setYelpUrl] = useState('');
+  const [hasCRM, setHasCRM] = useState('');
+  const [crmName, setCrmName] = useState('');
+
+  // Load existing data on mount
+  useEffect(() => {
+    const existingData = getStepData<Step5FormData>(5);
+    if (existingData) {
+      setHasWebsite(existingData.hasWebsite || '');
+      setWebsiteUrl(existingData.websiteUrl || '');
+      setHasDomainAccess(existingData.hasDomainAccess || '');
+      setDomainProvider(existingData.domainProvider || '');
+      setHasGBP(existingData.hasGBP || '');
+      setGbpEmail(existingData.gbpEmail || '');
+      setGbpSuspended(existingData.gbpSuspended || '');
+      setHasGoogleAds(existingData.hasGoogleAds || '');
+      setGoogleAdsEmail(existingData.googleAdsEmail || '');
+      setGoogleAdsSuspended(existingData.googleAdsSuspended || '');
+      setHasLSA(existingData.hasLSA || '');
+      setLsaEmail(existingData.lsaEmail || '');
+      setLsaRejectionReason(existingData.lsaRejectionReason || '');
+      setBackgroundCheckReady(existingData.backgroundCheckReady || '');
+      setHasFacebook(existingData.hasFacebook || '');
+      setFacebookUrl(existingData.facebookUrl || '');
+      setHasInstagram(existingData.hasInstagram || '');
+      setInstagramUrl(existingData.instagramUrl || '');
+      setHasNextdoor(existingData.hasNextdoor || '');
+      setHasYelp(existingData.hasYelp || '');
+      setYelpUrl(existingData.yelpUrl || '');
+      setHasCRM(existingData.hasCRM || '');
+      setCrmName(existingData.crmName || '');
+    }
+  }, [getStepData]);
+
+  const handleSubmit = async () => {
+    setSaving(true);
+
+    const formData: Step5FormData = {
+      hasWebsite,
+      websiteUrl,
+      hasDomainAccess,
+      domainProvider,
+      hasGBP,
+      gbpEmail,
+      gbpSuspended,
+      hasGoogleAds,
+      googleAdsEmail,
+      googleAdsSuspended,
+      hasLSA,
+      lsaEmail,
+      lsaRejectionReason,
+      backgroundCheckReady,
+      hasFacebook,
+      facebookUrl,
+      hasInstagram,
+      instagramUrl,
+      hasNextdoor,
+      hasYelp,
+      yelpUrl,
+      hasCRM,
+      crmName,
+    };
+
+    const success = await saveStepData(5, formData);
+    setSaving(false);
+
+    if (success) {
+      onSave();
+    }
+  };
 
   const inputClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] placeholder:text-[#64748B] focus:border-[#F59E0B] focus:outline-none focus:ring-2 focus:ring-[#F59E0B]/20 transition-all";
   const labelClasses = "flex items-center gap-2 text-[#94A3B8] text-sm mb-2";
@@ -91,21 +178,23 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
                 <>
                   <div>
                     <label className={labelClasses}>Website URL</label>
-                    <input type="url" placeholder="https://..." className={inputClasses} />
-                  </div>
-                  <div>
-                    <label className={labelClasses}>Platform</label>
-                    <select className={selectClasses}>
-                      <option value="">Select...</option>
-                      <option value="wix">Wix</option>
-                      <option value="squarespace">Squarespace</option>
-                      <option value="wordpress">WordPress</option>
-                      <option value="other">Other</option>
-                    </select>
+                    <input
+                      type="url"
+                      placeholder="https://..."
+                      className={inputClasses}
+                      value={websiteUrl}
+                      onChange={(e) => setWebsiteUrl(e.target.value)}
+                    />
                   </div>
                   <div>
                     <label className={labelClasses}>Domain Registrar</label>
-                    <input type="text" placeholder="e.g., GoDaddy, Namecheap" className={inputClasses} />
+                    <input
+                      type="text"
+                      placeholder="e.g., GoDaddy, Namecheap"
+                      className={inputClasses}
+                      value={domainProvider}
+                      onChange={(e) => setDomainProvider(e.target.value)}
+                    />
                   </div>
                   <div>
                     <label className={labelClasses}>Do you have login access to the domain?</label>
@@ -149,17 +238,13 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
                 <>
                   <div>
                     <label className={labelClasses}>Email used for GBP</label>
-                    <input type="email" placeholder="email@gmail.com" className={inputClasses} />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className={labelClasses}>Current Rating</label>
-                      <input type="text" placeholder="e.g., 4.8" className={inputClasses} />
-                    </div>
-                    <div>
-                      <label className={labelClasses}>Review Count</label>
-                      <input type="number" placeholder="e.g., 50" className={inputClasses} />
-                    </div>
+                    <input
+                      type="email"
+                      placeholder="email@gmail.com"
+                      className={inputClasses}
+                      value={gbpEmail}
+                      onChange={(e) => setGbpEmail(e.target.value)}
+                    />
                   </div>
                   <div>
                     <label className={labelClasses}>Has it ever been suspended?</label>
@@ -206,14 +291,13 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
                 <>
                   <div>
                     <label className={labelClasses}>Email used for Google Ads</label>
-                    <input type="email" placeholder="email@gmail.com" className={inputClasses} />
-                  </div>
-                  <div>
-                    <label className={labelClasses}>Will you grant manager access?</label>
-                    <div className="flex gap-4">
-                      <button type="button" className="flex-1 px-4 py-3 rounded-xl border text-sm font-medium bg-[#0D1114] border-[#293038] text-[#94A3B8] hover:border-[#F59E0B]/50 transition-all">Yes</button>
-                      <button type="button" className="flex-1 px-4 py-3 rounded-xl border text-sm font-medium bg-[#0D1114] border-[#293038] text-[#94A3B8] hover:border-[#F59E0B]/50 transition-all">No</button>
-                    </div>
+                    <input
+                      type="email"
+                      placeholder="email@gmail.com"
+                      className={inputClasses}
+                      value={googleAdsEmail}
+                      onChange={(e) => setGoogleAdsEmail(e.target.value)}
+                    />
                   </div>
                   <div>
                     <label className={labelClasses}>Has it ever been suspended?</label>
@@ -251,6 +335,19 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
                   <option value="yes-pending">Yes - Pending</option>
                 </select>
               </div>
+
+              {(hasLSA === 'yes-active' || hasLSA === 'yes-pending') && (
+                <div>
+                  <label className={labelClasses}>Email used for LSA</label>
+                  <input
+                    type="email"
+                    placeholder="email@gmail.com"
+                    className={inputClasses}
+                    value={lsaEmail}
+                    onChange={(e) => setLsaEmail(e.target.value)}
+                  />
+                </div>
+              )}
 
               {hasLSA === 'yes-rejected' && (
                 <>
@@ -292,39 +389,77 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className={labelClasses}>Facebook Page URL <span className="text-[#64748B]">(Optional)</span></label>
-                  <input type="url" placeholder="https://facebook.com/..." className={inputClasses} />
+                  <input
+                    type="url"
+                    placeholder="https://facebook.com/..."
+                    className={inputClasses}
+                    value={facebookUrl}
+                    onChange={(e) => setFacebookUrl(e.target.value)}
+                  />
                 </div>
                 <div>
                   <label className={labelClasses}>Instagram URL <span className="text-[#64748B]">(Optional)</span></label>
-                  <input type="url" placeholder="https://instagram.com/..." className={inputClasses} />
+                  <input
+                    type="url"
+                    placeholder="https://instagram.com/..."
+                    className={inputClasses}
+                    value={instagramUrl}
+                    onChange={(e) => setInstagramUrl(e.target.value)}
+                  />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className={labelClasses}>Nextdoor Personal Account?</label>
+                  <label className={labelClasses}>Nextdoor Account?</label>
                   <div className="flex gap-4">
-                    <button type="button" className="flex-1 px-4 py-2 rounded-xl border text-sm font-medium bg-[#0D1114] border-[#293038] text-[#94A3B8] hover:border-[#F59E0B]/50 transition-all">Yes</button>
-                    <button type="button" className="flex-1 px-4 py-2 rounded-xl border text-sm font-medium bg-[#0D1114] border-[#293038] text-[#94A3B8] hover:border-[#F59E0B]/50 transition-all">No</button>
+                    <button type="button" onClick={() => setHasNextdoor('yes')}
+                      className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasNextdoor === 'yes' ? 'bg-[#10B981]/20 border-[#10B981] text-[#10B981]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
+                      Yes
+                    </button>
+                    <button type="button" onClick={() => setHasNextdoor('no')}
+                      className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasNextdoor === 'no' ? 'bg-[#0D1114] border-[#293038] text-[#94A3B8]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
+                      No
+                    </button>
                   </div>
                 </div>
                 <div>
-                  <label className={labelClasses}>Nextdoor Business Page?</label>
+                  <label className={labelClasses}>Yelp Page?</label>
                   <div className="flex gap-4">
-                    <button type="button" className="flex-1 px-4 py-2 rounded-xl border text-sm font-medium bg-[#0D1114] border-[#293038] text-[#94A3B8] hover:border-[#F59E0B]/50 transition-all">Yes</button>
-                    <button type="button" className="flex-1 px-4 py-2 rounded-xl border text-sm font-medium bg-[#0D1114] border-[#293038] text-[#94A3B8] hover:border-[#F59E0B]/50 transition-all">No</button>
+                    <button type="button" onClick={() => setHasYelp('yes')}
+                      className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasYelp === 'yes' ? 'bg-[#10B981]/20 border-[#10B981] text-[#10B981]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
+                      Yes
+                    </button>
+                    <button type="button" onClick={() => setHasYelp('no')}
+                      className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasYelp === 'no' ? 'bg-[#0D1114] border-[#293038] text-[#94A3B8]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
+                      No
+                    </button>
                   </div>
                 </div>
               </div>
 
-              <div>
-                <label className={labelClasses}>Yelp Page URL <span className="text-[#64748B]">(Optional)</span></label>
-                <input type="url" placeholder="https://yelp.com/..." className={inputClasses} />
-              </div>
+              {hasYelp === 'yes' && (
+                <div>
+                  <label className={labelClasses}>Yelp Page URL</label>
+                  <input
+                    type="url"
+                    placeholder="https://yelp.com/..."
+                    className={inputClasses}
+                    value={yelpUrl}
+                    onChange={(e) => setYelpUrl(e.target.value)}
+                  />
+                </div>
+              )}
 
               <div>
                 <label className={labelClasses}>Currently using any CRM? <span className="text-[#64748B]">(Optional)</span></label>
-                <input type="text" placeholder="If yes, which one? Any data to migrate?" className={inputClasses} />
+                <input
+                  type="text"
+                  placeholder="If yes, which one? Any data to migrate?"
+                  className={inputClasses}
+                  value={crmName}
+                  onChange={(e) => setCrmName(e.target.value)}
+                />
               </div>
             </div>
 
@@ -332,10 +467,18 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
             <div className="pt-6 border-t border-[#293038]">
               <button
                 type="button"
-                onClick={onSave}
-                className="w-full bg-gradient-to-r from-[#F59E0B] to-[#EF4444] text-white px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-[#F59E0B]/30 transition-all font-medium"
+                onClick={handleSubmit}
+                disabled={saving}
+                className="w-full bg-gradient-to-r from-[#F59E0B] to-[#EF4444] text-white px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-[#F59E0B]/30 transition-all font-medium disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                Save & Continue
+                {saving ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  'Save & Continue'
+                )}
               </button>
             </div>
           </form>

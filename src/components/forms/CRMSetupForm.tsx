@@ -1,5 +1,6 @@
-import { Database, ChevronLeft, ExternalLink, AlertTriangle } from 'lucide-react';
-import { useState } from 'react';
+import { Database, ChevronLeft, ExternalLink, AlertTriangle, Loader2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useProfile, Step6FormData } from '../../contexts/ProfileContext';
 
 interface CRMSetupFormProps {
   onBack: () => void;
@@ -7,12 +8,49 @@ interface CRMSetupFormProps {
 }
 
 export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
+  const { getStepData, saveStepData } = useProfile();
+  const [saving, setSaving] = useState(false);
+
+  // Form state
   const [selectedPlan, setSelectedPlan] = useState('');
   const [hasPurchased, setHasPurchased] = useState('');
+  const [purchaseConfirmationLink, setPurchaseConfirmationLink] = useState('');
+  const [fielddEmail, setFielddEmail] = useState('');
+  const [fielddPassword, setFielddPassword] = useState('');
+
+  // Load existing data on mount
+  useEffect(() => {
+    const existingData = getStepData<Step6FormData>(6);
+    if (existingData) {
+      setSelectedPlan(existingData.selectedPlan || '');
+      setHasPurchased(existingData.hasPurchased || '');
+      setPurchaseConfirmationLink(existingData.purchaseConfirmationLink || '');
+      setFielddEmail(existingData.fielddEmail || '');
+      setFielddPassword(existingData.fielddPassword || '');
+    }
+  }, [getStepData]);
+
+  const handleSubmit = async () => {
+    setSaving(true);
+
+    const formData: Step6FormData = {
+      selectedPlan,
+      hasPurchased,
+      purchaseConfirmationLink,
+      fielddEmail,
+      fielddPassword,
+    };
+
+    const success = await saveStepData(6, formData);
+    setSaving(false);
+
+    if (success) {
+      onSave();
+    }
+  };
 
   const inputClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] placeholder:text-[#64748B] focus:border-[#8B5CF6] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]/20 transition-all";
   const labelClasses = "flex items-center gap-2 text-[#94A3B8] text-sm mb-2";
-  const selectClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] focus:border-[#8B5CF6] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]/20 transition-all";
 
   const canProceed = hasPurchased === 'yes';
 
@@ -133,19 +171,37 @@ export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
                 {/* Purchase Confirmation Link */}
                 <div>
                   <label className={labelClasses}>Purchase Confirmation Link <span className="text-[#64748B]">(Optional)</span></label>
-                  <input type="url" placeholder="https://..." className={inputClasses} />
+                  <input
+                    type="url"
+                    placeholder="https://..."
+                    className={inputClasses}
+                    value={purchaseConfirmationLink}
+                    onChange={(e) => setPurchaseConfirmationLink(e.target.value)}
+                  />
                 </div>
 
                 {/* Fieldd Account Email */}
                 <div>
                   <label className={labelClasses}>Fieldd Account Email *</label>
-                  <input type="email" placeholder="your-email@business.com" className={inputClasses} />
+                  <input
+                    type="email"
+                    placeholder="your-email@business.com"
+                    className={inputClasses}
+                    value={fielddEmail}
+                    onChange={(e) => setFielddEmail(e.target.value)}
+                  />
                 </div>
 
                 {/* Fieldd Account Password */}
                 <div>
                   <label className={labelClasses}>Fieldd Account Password *</label>
-                  <input type="password" placeholder="Enter your password" className={inputClasses} />
+                  <input
+                    type="password"
+                    placeholder="Enter your password"
+                    className={inputClasses}
+                    value={fielddPassword}
+                    onChange={(e) => setFielddPassword(e.target.value)}
+                  />
                   <p className="text-[#64748B] text-xs mt-2">We will securely set up your entire Fieldd system for you.</p>
                 </div>
               </>
@@ -155,15 +211,22 @@ export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
             <div className="pt-6 border-t border-[#293038]">
               <button
                 type="button"
-                onClick={onSave}
-                disabled={!canProceed}
-                className={`w-full px-8 py-4 rounded-xl font-medium transition-all ${
+                onClick={handleSubmit}
+                disabled={!canProceed || saving}
+                className={`w-full px-8 py-4 rounded-xl font-medium transition-all flex items-center justify-center gap-2 ${
                   canProceed
-                    ? 'bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white hover:shadow-lg hover:shadow-[#8B5CF6]/30'
+                    ? 'bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white hover:shadow-lg hover:shadow-[#8B5CF6]/30 disabled:opacity-70'
                     : 'bg-[#293038] text-[#64748B] cursor-not-allowed'
                 }`}
               >
-                Save & Continue
+                {saving ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  'Save & Continue'
+                )}
               </button>
             </div>
           </form>

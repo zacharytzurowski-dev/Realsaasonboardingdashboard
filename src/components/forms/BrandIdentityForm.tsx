@@ -1,5 +1,6 @@
-import { Palette, ChevronLeft } from 'lucide-react';
-import { useState } from 'react';
+import { Palette, ChevronLeft, Loader2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useProfile, Step2FormData } from '../../contexts/ProfileContext';
 
 interface BrandIdentityFormProps {
   onBack: () => void;
@@ -7,8 +8,55 @@ interface BrandIdentityFormProps {
 }
 
 export function BrandIdentityForm({ onBack, onSave }: BrandIdentityFormProps) {
+  const { getStepData, saveStepData } = useProfile();
+  const [saving, setSaving] = useState(false);
+
+  // Form state
+  const [logoLink, setLogoLink] = useState('');
+  const [workPhotosLink, setWorkPhotosLink] = useState('');
+  const [teamPhotosLink, setTeamPhotosLink] = useState('');
+  const [businessTagline, setBusinessTagline] = useState('');
+  const [usps, setUsps] = useState('');
+  const [brandPersonality, setBrandPersonality] = useState('');
   const [primaryColor, setPrimaryColor] = useState('#3B82F6');
   const [secondaryColor, setSecondaryColor] = useState('#8B5CF6');
+
+  // Load existing data on mount
+  useEffect(() => {
+    const existingData = getStepData<Step2FormData>(2);
+    if (existingData) {
+      setLogoLink(existingData.logoLink || '');
+      setWorkPhotosLink(existingData.workPhotosLink || '');
+      setTeamPhotosLink(existingData.teamPhotosLink || '');
+      setBusinessTagline(existingData.businessTagline || '');
+      setUsps(existingData.usps || '');
+      setBrandPersonality(existingData.brandPersonality || '');
+      setPrimaryColor(existingData.primaryColor || '#3B82F6');
+      setSecondaryColor(existingData.secondaryColor || '#8B5CF6');
+    }
+  }, [getStepData]);
+
+  const handleSubmit = async () => {
+    setSaving(true);
+
+    const formData: Step2FormData = {
+      logoLink,
+      workPhotosLink,
+      teamPhotosLink,
+      businessTagline,
+      usps,
+      brandPersonality,
+      primaryColor,
+      secondaryColor,
+    };
+
+    const success = await saveStepData(2, formData);
+    setSaving(false);
+
+    if (success) {
+      onSave();
+    }
+  };
 
   const inputClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] placeholder:text-[#64748B] focus:border-[#8B5CF6] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]/20 transition-all";
   const labelClasses = "flex items-center gap-2 text-[#94A3B8] text-sm mb-2";
@@ -70,26 +118,50 @@ export function BrandIdentityForm({ onBack, onSave }: BrandIdentityFormProps) {
             <div>
               <label className={labelClasses}>Logo Link *</label>
               <p className="text-[#64748B] text-xs mb-2">Paste a Google Drive or Dropbox link to your logo file</p>
-              <input type="url" placeholder="https://drive.google.com/..." className={inputClasses} />
+              <input
+                type="url"
+                placeholder="https://drive.google.com/..."
+                className={inputClasses}
+                value={logoLink}
+                onChange={(e) => setLogoLink(e.target.value)}
+              />
             </div>
 
             {/* Work Photos Link */}
             <div>
               <label className={labelClasses}>Work Photos Link *</label>
               <p className="text-[#64748B] text-xs mb-2">Link to a folder with photos of your work</p>
-              <input type="url" placeholder="https://drive.google.com/..." className={inputClasses} />
+              <input
+                type="url"
+                placeholder="https://drive.google.com/..."
+                className={inputClasses}
+                value={workPhotosLink}
+                onChange={(e) => setWorkPhotosLink(e.target.value)}
+              />
             </div>
 
             {/* Team Photos Link */}
             <div>
               <label className={labelClasses}>Team Photos Link <span className="text-[#64748B]">(Optional)</span></label>
-              <input type="url" placeholder="https://drive.google.com/..." className={inputClasses} />
+              <input
+                type="url"
+                placeholder="https://drive.google.com/..."
+                className={inputClasses}
+                value={teamPhotosLink}
+                onChange={(e) => setTeamPhotosLink(e.target.value)}
+              />
             </div>
 
             {/* Business Tagline */}
             <div>
               <label className={labelClasses}>Business Tagline / Slogan <span className="text-[#64748B]">(Optional)</span></label>
-              <input type="text" placeholder="e.g., 'We bring the shine to you!'" className={inputClasses} />
+              <input
+                type="text"
+                placeholder="e.g., 'We bring the shine to you!'"
+                className={inputClasses}
+                value={businessTagline}
+                onChange={(e) => setBusinessTagline(e.target.value)}
+              />
             </div>
 
             {/* What Makes You Different */}
@@ -99,13 +171,19 @@ export function BrandIdentityForm({ onBack, onSave }: BrandIdentityFormProps) {
                 placeholder="What sets your business apart from competitors? List your unique selling points..."
                 rows={4}
                 className={inputClasses + " resize-none"}
+                value={usps}
+                onChange={(e) => setUsps(e.target.value)}
               />
             </div>
 
             {/* Brand Personality */}
             <div>
               <label className={labelClasses}>Brand Personality *</label>
-              <select className={selectClasses}>
+              <select
+                className={selectClasses}
+                value={brandPersonality}
+                onChange={(e) => setBrandPersonality(e.target.value)}
+              >
                 <option value="">Select personality...</option>
                 <option value="professional">Professional</option>
                 <option value="friendly">Friendly</option>
@@ -188,10 +266,18 @@ export function BrandIdentityForm({ onBack, onSave }: BrandIdentityFormProps) {
             <div className="pt-6 border-t border-[#293038]">
               <button
                 type="button"
-                onClick={onSave}
-                className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-[#8B5CF6]/30 transition-all font-medium"
+                onClick={handleSubmit}
+                disabled={saving}
+                className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-[#8B5CF6]/30 transition-all font-medium disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                Save & Continue
+                {saving ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  'Save & Continue'
+                )}
               </button>
             </div>
           </form>

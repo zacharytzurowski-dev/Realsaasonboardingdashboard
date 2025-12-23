@@ -1,5 +1,6 @@
-import { FileText, ChevronLeft, AlertCircle } from 'lucide-react';
-import { useState } from 'react';
+import { FileText, ChevronLeft, AlertCircle, Loader2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useProfile, Step4FormData } from '../../contexts/ProfileContext';
 
 interface ContentMessagingFormProps {
   onBack: () => void;
@@ -7,7 +8,55 @@ interface ContentMessagingFormProps {
 }
 
 export function ContentMessagingForm({ onBack, onSave }: ContentMessagingFormProps) {
-  const [hasProfessionalPhotos, setHasProfessionalPhotos] = useState<string>('');
+  const { getStepData, saveStepData } = useProfile();
+  const [saving, setSaving] = useState(false);
+
+  // Form state
+  const [toneVoice, setToneVoice] = useState('');
+  const [usps, setUsps] = useState('');
+  const [servicesOffered, setServicesOffered] = useState('');
+  const [pricingStructure, setPricingStructure] = useState('');
+  const [competitorWebsites, setCompetitorWebsites] = useState('');
+  const [exampleWebsites, setExampleWebsites] = useState('');
+  const [hasProfessionalPhotos, setHasProfessionalPhotos] = useState('');
+  const [additionalNotes, setAdditionalNotes] = useState('');
+
+  // Load existing data on mount
+  useEffect(() => {
+    const existingData = getStepData<Step4FormData>(4);
+    if (existingData) {
+      setToneVoice(existingData.toneVoice || '');
+      setUsps(existingData.usps || '');
+      setServicesOffered(existingData.servicesOffered || '');
+      setPricingStructure(existingData.pricingStructure || '');
+      setCompetitorWebsites(existingData.competitorWebsites || '');
+      setExampleWebsites(existingData.exampleWebsites || '');
+      setHasProfessionalPhotos(existingData.hasProfessionalPhotos || '');
+      setAdditionalNotes(existingData.additionalNotes || '');
+    }
+  }, [getStepData]);
+
+  const handleSubmit = async () => {
+    setSaving(true);
+
+    const formData: Step4FormData = {
+      toneVoice,
+      usps,
+      servicesOffered,
+      pricingStructure,
+      competitorWebsites,
+      exampleWebsites,
+      hasProfessionalPhotos,
+      additionalNotes,
+    };
+
+    const success = await saveStepData(4, formData);
+    setSaving(false);
+
+    if (success) {
+      onSave();
+    }
+  };
 
   const inputClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] placeholder:text-[#64748B] focus:border-[#F59E0B] focus:outline-none focus:ring-2 focus:ring-[#F59E0B]/20 transition-all";
   const labelClasses = "flex items-center gap-2 text-[#94A3B8] text-sm mb-2";
@@ -53,7 +102,11 @@ export function ContentMessagingForm({ onBack, onSave }: ContentMessagingFormPro
             {/* Tone & Voice */}
             <div>
               <label className={labelClasses}>Tone & Voice *</label>
-              <select className={selectClasses}>
+              <select
+                className={selectClasses}
+                value={toneVoice}
+                onChange={(e) => setToneVoice(e.target.value)}
+              >
                 <option value="">Select tone...</option>
                 <option value="professional">Professional</option>
                 <option value="friendly">Friendly</option>
@@ -69,6 +122,8 @@ export function ContentMessagingForm({ onBack, onSave }: ContentMessagingFormPro
                 placeholder="What makes your business stand out? What do customers love about you?"
                 rows={3}
                 className={inputClasses + " resize-none"}
+                value={usps}
+                onChange={(e) => setUsps(e.target.value)}
               />
             </div>
 
@@ -79,6 +134,8 @@ export function ContentMessagingForm({ onBack, onSave }: ContentMessagingFormPro
                 placeholder="List all services you offer with brief descriptions..."
                 rows={4}
                 className={inputClasses + " resize-none"}
+                value={servicesOffered}
+                onChange={(e) => setServicesOffered(e.target.value)}
               />
             </div>
 
@@ -89,6 +146,8 @@ export function ContentMessagingForm({ onBack, onSave }: ContentMessagingFormPro
                 placeholder="Describe your pricing approach (e.g., flat rate, per vehicle size, packages...)"
                 rows={3}
                 className={inputClasses + " resize-none"}
+                value={pricingStructure}
+                onChange={(e) => setPricingStructure(e.target.value)}
               />
             </div>
 
@@ -99,6 +158,8 @@ export function ContentMessagingForm({ onBack, onSave }: ContentMessagingFormPro
                 placeholder="List competitor websites so we can differentiate your brand..."
                 rows={2}
                 className={inputClasses + " resize-none"}
+                value={competitorWebsites}
+                onChange={(e) => setCompetitorWebsites(e.target.value)}
               />
             </div>
 
@@ -109,6 +170,8 @@ export function ContentMessagingForm({ onBack, onSave }: ContentMessagingFormPro
                 placeholder="Link to websites with designs or messaging styles you admire..."
                 rows={2}
                 className={inputClasses + " resize-none"}
+                value={exampleWebsites}
+                onChange={(e) => setExampleWebsites(e.target.value)}
               />
             </div>
 
@@ -156,6 +219,8 @@ export function ContentMessagingForm({ onBack, onSave }: ContentMessagingFormPro
                 placeholder="Anything else we should know about your content or messaging preferences?"
                 rows={3}
                 className={inputClasses + " resize-none"}
+                value={additionalNotes}
+                onChange={(e) => setAdditionalNotes(e.target.value)}
               />
             </div>
 
@@ -163,10 +228,18 @@ export function ContentMessagingForm({ onBack, onSave }: ContentMessagingFormPro
             <div className="pt-6 border-t border-[#293038]">
               <button
                 type="button"
-                onClick={onSave}
-                className="w-full bg-gradient-to-r from-[#F59E0B] to-[#EC4899] text-white px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-[#F59E0B]/30 transition-all font-medium"
+                onClick={handleSubmit}
+                disabled={saving}
+                className="w-full bg-gradient-to-r from-[#F59E0B] to-[#EC4899] text-white px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-[#F59E0B]/30 transition-all font-medium disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                Save & Continue
+                {saving ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  'Save & Continue'
+                )}
               </button>
             </div>
           </form>
