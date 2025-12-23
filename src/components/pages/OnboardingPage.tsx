@@ -78,6 +78,12 @@ export function OnboardingPage() {
   const progressPercentage = (completedCount / steps.length) * 100;
   const allStepsCompleted = completedCount === steps.length;
 
+  // Debug: Log step statuses
+  console.log('OnboardingPage: stepStatuses =', stepStatuses);
+  console.log('OnboardingPage: completedCount =', completedCount);
+  console.log('OnboardingPage: allStepsCompleted =', allStepsCompleted);
+  console.log('OnboardingPage: onboardingSubmitted =', onboardingSubmitted);
+
   const handleStepClick = (stepId: number) => {
     setActiveStep(stepId);
   };
@@ -93,9 +99,19 @@ export function OnboardingPage() {
   };
 
   const handleSubmit = async () => {
+    console.log('OnboardingPage: handleSubmit called');
+    console.log('OnboardingPage: allStepsCompleted =', allStepsCompleted);
+    console.log('OnboardingPage: onboardingSubmitted =', onboardingSubmitted);
+    console.log('OnboardingPage: submitting =', submitting);
+
     const success = await submitOnboarding();
+    console.log('OnboardingPage: submitOnboarding result =', success);
+
     if (success) {
+      console.log('OnboardingPage: Navigating to /dashboard');
       navigate('/dashboard');
+    } else {
+      console.error('OnboardingPage: submitOnboarding failed');
     }
   };
 
