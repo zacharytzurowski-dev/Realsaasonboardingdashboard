@@ -64,7 +64,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-5">
             {/* Logo with Glow */}
-            <img src="/logo.png" alt="LaunchOS" className="h-10 w-auto" />
+            <img src="/logo.png" alt="LaunchOS" className="h-12 w-12" />
             
             {/* Header Text */}
             <div>

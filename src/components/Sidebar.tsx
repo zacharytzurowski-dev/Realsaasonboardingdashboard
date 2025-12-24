@@ -53,7 +53,7 @@ export function Sidebar() {
         <div className="p-6 h-full flex flex-col">
           {/* Logo */}
           <div className="flex items-center gap-3 mb-10">
-            <img src="/logo.png" alt="LaunchOS" className="h-8 w-auto" />
+            <img src="/logo.png" alt="LaunchOS" className="h-8 w-8" />
             <div>
               <h2 className="text-white tracking-tight">LaunchOS</h2>
               <p className="text-[#6B6C7B] text-xs">System Control</p>
