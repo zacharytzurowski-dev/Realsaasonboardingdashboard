@@ -1,7 +1,9 @@
 import { Globe, ExternalLink, Eye, Edit, Check, Clock, FileText, TrendingUp, Sparkles, Calendar, Zap } from 'lucide-react';
 import { PageHero } from '../PageHero';
+import { useProfile } from '../../contexts/ProfileContext';
 
 export function WebsitePage() {
+  const { systemStatus } = useProfile();
   // Project data
   const websiteProgress = 75; // Overall progress percentage
 
@@ -29,10 +31,17 @@ export function WebsitePage() {
                 <div>
                   <h2 className="text-[#E8F1FF] text-2xl mb-1">Website Build</h2>
                   <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#3AB8FF]/20 text-[#3AB8FF] text-sm border border-[#3AB8FF]/30">
-                      <div className="w-2 h-2 bg-[#3AB8FF] rounded-full mr-2 animate-pulse shadow-lg shadow-[#3AB8FF]/50"></div>
-                      Optimizing
-                    </span>
+                    {systemStatus === 'active' ? (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#10B981]/20 text-[#10B981] text-sm border border-[#10B981]/30">
+                        <Check className="w-3 h-3 mr-2" />
+                        Active
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#3AB8FF]/20 text-[#3AB8FF] text-sm border border-[#3AB8FF]/30">
+                        <div className="w-2 h-2 bg-[#3AB8FF] rounded-full mr-2 animate-pulse shadow-lg shadow-[#3AB8FF]/50"></div>
+                        Optimizing
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -101,10 +110,17 @@ export function WebsitePage() {
               </div>
               <h3 className="text-[#E8F1FF]">Design</h3>
             </div>
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#10B981]/20 text-[#10B981] text-sm border border-[#10B981]/30">
-              <div className="w-2 h-2 bg-[#10B981] rounded-full mr-2 animate-pulse shadow-lg shadow-[#10B981]/50"></div>
-              Optimizing
-            </div>
+            {systemStatus === 'active' ? (
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#10B981]/20 text-[#10B981] text-sm border border-[#10B981]/30">
+                <Check className="w-3 h-3 mr-2" />
+                Active
+              </div>
+            ) : (
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#10B981]/20 text-[#10B981] text-sm border border-[#10B981]/30">
+                <div className="w-2 h-2 bg-[#10B981] rounded-full mr-2 animate-pulse shadow-lg shadow-[#10B981]/50"></div>
+                Optimizing
+              </div>
+            )}
           </div>
 
           {/* Metrics */}
@@ -141,10 +157,17 @@ export function WebsitePage() {
               </div>
               <h3 className="text-[#E8F1FF]">Content</h3>
             </div>
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#3AB8FF]/20 text-[#3AB8FF] text-sm border border-[#3AB8FF]/30">
-              <div className="w-2 h-2 bg-[#3AB8FF] rounded-full mr-2 animate-pulse shadow-lg shadow-[#3AB8FF]/50"></div>
-              Optimizing
-            </div>
+            {systemStatus === 'active' ? (
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#10B981]/20 text-[#10B981] text-sm border border-[#10B981]/30">
+                <Check className="w-3 h-3 mr-2" />
+                Active
+              </div>
+            ) : (
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#3AB8FF]/20 text-[#3AB8FF] text-sm border border-[#3AB8FF]/30">
+                <div className="w-2 h-2 bg-[#3AB8FF] rounded-full mr-2 animate-pulse shadow-lg shadow-[#3AB8FF]/50"></div>
+                Optimizing
+              </div>
+            )}
           </div>
 
           {/* Metrics */}
@@ -181,10 +204,17 @@ export function WebsitePage() {
               </div>
               <h3 className="text-[#E8F1FF]">Launch</h3>
             </div>
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#8B5CF6]/20 text-[#8B5CF6] text-sm border border-[#8B5CF6]/30">
-              <div className="w-2 h-2 bg-[#8B5CF6] rounded-full mr-2 animate-pulse shadow-lg shadow-[#8B5CF6]/50"></div>
-              Optimizing
-            </div>
+            {systemStatus === 'active' ? (
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#10B981]/20 text-[#10B981] text-sm border border-[#10B981]/30">
+                <Check className="w-3 h-3 mr-2" />
+                Active
+              </div>
+            ) : (
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#8B5CF6]/20 text-[#8B5CF6] text-sm border border-[#8B5CF6]/30">
+                <div className="w-2 h-2 bg-[#8B5CF6] rounded-full mr-2 animate-pulse shadow-lg shadow-[#8B5CF6]/50"></div>
+                Optimizing
+              </div>
+            )}
           </div>
 
           {/* Metrics */}

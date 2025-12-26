@@ -1,7 +1,9 @@
-import { Megaphone, TrendingUp, Pin, ExternalLink, DollarSign, Users, MousePointerClick, Eye, Target, CheckCircle, RefreshCw, BarChart3, Award, Zap } from 'lucide-react';
+import { Megaphone, TrendingUp, Pin, ExternalLink, DollarSign, Users, MousePointerClick, Eye, Target, CheckCircle, RefreshCw, BarChart3, Award, Zap, Check } from 'lucide-react';
 import { PageHero } from '../PageHero';
+import { useProfile } from '../../contexts/ProfileContext';
 
 export function PaidMarketingPage() {
+  const { systemStatus } = useProfile();
   // Mock Google Ads data
   const googleAdsData = {
     adSpend: 2847,
@@ -88,10 +90,17 @@ export function PaidMarketingPage() {
                 <p className="text-[#94A3B8] text-sm">Google LSA campaigns</p>
               </div>
             </div>
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#3AB8FF]/20 text-[#3AB8FF] text-sm border border-[#3AB8FF]/30">
-              <div className="w-2 h-2 bg-[#3AB8FF] rounded-full mr-2 animate-pulse shadow-lg shadow-[#3AB8FF]/50"></div>
-              Optimizing
-            </div>
+            {systemStatus === 'active' ? (
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#10B981]/20 text-[#10B981] text-sm border border-[#10B981]/30">
+                <Check className="w-3 h-3 mr-2" />
+                Active
+              </div>
+            ) : (
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#3AB8FF]/20 text-[#3AB8FF] text-sm border border-[#3AB8FF]/30">
+                <div className="w-2 h-2 bg-[#3AB8FF] rounded-full mr-2 animate-pulse shadow-lg shadow-[#3AB8FF]/50"></div>
+                Optimizing
+              </div>
+            )}
           </div>
 
           {/* Metrics */}
@@ -135,10 +144,17 @@ export function PaidMarketingPage() {
                 <p className="text-[#94A3B8] text-sm">Profile and leads management</p>
               </div>
             </div>
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#8B5CF6]/20 text-[#8B5CF6] text-sm border border-[#8B5CF6]/30">
-              <div className="w-2 h-2 bg-[#8B5CF6] rounded-full mr-2 animate-pulse shadow-lg shadow-[#8B5CF6]/50"></div>
-              Optimizing
-            </div>
+            {systemStatus === 'active' ? (
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#10B981]/20 text-[#10B981] text-sm border border-[#10B981]/30">
+                <Check className="w-3 h-3 mr-2" />
+                Active
+              </div>
+            ) : (
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#8B5CF6]/20 text-[#8B5CF6] text-sm border border-[#8B5CF6]/30">
+                <div className="w-2 h-2 bg-[#8B5CF6] rounded-full mr-2 animate-pulse shadow-lg shadow-[#8B5CF6]/50"></div>
+                Optimizing
+              </div>
+            )}
           </div>
 
           {/* Metrics */}

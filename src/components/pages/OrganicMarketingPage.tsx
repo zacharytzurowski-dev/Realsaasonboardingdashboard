@@ -1,8 +1,10 @@
-import { MapPin, Search, Users, ExternalLink, Star, Eye, Phone, MessageCircle, TrendingUp, AlertCircle, CheckCircle, RefreshCw, Clock, Zap } from 'lucide-react';
+import { MapPin, Search, Users, ExternalLink, Star, Eye, Phone, MessageCircle, TrendingUp, AlertCircle, CheckCircle, RefreshCw, Clock, Zap, Check } from 'lucide-react';
 import { useState } from 'react';
 import { PageHero } from '../PageHero';
+import { useProfile } from '../../contexts/ProfileContext';
 
 export function OrganicMarketingPage() {
+  const { systemStatus } = useProfile();
   // GBP Connection States: 'connected' | 'not-connected' | 'error-permissions' | 'error-not-verified'
   const [gbpStatus, setGbpStatus] = useState<'connected' | 'not-connected' | 'error-permissions' | 'error-not-verified'>('connected');
   
