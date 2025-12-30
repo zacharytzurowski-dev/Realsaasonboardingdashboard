@@ -1,4 +1,4 @@
-import { Clock, CheckCircle, Sparkles, Globe, TrendingUp, Zap, Rocket, ArrowRight, Palette, FileText, Calendar, Database, Star, Loader2, User, Briefcase, Settings, HelpCircle, LogOut, ChevronDown, Check } from 'lucide-react';
+import { Clock, CheckCircle, Sparkles, Globe, TrendingUp, Zap, Rocket, ArrowRight, Palette, FileText, Calendar, Database, Star, Loader2, Settings, HelpCircle, ChevronDown, Check } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeploymentCountdown } from '../DeploymentCountdown';
@@ -13,7 +13,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
   const { profile, onboardingSubmitted } = useProfile();
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   // Owner information from profile or auth user
@@ -113,56 +113,19 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
                 <div className="absolute inset-0 bg-gradient-to-br from-[#00D9FF]/5 via-transparent to-[#8B5CF6]/5 pointer-events-none"></div>
 
                 <div className="relative p-3 space-y-1">
-                  {/* Edit Personal Info */}
+                  {/* Edit Account */}
                   <button
                     onClick={() => {
                       setIsProfileDropdownOpen(false);
-                      onNavigate && onNavigate('settings');
+                      navigate('/settings');
                     }}
-                    className="group w-full flex items-start gap-4 p-4 rounded-xl bg-[#0A0A0A]/50 border border-[#2A2B2E]/30 hover:border-[#00D9FF]/40 hover:bg-[#151618]/80 transition-all hover:-translate-y-0.5"
+                    className="group w-full flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A]/50 border border-[#2A2B2E]/30 hover:border-[#00D9FF]/40 hover:bg-[#151618]/80 transition-all hover:-translate-y-0.5"
                   >
                     <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center">
-                      <User className="w-6 h-6 text-[#00D9FF]" />
+                      <Settings className="w-5 h-5 text-[#00D9FF]" />
                     </div>
                     <div className="flex-1 text-left">
-                      <div className="text-white mb-0.5">Edit Personal Info</div>
-                      <div className="text-[#8B8D98] text-sm">Update your name and contact details</div>
-                    </div>
-                  </button>
-
-                  {/* Edit Business Info */}
-                  <button
-                    onClick={() => {
-                      setIsProfileDropdownOpen(false);
-                      onNavigate && onNavigate('onboarding');
-                    }}
-                    className="group w-full flex items-start gap-4 p-4 rounded-xl bg-[#0A0A0A]/50 border border-[#2A2B2E]/30 hover:border-[#8B5CF6]/40 hover:bg-[#151618]/80 transition-all hover:-translate-y-0.5"
-                  >
-                    <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center">
-                      <Briefcase className="w-6 h-6 text-[#8B5CF6]" />
-                    </div>
-                    <div className="flex-1 text-left">
-                      <div className="text-white mb-0.5">Edit Business Info</div>
-                      <div className="text-[#8B8D98] text-sm">Business name, company info, and industry</div>
-                    </div>
-                  </button>
-
-                  {/* Account Settings */}
-                  <button
-                    onClick={() => {
-                      setIsProfileDropdownOpen(false);
-                      onNavigate && onNavigate('settings');
-                    }}
-                    className="group w-full flex items-start gap-4 p-4 rounded-xl bg-[#0A0A0A]/50 border border-[#2A2B2E]/30 hover:border-[#0EA5E9]/40 hover:bg-[#151618]/80 transition-all hover:-translate-y-0.5"
-                  >
-                    <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center">
-                      <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#00D9FF] to-[#0EA5E9] flex items-center justify-center">
-                        <Settings className="w-4 h-4 text-white" />
-                      </div>
-                    </div>
-                    <div className="flex-1 text-left">
-                      <div className="text-white mb-0.5">Account Settings</div>
-                      <div className="text-[#8B8D98] text-sm">Manage notifications and preferences</div>
+                      <div className="text-white">Edit Account</div>
                     </div>
                   </button>
 
@@ -170,34 +133,15 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
                   <button
                     onClick={() => {
                       setIsProfileDropdownOpen(false);
+                      console.log('Open Intercom');
                     }}
-                    className="group w-full flex items-start gap-4 p-4 rounded-xl bg-[#0A0A0A]/50 border border-[#2A2B2E]/30 hover:border-[#06B6D4]/40 hover:bg-[#151618]/80 transition-all hover:-translate-y-0.5"
+                    className="group w-full flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A]/50 border border-[#2A2B2E]/30 hover:border-[#06B6D4]/40 hover:bg-[#151618]/80 transition-all hover:-translate-y-0.5"
                   >
                     <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center">
-                      <HelpCircle className="w-6 h-6 text-[#06B6D4]" />
+                      <HelpCircle className="w-5 h-5 text-[#06B6D4]" />
                     </div>
                     <div className="flex-1 text-left">
-                      <div className="text-white mb-0.5">Contact Support</div>
-                      <div className="text-[#8B8D98] text-sm">Get help from our team</div>
-                    </div>
-                  </button>
-
-                  {/* Divider */}
-                  <div className="h-px bg-gradient-to-r from-transparent via-[#2A2B2E] to-transparent my-2"></div>
-
-                  {/* Log Out */}
-                  <button
-                    onClick={async () => {
-                      setIsProfileDropdownOpen(false);
-                      await signOut();
-                    }}
-                    className="group w-full flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A]/50 border border-[#2A2B2E]/30 hover:border-[#EF4444]/40 hover:bg-[#151618]/80 transition-all hover:-translate-y-0.5"
-                  >
-                    <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center">
-                      <LogOut className="w-6 h-6 text-[#EF4444]" />
-                    </div>
-                    <div className="flex-1 text-left">
-                      <div className="text-[#EF4444]">Log Out</div>
+                      <div className="text-white">Contact Support</div>
                     </div>
                   </button>
                 </div>
