@@ -12,7 +12,7 @@ interface DashboardPageProps {
 export function DashboardPage({ onNavigate }: DashboardPageProps) {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
-  const { profile, onboardingSubmitted } = useProfile();
+  const { profile, onboardingSubmitted, systemStatus } = useProfile();
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -180,7 +180,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
                 Next Steps to Activate Your System
               </h2>
               <div className="text-sm text-[#8B8D98]">
-                <span className="text-[#00D9FF]">2</span> of 5 completed
+                <span className="text-[#00D9FF]">{systemStatus === 'active' ? 5 : 2}</span> of 5 completed
               </div>
             </div>
 
@@ -189,9 +189,9 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
               {[
                 { step: 1, text: 'Upload your business info & brand assets', icon: FileText, completed: true },
                 { step: 2, text: 'Preview your new business hub', icon: Globe, completed: true },
-                { step: 3, text: 'Your backend completes in 72 hours', icon: Clock, completed: false },
-                { step: 4, text: 'Explore Fieldd (your new CRM)', icon: Database, completed: false },
-                { step: 5, text: 'LaunchOS runs without you', icon: Sparkles, completed: false },
+                { step: 3, text: 'Your backend completes in 72 hours', icon: Clock, completed: systemStatus === 'active' },
+                { step: 4, text: 'Explore Fieldd (your new CRM)', icon: Database, completed: systemStatus === 'active' },
+                { step: 5, text: 'LaunchOS runs without you', icon: Sparkles, completed: systemStatus === 'active' },
               ].map((item) => {
                 const Icon = item.icon;
                 return (
