@@ -3,7 +3,11 @@ import { PageHero } from '../PageHero';
 import { useProfile } from '../../contexts/ProfileContext';
 
 export function PaidMarketingPage() {
-  const { systemStatus } = useProfile();
+  const { systemStatus, formData } = useProfile();
+
+  // Get real business name from onboarding
+  const businessName = formData?.step1_business_info?.businessName || 'Your Business';
+
   // Mock Google Ads data
   const googleAdsData = {
     adSpend: 2847,
@@ -16,7 +20,7 @@ export function PaidMarketingPage() {
     topKeyword: 'emergency plumber near me',
     qualityScore: 8.2,
     lastSynced: '1 hour ago',
-    accountName: 'Acme Plumbing & HVAC - Ads',
+    accountName: `${businessName} - Ads`,
     verified: true
   };
 

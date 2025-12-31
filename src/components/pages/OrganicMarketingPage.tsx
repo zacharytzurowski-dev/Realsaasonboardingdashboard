@@ -4,10 +4,13 @@ import { PageHero } from '../PageHero';
 import { useProfile } from '../../contexts/ProfileContext';
 
 export function OrganicMarketingPage() {
-  const { systemStatus } = useProfile();
+  const { systemStatus, formData } = useProfile();
   // GBP Connection States: 'connected' | 'not-connected' | 'error-permissions' | 'error-not-verified'
   const [gbpStatus, setGbpStatus] = useState<'connected' | 'not-connected' | 'error-permissions' | 'error-not-verified'>('connected');
-  
+
+  // Get real business name from onboarding
+  const businessName = formData?.step1_business_info?.businessName || 'Your Business';
+
   // Mock GBP data
   const gbpData = {
     rating: 4.8,
@@ -19,7 +22,7 @@ export function OrganicMarketingPage() {
     websiteClicks: 156,
     directionRequests: 73,
     lastSynced: '2 hours ago',
-    locationName: 'Acme Plumbing & HVAC',
+    locationName: businessName,
     verified: true
   };
 

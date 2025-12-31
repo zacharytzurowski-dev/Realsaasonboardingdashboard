@@ -12,13 +12,13 @@ interface DashboardPageProps {
 export function DashboardPage({ onNavigate }: DashboardPageProps) {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
-  const { profile, onboardingSubmitted, systemStatus } = useProfile();
+  const { profile, onboardingSubmitted, systemStatus, formData } = useProfile();
   const { user } = useAuth();
   const navigate = useNavigate();
 
   // Owner information from profile or auth user
   const ownerName = profile?.full_name || user?.user_metadata?.full_name || 'User';
-  const businessName = profile?.business_name || 'Your Business';
+  const businessName = formData?.step1_business_info?.businessName || profile?.business_name || 'Your Business';
 
   // Activity ticker messages
   const activities = [
