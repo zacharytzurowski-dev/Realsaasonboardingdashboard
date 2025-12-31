@@ -20,13 +20,18 @@ declare global {
 }
 
 export function IntercomProvider({ children }: { children: React.ReactNode }) {
+  console.log('IntercomProvider mounted');
+
   const { user } = useAuth();
   const { profile } = useProfile();
   const scriptLoaded = useRef(false);
 
   // Initialize and boot Intercom
   useEffect(() => {
+    console.log('IntercomProvider useEffect running, user:', user?.email);
+
     if (!user) {
+      console.log('No user, skipping Intercom init');
       // Shutdown if no user
       if (window.Intercom) {
         window.Intercom('shutdown');
@@ -42,9 +47,11 @@ export function IntercomProvider({ children }: { children: React.ReactNode }) {
       name: profile?.full_name || profile?.business_name || user.user_metadata?.full_name || 'User',
       created_at: user.created_at ? Math.floor(new Date(user.created_at).getTime() / 1000) : undefined,
     };
+    console.log('Set window.intercomSettings:', window.intercomSettings);
 
     // If Intercom already loaded, just update
     if (typeof window.Intercom === 'function' && scriptLoaded.current) {
+      console.log('Intercom already loaded, calling update');
       window.Intercom('update', window.intercomSettings);
       return;
     }
@@ -52,14 +59,17 @@ export function IntercomProvider({ children }: { children: React.ReactNode }) {
     // Load Intercom script (standard snippet from Intercom docs)
     if (!scriptLoaded.current) {
       scriptLoaded.current = true;
+      console.log('Loading Intercom script...');
 
       (function() {
         const w = window;
         const ic = w.Intercom;
         if (typeof ic === "function") {
+          console.log('Intercom function exists, reattaching');
           ic('reattach_activator');
           ic('update', w.intercomSettings);
         } else {
+          console.log('Creating Intercom stub and loading script');
           const d = document;
           const i = function(...args: unknown[]) {
             (i as unknown as { c: (args: unknown[]) => void }).c(args);
@@ -70,10 +80,13 @@ export function IntercomProvider({ children }: { children: React.ReactNode }) {
           };
           w.Intercom = i as typeof w.Intercom;
           const l = function() {
+            console.log('Inserting Intercom script tag');
             const s = d.createElement('script');
             s.type = 'text/javascript';
             s.async = true;
             s.src = 'https://widget.intercom.io/widget/' + INTERCOM_APP_ID;
+            s.onload = () => console.log('Intercom script loaded successfully');
+            s.onerror = (e) => console.error('Intercom script failed to load:', e);
             const x = d.getElementsByTagName('script')[0];
             if (x && x.parentNode) {
               x.parentNode.insertBefore(s, x);
@@ -82,10 +95,12 @@ export function IntercomProvider({ children }: { children: React.ReactNode }) {
             }
           };
           if (document.readyState === 'complete') {
+            console.log('Document ready, loading script immediately');
             l();
           } else if (w.attachEvent) {
             w.attachEvent('onload', l);
           } else {
+            console.log('Document not ready, waiting for load event');
             w.addEventListener('load', l, false);
           }
         }
