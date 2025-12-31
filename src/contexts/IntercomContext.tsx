@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useCallback } from 'react';
+import { createContext, useContext, useEffect, useCallback, useState } from 'react';
 import { useAuth } from './AuthContext';
 import { useProfile } from './ProfileContext';
 
@@ -13,7 +13,7 @@ const IntercomContext = createContext<IntercomContextType | undefined>(undefined
 // Extend Window interface for Intercom
 declare global {
   interface Window {
-    Intercom: (...args: unknown[]) => void;
+    Intercom: ((...args: unknown[]) => void) & { q?: unknown[][]; c?: (args: unknown[]) => void };
     intercomSettings: Record<string, unknown>;
   }
 }
@@ -21,26 +21,49 @@ declare global {
 export function IntercomProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
   const { profile } = useProfile();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // Load Intercom script
   useEffect(() => {
     // Don't load if already loaded
-    if (window.Intercom) return;
+    if (document.getElementById('intercom-script')) {
+      setIsLoaded(true);
+      return;
+    }
 
-    // Create the Intercom script
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.async = true;
-    script.src = `https://widget.intercom.io/widget/${INTERCOM_APP_ID}`;
+    // Set up Intercom settings
+    window.intercomSettings = {
+      app_id: INTERCOM_APP_ID,
+    };
 
-    // Initialize Intercom
-    window.Intercom = function(...args: unknown[]) {
-      window.Intercom.q = window.Intercom.q || [];
-      window.Intercom.q.push(args);
-    } as typeof window.Intercom;
-    (window.Intercom as { q?: unknown[] }).q = [];
+    // Standard Intercom initialization snippet
+    const w = window;
+    const ic = w.Intercom;
+    if (typeof ic === "function") {
+      ic('reattach_activator');
+      ic('update', w.intercomSettings);
+      setIsLoaded(true);
+    } else {
+      const i = function(...args: unknown[]) {
+        i.c(args);
+      } as Window['Intercom'];
+      i.q = [];
+      i.c = function(args: unknown[]) {
+        i.q!.push(args);
+      };
+      w.Intercom = i;
 
-    document.body.appendChild(script);
+      // Create and load the script
+      const script = document.createElement('script');
+      script.id = 'intercom-script';
+      script.type = 'text/javascript';
+      script.async = true;
+      script.src = `https://widget.intercom.io/widget/${INTERCOM_APP_ID}`;
+      script.onload = () => {
+        setIsLoaded(true);
+      };
+      document.body.appendChild(script);
+    }
 
     return () => {
       // Cleanup on unmount
@@ -50,8 +73,9 @@ export function IntercomProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // Boot/update Intercom when user changes
+  // Boot/update Intercom when user changes or script loads
   useEffect(() => {
+    if (!isLoaded) return;
     if (!window.Intercom) return;
 
     if (user) {
@@ -67,7 +91,7 @@ export function IntercomProvider({ children }: { children: React.ReactNode }) {
       // Shutdown Intercom when user logs out
       window.Intercom('shutdown');
     }
-  }, [user, profile]);
+  }, [user, profile, isLoaded]);
 
   // Helper function to show Intercom
   const showIntercom = useCallback(() => {
