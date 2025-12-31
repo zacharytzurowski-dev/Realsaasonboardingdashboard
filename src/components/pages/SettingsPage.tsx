@@ -1,7 +1,18 @@
 import { User, Lock, CreditCard, Save, X, ChevronRight, Mail, Phone, Building, Wallet, Calendar, CheckCircle, Receipt } from 'lucide-react';
 import { PageHero } from '../PageHero';
+import { useProfile } from '../../contexts/ProfileContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 export function SettingsPage() {
+  const { profile, formData } = useProfile();
+  const { user } = useAuth();
+
+  // Get real user data with fallbacks
+  const fullName = profile?.full_name || user?.user_metadata?.full_name || 'Not provided';
+  const email = user?.email || 'Not provided';
+  const phoneNumber = formData?.step1_business_info?.businessPhone || 'Not provided';
+  const companyName = formData?.step1_business_info?.businessName || profile?.business_name || 'Not provided';
+
   return (
     <div>
       {/* Page Hero */}
@@ -38,7 +49,7 @@ export function SettingsPage() {
             </div>
           </div>
 
-          {/* Input Fields Grid */}
+          {/* Display Fields Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Name Field */}
             <div>
@@ -46,11 +57,9 @@ export function SettingsPage() {
                 <User className="w-4 h-4" />
                 Full Name
               </label>
-              <input
-                type="text"
-                placeholder="John Doe"
-                className="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-[#2A2B2E]/50 text-white placeholder:text-[#6B6C7B] focus:border-[#00D9FF] focus:outline-none focus:ring-2 focus:ring-[#00D9FF]/20 transition-all"
-              />
+              <div className="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-[#2A2B2E]/50 text-white">
+                {fullName}
+              </div>
             </div>
 
             {/* Email Field */}
@@ -59,11 +68,9 @@ export function SettingsPage() {
                 <Mail className="w-4 h-4" />
                 Email Address
               </label>
-              <input
-                type="email"
-                placeholder="john@company.com"
-                className="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-[#2A2B2E]/50 text-white placeholder:text-[#6B6C7B] focus:border-[#00D9FF] focus:outline-none focus:ring-2 focus:ring-[#00D9FF]/20 transition-all"
-              />
+              <div className="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-[#2A2B2E]/50 text-white">
+                {email}
+              </div>
             </div>
 
             {/* Phone Field */}
@@ -72,11 +79,9 @@ export function SettingsPage() {
                 <Phone className="w-4 h-4" />
                 Phone Number
               </label>
-              <input
-                type="tel"
-                placeholder="(555) 123-4567"
-                className="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-[#2A2B2E]/50 text-white placeholder:text-[#6B6C7B] focus:border-[#00D9FF] focus:outline-none focus:ring-2 focus:ring-[#00D9FF]/20 transition-all"
-              />
+              <div className="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-[#2A2B2E]/50 text-white">
+                {phoneNumber}
+              </div>
             </div>
 
             {/* Company Field */}
@@ -85,11 +90,9 @@ export function SettingsPage() {
                 <Building className="w-4 h-4" />
                 Company Name
               </label>
-              <input
-                type="text"
-                placeholder="Your Company Inc."
-                className="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-[#2A2B2E]/50 text-white placeholder:text-[#6B6C7B] focus:border-[#00D9FF] focus:outline-none focus:ring-2 focus:ring-[#00D9FF]/20 transition-all"
-              />
+              <div className="w-full px-4 py-3 rounded-xl bg-[#0A0A0A] border border-[#2A2B2E]/50 text-white">
+                {companyName}
+              </div>
             </div>
           </div>
         </div>
