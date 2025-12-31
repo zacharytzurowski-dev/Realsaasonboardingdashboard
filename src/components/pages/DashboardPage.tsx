@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { DeploymentCountdown } from '../DeploymentCountdown';
 import { useProfile } from '../../contexts/ProfileContext';
 import { useAuth } from '../../contexts/AuthContext';
+import { useIntercom } from '../../contexts/IntercomContext';
 
 interface DashboardPageProps {
   onNavigate?: (page: string) => void;
@@ -15,6 +16,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
   const { profile, onboardingSubmitted, systemStatus, formData } = useProfile();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { showIntercom } = useIntercom();
 
   // Owner information from profile or auth user
   const ownerName = profile?.full_name || user?.user_metadata?.full_name || 'User';
@@ -133,7 +135,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
                   <button
                     onClick={() => {
                       setIsProfileDropdownOpen(false);
-                      console.log('Open Intercom');
+                      showIntercom();
                     }}
                     className="group w-full flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A]/50 border border-[#2A2B2E]/30 hover:border-[#06B6D4]/40 hover:bg-[#151618]/80 transition-all hover:-translate-y-0.5"
                   >

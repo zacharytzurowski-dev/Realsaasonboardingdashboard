@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 import { ProfileProvider } from './contexts/ProfileContext'
+import { IntercomProvider } from './contexts/IntercomContext'
 import AuthPage from './components/auth/AuthPage'
 import { Sidebar } from './components/Sidebar'
 import { DashboardPage } from './components/pages/DashboardPage'
@@ -28,6 +29,7 @@ function ProtectedApp() {
 
   return (
     <ProfileProvider>
+      <IntercomProvider>
       <div className="min-h-screen bg-[#080808] relative overflow-hidden">
         {/* Subtle grid pattern background */}
         <div className="fixed inset-0 opacity-[0.03] pointer-events-none"
@@ -65,6 +67,7 @@ function ProtectedApp() {
           </div>
         </main>
       </div>
+      </IntercomProvider>
     </ProfileProvider>
   )
 }

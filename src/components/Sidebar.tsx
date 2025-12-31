@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Home, CheckCircle, Globe, DollarSign, TrendingUp, Settings, Menu, X, ExternalLink } from 'lucide-react';
 import { useProfile } from '../contexts/ProfileContext';
+import { useIntercom } from '../contexts/IntercomContext';
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { onboardingSubmitted } = useProfile();
+  const { showIntercom } = useIntercom();
 
   // Map pathname to page identifier
   const currentPage = location.pathname.replace('/', '') || 'dashboard';
@@ -127,7 +129,8 @@ export function Sidebar() {
               <div className="relative">
                 <h4 className="text-white mb-1">Need Help?</h4>
                 <p className="text-[#8B8D98] text-sm mb-3">Support available 24/7</p>
-                <button 
+                <button
+                  onClick={showIntercom}
                   className="w-full bg-[#00D9FF]/10 text-[#00D9FF] px-4 py-2.5 rounded-xl hover:bg-[#00D9FF]/20 transition-all border border-[#00D9FF]/20 backdrop-blur-sm"
                   style={{
                     boxShadow: '0 0 15px rgba(0, 217, 255, 0.1)'
