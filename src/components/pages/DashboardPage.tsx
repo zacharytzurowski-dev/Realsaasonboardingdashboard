@@ -92,13 +92,13 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
                 <div className="text-sm text-white">{ownerName}</div>
                 <div className="text-xs text-[#8B8D98]">{businessName}</div>
               </div>
-              <div 
-                className="w-11 h-11 rounded-full bg-gradient-to-br from-[#00D9FF] to-[#0EA5E9] flex items-center justify-center text-white"
+              <div
+                className="w-11 h-11 rounded-full bg-gradient-to-br from-[#00D9FF] to-[#0EA5E9] flex items-center justify-center text-white font-semibold"
                 style={{
                   boxShadow: '0 4px 16px rgba(0, 217, 255, 0.3)'
                 }}
               >
-                S
+                {(profile?.full_name?.[0] || user?.user_metadata?.full_name?.[0] || user?.email?.[0] || 'U').toUpperCase()}
               </div>
               <ChevronDown className={`w-4 h-4 text-[#8B8D98] transition-transform ${isProfileDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
