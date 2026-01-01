@@ -215,7 +215,7 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
                         Yes
                       </button>
                       <button type="button" onClick={() => setHasDomainAccess('no')}
-                        className={`flex-1 px-4 py-3 rounded-xl border text-sm font-medium transition-all ${hasDomainAccess === 'no' ? 'bg-[#EF4444]/20 border-[#EF4444] text-[#EF4444]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
+                        className={`flex-1 px-4 py-3 rounded-xl border text-sm font-medium transition-all ${hasDomainAccess === 'no' ? 'bg-[#F59E0B]/20 border-[#F59E0B] text-[#F59E0B]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
                         No
                       </button>
                     </div>
@@ -428,7 +428,7 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
                     Yes
                   </button>
                   <button type="button" onClick={() => setHasNextdoor('no')}
-                    className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasNextdoor === 'no' ? 'bg-[#EF4444]/20 border-[#EF4444] text-[#EF4444]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
+                    className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasNextdoor === 'no' ? 'bg-[#F59E0B]/20 border-[#F59E0B] text-[#F59E0B]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
                     No
                   </button>
                 </div>
@@ -467,7 +467,7 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
                     Yes
                   </button>
                   <button type="button" onClick={() => setHasYelp('no')}
-                    className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasYelp === 'no' ? 'bg-[#EF4444]/20 border-[#EF4444] text-[#EF4444]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
+                    className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasYelp === 'no' ? 'bg-[#F59E0B]/20 border-[#F59E0B] text-[#F59E0B]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
                     No
                   </button>
                 </div>
