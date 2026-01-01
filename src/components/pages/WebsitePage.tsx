@@ -51,11 +51,11 @@ export function WebsitePage() {
                 <div className="flex items-center gap-4 text-sm text-[#94A3B8]">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
-                    <span>Est. Launch: Dec 18, 2025</span>
+                    <span>Est. Launch: See dashboard</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4" />
-                    <span>Last Updated: 2 hours ago</span>
+                    <span>Last Updated: Today</span>
                   </div>
                 </div>
               </div>
