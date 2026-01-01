@@ -115,11 +115,19 @@ export function PaidMarketingPage() {
             </div>
             <div className="flex items-center justify-between py-3 border-b border-[#293038]">
               <span className="text-[#94A3B8]">Background Check</span>
-              <span className="text-[#E8F1FF]">Pending</span>
+              {systemStatus === 'active' ? (
+                <span className="text-[#10B981] flex items-center gap-1">Passed <Check className="w-3 h-3" /></span>
+              ) : (
+                <span className="text-[#E8F1FF]">Pending</span>
+              )}
             </div>
             <div className="flex items-center justify-between py-3">
               <span className="text-[#94A3B8]">Google Guarantee</span>
-              <span className="text-[#E8F1FF]">Not Eligible Yet</span>
+              {systemStatus === 'active' ? (
+                <span className="text-[#10B981] flex items-center gap-1">Active <Check className="w-3 h-3" /></span>
+              ) : (
+                <span className="text-[#E8F1FF]">Not Eligible Yet</span>
+              )}
             </div>
           </div>
 
@@ -165,15 +173,27 @@ export function PaidMarketingPage() {
           <div className="space-y-4 mb-6">
             <div className="flex items-center justify-between py-3 border-b border-[#293038]">
               <span className="text-[#94A3B8]">Profile Status</span>
-              <span className="text-[#E8F1FF]">Active ✓</span>
+              {systemStatus === 'active' ? (
+                <span className="text-[#10B981] flex items-center gap-1">Active <Check className="w-3 h-3" /></span>
+              ) : (
+                <span className="text-[#E8F1FF]">Setting Up</span>
+              )}
             </div>
             <div className="flex items-center justify-between py-3 border-b border-[#293038]">
               <span className="text-[#94A3B8]">Response Rate</span>
-              <span className="text-[#E8F1FF]">92%</span>
+              {systemStatus === 'active' ? (
+                <span className="text-[#3AB8FF]">Open Thumbtack</span>
+              ) : (
+                <span className="text-[#E8F1FF]">--</span>
+              )}
             </div>
             <div className="flex items-center justify-between py-3">
               <span className="text-[#94A3B8]">Avg. Response Time</span>
-              <span className="text-[#E8F1FF]">2.5 hours</span>
+              {systemStatus === 'active' ? (
+                <span className="text-[#3AB8FF]">Open Thumbtack</span>
+              ) : (
+                <span className="text-[#E8F1FF]">--</span>
+              )}
             </div>
           </div>
 
