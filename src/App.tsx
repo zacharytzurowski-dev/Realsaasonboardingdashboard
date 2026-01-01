@@ -14,7 +14,6 @@ import { ResourcesPage } from './components/pages/ResourcesPage'
 
 function ProtectedApp() {
   const { user, loading } = useAuth()
-  console.log("PROTECTED APP - loading:", loading, "user:", user?.email);
 
   if (loading) {
     return (
