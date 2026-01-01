@@ -35,7 +35,7 @@ export function OrganicMarketingPage() {
       {/* Page Hero */}
       <PageHero
         title="Organic Marketing"
-        subtitle="Grow your online presence organically"
+        subtitle="View track, and monitor your organic presence"
         icon={<MapPin className="w-8 h-8 text-white" />}
         iconGradient="from-[#F59E0B] to-[#D97706]"
       />
