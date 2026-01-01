@@ -186,7 +186,7 @@ export function PaidMarketingPage() {
             <div className="flex items-center justify-between py-3 border-b border-[#293038]">
               <span className="text-[#94A3B8]">Response Rate</span>
               {systemStatus === 'active' ? (
-                <span className="text-[#3AB8FF]">Open Thumbtack</span>
+                <span className="text-[#10B981]">Open Thumbtack</span>
               ) : (
                 <span className="text-[#E8F1FF]">--</span>
               )}
@@ -194,7 +194,7 @@ export function PaidMarketingPage() {
             <div className="flex items-center justify-between py-3">
               <span className="text-[#94A3B8]">Avg. Response Time</span>
               {systemStatus === 'active' ? (
-                <span className="text-[#3AB8FF]">Open Thumbtack</span>
+                <span className="text-[#10B981]">Open Thumbtack</span>
               ) : (
                 <span className="text-[#E8F1FF]">--</span>
               )}
