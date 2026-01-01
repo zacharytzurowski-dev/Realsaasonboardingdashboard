@@ -111,7 +111,11 @@ export function PaidMarketingPage() {
           <div className="space-y-4 mb-6">
             <div className="flex items-center justify-between py-3 border-b border-[#293038]">
               <span className="text-[#94A3B8]">Setup Status</span>
-              <span className="text-[#E8F1FF]">In Progress</span>
+              {systemStatus === 'active' ? (
+                <span className="text-[#10B981] flex items-center gap-1">Active <Check className="w-3 h-3" /></span>
+              ) : (
+                <span className="text-[#E8F1FF]">In Progress</span>
+              )}
             </div>
             <div className="flex items-center justify-between py-3 border-b border-[#293038]">
               <span className="text-[#94A3B8]">Background Check</span>
