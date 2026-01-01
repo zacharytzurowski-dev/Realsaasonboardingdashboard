@@ -56,7 +56,7 @@ export function OrganicMarketingPage() {
                     </div>
                     <div className="flex-1">
                       <h2 className="text-[#E8F1FF] mb-2">Google Business Profile</h2>
-                      <p className="text-[#94A3B8] mb-3">Real-time insights from your Google listing</p>
+                      <p className="text-[#94A3B8] mb-3">View track, and monitor your organic presence</p>
                       
                       {/* Connection Status Badge */}
                       <div className="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-[#1A1D23]/60 backdrop-blur-sm border border-[#10B981]/30">
