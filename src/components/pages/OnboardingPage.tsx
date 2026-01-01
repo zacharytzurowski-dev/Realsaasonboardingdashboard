@@ -169,7 +169,7 @@ export function OnboardingPage() {
         title="Onboarding Checklist"
         subtitle="Complete these steps to launch your system"
         icon={<CheckCircle2 className="w-8 h-8 text-white" />}
-        iconGradient="from-[#10B981] to-[#059669]"
+        iconGradient="from-[#06B6D4] to-[#0D9488]"
       />
 
       {/* Progress Overview - Neon Blue Progress Bar */}
