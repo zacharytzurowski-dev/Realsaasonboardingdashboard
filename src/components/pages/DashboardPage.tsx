@@ -74,7 +74,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
                 Welcome back, <span className="bg-gradient-to-r from-[#00D9FF] to-[#0EA5E9] bg-clip-text text-transparent">{ownerName}</span>
               </h1>
               <p className="text-[#6B6C7B] mt-2">
-                LaunchOS is building your system. Everything runs without you.
+                LaunchOS builds your client acquisition system. Everything runs without you.
               </p>
             </div>
           </div>
