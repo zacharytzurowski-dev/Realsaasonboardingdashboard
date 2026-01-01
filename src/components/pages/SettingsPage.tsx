@@ -43,7 +43,7 @@ export function SettingsPage() {
         title="Settings"
         subtitle="Manage your account and preferences"
         icon={<User className="w-8 h-8 text-white" />}
-        iconGradient="from-[#00D9FF] to-[#0EA5E9]"
+        iconGradient="from-[#64748B] to-[#475569]"
       />
 
       {/* Profile Settings */}
@@ -53,15 +53,15 @@ export function SettingsPage() {
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-[#00D9FF]/5 to-transparent pointer-events-none"></div>
-        
+        <div className="absolute inset-0 bg-gradient-to-br from-[#64748B]/5 to-transparent pointer-events-none"></div>
+
         <div className="relative">
           {/* Header */}
           <div className="flex items-start gap-6 mb-8">
             <div
-              className="w-16 h-16 bg-gradient-to-br from-[#00D9FF] to-[#0EA5E9] rounded-2xl flex items-center justify-center flex-shrink-0"
+              className="w-16 h-16 bg-gradient-to-br from-[#64748B] to-[#475569] rounded-2xl flex items-center justify-center flex-shrink-0"
               style={{
-                boxShadow: '0 8px 24px rgba(0, 217, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                boxShadow: '0 8px 24px rgba(100, 116, 139, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
               }}
             >
               <User className="w-8 h-8 text-white" />
@@ -181,15 +181,15 @@ export function SettingsPage() {
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/5 to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#64748B]/5 to-transparent pointer-events-none"></div>
 
         <div className="relative">
           {/* Header */}
           <div className="flex items-start gap-6 mb-8">
             <div
-              className="w-16 h-16 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-2xl flex items-center justify-center flex-shrink-0"
+              className="w-16 h-16 bg-gradient-to-br from-[#64748B] to-[#475569] rounded-2xl flex items-center justify-center flex-shrink-0"
               style={{
-                boxShadow: '0 8px 24px rgba(6, 182, 212, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                boxShadow: '0 8px 24px rgba(100, 116, 139, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
               }}
             >
               <CreditCard className="w-8 h-8 text-white" />
@@ -201,7 +201,7 @@ export function SettingsPage() {
           </div>
 
           {/* Current Subscription Card */}
-          <div className="mb-6 p-6 rounded-2xl bg-[#0A0A0A] border border-[#06B6D4]/20"
+          <div className="mb-6 p-6 rounded-2xl bg-[#0A0A0A] border border-[#64748B]/20"
             style={{
               boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.02)'
             }}
@@ -228,14 +228,14 @@ export function SettingsPage() {
           {/* Billing Mini-Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             {/* Payment Methods */}
-            <button className="group relative p-5 rounded-2xl bg-[#0A0A0A] border border-[#2A2B2E]/50 hover:border-[#06B6D4]/40 transition-all text-left hover:-translate-y-1"
+            <button className="group relative p-5 rounded-2xl bg-[#0A0A0A] border border-[#2A2B2E]/50 hover:border-[#64748B]/40 transition-all text-left hover:-translate-y-1"
               style={{
                 boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.02)'
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#06B6D4]/0 group-hover:from-[#06B6D4]/5 to-transparent rounded-2xl transition-all pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#64748B]/0 group-hover:from-[#64748B]/5 to-transparent rounded-2xl transition-all pointer-events-none"></div>
               <div className="relative flex items-center justify-between mb-2">
-                <Wallet className="w-5 h-5 text-[#06B6D4]" />
+                <Wallet className="w-5 h-5 text-[#64748B]" />
                 <ChevronRight className="w-4 h-4 text-[#8B8D98] opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <p className="relative text-white mb-1">Payment Methods</p>
@@ -243,14 +243,14 @@ export function SettingsPage() {
             </button>
 
             {/* Billing History */}
-            <button className="group relative p-5 rounded-2xl bg-[#0A0A0A] border border-[#2A2B2E]/50 hover:border-[#06B6D4]/40 transition-all text-left hover:-translate-y-1"
+            <button className="group relative p-5 rounded-2xl bg-[#0A0A0A] border border-[#2A2B2E]/50 hover:border-[#64748B]/40 transition-all text-left hover:-translate-y-1"
               style={{
                 boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.02)'
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#06B6D4]/0 group-hover:from-[#06B6D4]/5 to-transparent rounded-2xl transition-all pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#64748B]/0 group-hover:from-[#64748B]/5 to-transparent rounded-2xl transition-all pointer-events-none"></div>
               <div className="relative flex items-center justify-between mb-2">
-                <Calendar className="w-5 h-5 text-[#06B6D4]" />
+                <Calendar className="w-5 h-5 text-[#64748B]" />
                 <ChevronRight className="w-4 h-4 text-[#8B8D98] opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <p className="relative text-white mb-1">Billing History</p>
@@ -258,14 +258,14 @@ export function SettingsPage() {
             </button>
 
             {/* Invoices */}
-            <button className="group relative p-5 rounded-2xl bg-[#0A0A0A] border border-[#2A2B2E]/50 hover:border-[#06B6D4]/40 transition-all text-left hover:-translate-y-1"
+            <button className="group relative p-5 rounded-2xl bg-[#0A0A0A] border border-[#2A2B2E]/50 hover:border-[#64748B]/40 transition-all text-left hover:-translate-y-1"
               style={{
                 boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.02)'
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#06B6D4]/0 group-hover:from-[#06B6D4]/5 to-transparent rounded-2xl transition-all pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#64748B]/0 group-hover:from-[#64748B]/5 to-transparent rounded-2xl transition-all pointer-events-none"></div>
               <div className="relative flex items-center justify-between mb-2">
-                <Receipt className="w-5 h-5 text-[#06B6D4]" />
+                <Receipt className="w-5 h-5 text-[#64748B]" />
                 <ChevronRight className="w-4 h-4 text-[#8B8D98] opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <p className="relative text-white mb-1">Invoices</p>
@@ -275,15 +275,15 @@ export function SettingsPage() {
 
           {/* Update Payment Button */}
           <button
-            className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#06B6D4] to-[#0D9488] text-white hover:shadow-2xl hover:-translate-y-0.5 transition-all"
+            className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#64748B] to-[#475569] text-white hover:shadow-2xl hover:-translate-y-0.5 transition-all"
             style={{
-              boxShadow: '0 8px 24px rgba(6, 182, 212, 0.3)'
+              boxShadow: '0 8px 24px rgba(100, 116, 139, 0.3)'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 12px 32px rgba(6, 182, 212, 0.4)';
+              e.currentTarget.style.boxShadow = '0 12px 32px rgba(100, 116, 139, 0.4)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = '0 8px 24px rgba(6, 182, 212, 0.3)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(100, 116, 139, 0.3)';
             }}
           >
             <CreditCard className="w-5 h-5" />
@@ -299,7 +299,7 @@ export function SettingsPage() {
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-[#00D9FF]/3 to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#64748B]/3 to-transparent pointer-events-none"></div>
         
         <div className="relative">
           <h3 className="text-white text-xl mb-6 tracking-tight">Account Actions</h3>
@@ -310,15 +310,15 @@ export function SettingsPage() {
           <div className="flex flex-col sm:flex-row gap-4">
             {/* Save Changes Button */}
             <button
-              className="flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-[#00D9FF] to-[#0EA5E9] text-white hover:shadow-2xl hover:-translate-y-0.5 transition-all"
+              className="flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-[#64748B] to-[#475569] text-white hover:shadow-2xl hover:-translate-y-0.5 transition-all"
               style={{
-                boxShadow: '0 8px 24px rgba(0, 217, 255, 0.3)'
+                boxShadow: '0 8px 24px rgba(100, 116, 139, 0.3)'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 217, 255, 0.4)';
+                e.currentTarget.style.boxShadow = '0 12px 32px rgba(100, 116, 139, 0.4)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 217, 255, 0.3)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(100, 116, 139, 0.3)';
               }}
             >
               <Save className="w-5 h-5" />
@@ -326,7 +326,7 @@ export function SettingsPage() {
             </button>
 
             {/* Cancel Button */}
-            <button className="flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-[#151618] text-white border border-[#2A2B2E] hover:border-[#00D9FF]/50 hover:bg-[#1A1B1E] transition-all">
+            <button className="flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-[#151618] text-white border border-[#2A2B2E] hover:border-[#64748B]/50 hover:bg-[#1A1B1E] transition-all">
               <X className="w-5 h-5" />
               <span>Cancel</span>
             </button>

@@ -19,7 +19,7 @@ export function BrandIdentityForm({ onBack, onSave }: BrandIdentityFormProps) {
   const [usps, setUsps] = useState('');
   const [brandPersonality, setBrandPersonality] = useState('');
   const [primaryColor, setPrimaryColor] = useState('#3B82F6');
-  const [secondaryColor, setSecondaryColor] = useState('#8B5CF6');
+  const [secondaryColor, setSecondaryColor] = useState('#06B6D4');
 
   // Load existing data on mount
   useEffect(() => {
@@ -32,7 +32,7 @@ export function BrandIdentityForm({ onBack, onSave }: BrandIdentityFormProps) {
       setUsps(existingData.usps || '');
       setBrandPersonality(existingData.brandPersonality || '');
       setPrimaryColor(existingData.primaryColor || '#3B82F6');
-      setSecondaryColor(existingData.secondaryColor || '#8B5CF6');
+      setSecondaryColor(existingData.secondaryColor || '#06B6D4');
     }
   }, [getStepData]);
 
@@ -58,9 +58,9 @@ export function BrandIdentityForm({ onBack, onSave }: BrandIdentityFormProps) {
     }
   };
 
-  const inputClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] placeholder:text-[#64748B] focus:border-[#8B5CF6] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]/20 transition-all";
+  const inputClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] placeholder:text-[#64748B] focus:border-[#06B6D4] focus:outline-none focus:ring-2 focus:ring-[#06B6D4]/20 transition-all";
   const labelClasses = "flex items-center gap-2 text-[#94A3B8] text-sm mb-2";
-  const selectClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] focus:border-[#8B5CF6] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]/20 transition-all";
+  const selectClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] focus:border-[#06B6D4] focus:outline-none focus:ring-2 focus:ring-[#06B6D4]/20 transition-all";
 
   const getLighterShade = (hex: string) => {
     const r = parseInt(hex.slice(1, 3), 16);
@@ -82,14 +82,14 @@ export function BrandIdentityForm({ onBack, onSave }: BrandIdentityFormProps) {
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
-          backgroundImage: `linear-gradient(90deg, #8B5CF6 1px, transparent 1px), linear-gradient(0deg, #8B5CF6 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(90deg, #06B6D4 1px, transparent 1px), linear-gradient(0deg, #06B6D4 1px, transparent 1px)`,
           backgroundSize: '60px 60px'
         }}></div>
       </div>
-      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-[#8B5CF6]/5 to-transparent pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-[#06B6D4]/5 to-transparent pointer-events-none"></div>
 
       <div className="relative z-10 max-w-[900px] mx-auto px-6 py-8">
-        <button onClick={onBack} className="flex items-center gap-2 text-[#8B5CF6] hover:text-[#A78BFA] mb-6 transition-colors">
+        <button onClick={onBack} className="flex items-center gap-2 text-[#06B6D4] hover:text-[#0D9488] mb-6 transition-colors">
           <ChevronLeft className="w-5 h-5" />
           Back to Checklist
         </button>
@@ -97,7 +97,7 @@ export function BrandIdentityForm({ onBack, onSave }: BrandIdentityFormProps) {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-3">
-            <div className="w-16 h-16 bg-gradient-to-br from-[#8B5CF6] to-[#EC4899] rounded-2xl flex items-center justify-center shadow-lg shadow-[#8B5CF6]/50">
+            <div className="w-16 h-16 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#06B6D4]/50">
               <Palette className="w-8 h-8 text-white" />
             </div>
             <div>
@@ -111,7 +111,7 @@ export function BrandIdentityForm({ onBack, onSave }: BrandIdentityFormProps) {
 
         {/* Form */}
         <div className="bg-gradient-to-br from-[#1A1D23] to-[#0F1115] rounded-2xl border border-[#293038] p-8 shadow-xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#8B5CF6]/5 via-transparent to-[#EC4899]/5"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/5 via-transparent to-[#0D9488]/5"></div>
 
           <form className="relative space-y-6">
             {/* Logo Link */}
@@ -223,7 +223,7 @@ export function BrandIdentityForm({ onBack, onSave }: BrandIdentityFormProps) {
                       type="text"
                       value={primaryColor}
                       onChange={(e) => setPrimaryColor(e.target.value)}
-                      className="flex-1 px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] focus:border-[#8B5CF6] focus:outline-none transition-all"
+                      className="flex-1 px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] focus:border-[#06B6D4] focus:outline-none transition-all"
                     />
                   </div>
                 </div>
@@ -255,7 +255,7 @@ export function BrandIdentityForm({ onBack, onSave }: BrandIdentityFormProps) {
                       type="text"
                       value={secondaryColor}
                       onChange={(e) => setSecondaryColor(e.target.value)}
-                      className="flex-1 px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] focus:border-[#8B5CF6] focus:outline-none transition-all"
+                      className="flex-1 px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] focus:border-[#06B6D4] focus:outline-none transition-all"
                     />
                   </div>
                 </div>
@@ -268,7 +268,7 @@ export function BrandIdentityForm({ onBack, onSave }: BrandIdentityFormProps) {
                 type="button"
                 onClick={handleSubmit}
                 disabled={saving}
-                className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-[#8B5CF6]/30 transition-all font-medium disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full bg-gradient-to-r from-[#06B6D4] to-[#0D9488] text-white px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-[#06B6D4]/30 transition-all font-medium disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {saving ? (
                   <>

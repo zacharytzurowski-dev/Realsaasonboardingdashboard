@@ -37,7 +37,7 @@ export function OrganicMarketingPage() {
         title="Organic Marketing"
         subtitle="View track, and monitor your organic presence"
         icon={<MapPin className="w-8 h-8 text-white" />}
-        iconGradient="from-[#06B6D4] to-[#0D9488]"
+        iconGradient="from-[#14B8A6] to-[#0D9488]"
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -45,13 +45,13 @@ export function OrganicMarketingPage() {
         {gbpStatus === 'connected' && (
           <div className="lg:col-span-2">
             {/* Hero Header Banner - Matching Website Build Style */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#3AB8FF]/20 shadow-2xl shadow-[#3AB8FF]/10 mb-8">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/5 to-[#5DAEFF]/5"></div>
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#14B8A6]/20 shadow-2xl shadow-[#14B8A6]/10 mb-8">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#14B8A6]/5 to-[#0D9488]/5"></div>
               <div className="relative p-10">
                 <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
                   {/* Left side - Header and Status */}
                   <div className="flex items-start gap-6 flex-1">
-                    <div className="w-14 h-14 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#06B6D4]/50 flex-shrink-0">
+                    <div className="w-14 h-14 bg-gradient-to-br from-[#14B8A6] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#14B8A6]/50 flex-shrink-0">
                       <MapPin className="w-7 h-7 text-white" />
                     </div>
                     <div className="flex-1">
@@ -79,7 +79,7 @@ export function OrganicMarketingPage() {
                       href="https://business.google.com/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#06B6D4] to-[#0D9488] text-white shadow-xl shadow-[#06B6D4]/40 hover:shadow-2xl hover:shadow-[#06B6D4]/60 hover:-translate-y-0.5 transition-all font-medium"
+                      className="group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#14B8A6] to-[#0D9488] text-white shadow-xl shadow-[#14B8A6]/40 hover:shadow-2xl hover:shadow-[#14B8A6]/60 hover:-translate-y-0.5 transition-all font-medium"
                     >
                       <span>Open GBP Dashboard</span>
                       <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -97,21 +97,21 @@ export function OrganicMarketingPage() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between py-3 border-b border-[#293038]">
                     <div className="flex items-center gap-3">
-                      <MessageCircle className="w-5 h-5 text-[#00CFFF]" />
+                      <MessageCircle className="w-5 h-5 text-[#14B8A6]" />
                       <span className="text-[#94A3B8]">Messages</span>
                     </div>
                     <span className="text-[#E8F1FF] font-medium">Open GBP Dashboard</span>
                   </div>
                   <div className="flex items-center justify-between py-3 border-b border-[#293038]">
                     <div className="flex items-center gap-3">
-                      <ExternalLink className="w-5 h-5 text-[#6366F1]" />
+                      <ExternalLink className="w-5 h-5 text-[#0D9488]" />
                       <span className="text-[#94A3B8]">Website Clicks</span>
                     </div>
                     <span className="text-[#E8F1FF] font-medium">Open GBP Dashboard</span>
                   </div>
                   <div className="flex items-center justify-between py-3">
                     <div className="flex items-center gap-3">
-                      <MapPin className="w-5 h-5 text-[#06B6D4]" />
+                      <MapPin className="w-5 h-5 text-[#14B8A6]" />
                       <span className="text-[#94A3B8]">Direction Requests</span>
                     </div>
                     <span className="text-[#E8F1FF] font-medium">Open GBP Dashboard</span>
@@ -132,14 +132,14 @@ export function OrganicMarketingPage() {
                   </div>
                   <div className="flex items-center justify-between py-3 border-b border-[#293038]">
                     <div className="flex items-center gap-3">
-                      <Search className="w-5 h-5 text-[#3AB8FF]" />
+                      <Search className="w-5 h-5 text-[#14B8A6]" />
                       <span className="text-[#94A3B8]">Search Ranking</span>
                     </div>
                     <span className="text-[#E8F1FF] font-medium">Open GBP Dashboard</span>
                   </div>
                   <div className="flex items-center justify-between py-3">
                     <div className="flex items-center gap-3">
-                      <Zap className="w-5 h-5 text-[#06B6D4]" />
+                      <Zap className="w-5 h-5 text-[#0D9488]" />
                       <span className="text-[#94A3B8]">Response Rate</span>
                     </div>
                     <span className="text-[#E8F1FF] font-medium">Open GBP Dashboard</span>
@@ -153,10 +153,10 @@ export function OrganicMarketingPage() {
         {/* Not Connected State */}
         {gbpStatus === 'not-connected' && (
           <div className="lg:col-span-2 relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#293038] shadow-2xl shadow-black/20 p-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/3 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#14B8A6]/3 to-transparent"></div>
             <div className="relative">
               <div className="flex items-start gap-6 mb-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#64748B] to-[#475569] rounded-2xl flex items-center justify-center shadow-lg shadow-[#64748B]/30 flex-shrink-0">
+                <div className="w-14 h-14 bg-gradient-to-br from-[#14B8A6] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#14B8A6]/30 flex-shrink-0">
                   <MapPin className="w-7 h-7 text-white" />
                 </div>
                 <div className="flex-1">
@@ -165,9 +165,9 @@ export function OrganicMarketingPage() {
                 </div>
               </div>
 
-              <div className="bg-[#1A1D23]/60 backdrop-blur-sm rounded-xl p-6 border border-[#3AB8FF]/20 mb-6">
+              <div className="bg-[#1A1D23]/60 backdrop-blur-sm rounded-xl p-6 border border-[#14B8A6]/20 mb-6">
                 <div className="flex items-start gap-3 mb-4">
-                  <AlertCircle className="w-5 h-5 text-[#3AB8FF] flex-shrink-0 mt-0.5" />
+                  <AlertCircle className="w-5 h-5 text-[#14B8A6] flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-[#E8F1FF] mb-2">GBP Not Connected</h4>
                     <p className="text-[#94A3B8] text-sm mb-3">Connect your Google Business Profile to unlock:</p>
@@ -183,7 +183,7 @@ export function OrganicMarketingPage() {
 
               <button
                 onClick={handleConnect}
-                className="group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#06B6D4] to-[#0D9488] text-white shadow-xl shadow-[#06B6D4]/40 hover:shadow-2xl hover:shadow-[#06B6D4]/60 hover:-translate-y-0.5 transition-all font-medium"
+                className="group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#14B8A6] to-[#0D9488] text-white shadow-xl shadow-[#14B8A6]/40 hover:shadow-2xl hover:shadow-[#14B8A6]/60 hover:-translate-y-0.5 transition-all font-medium"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -244,11 +244,11 @@ export function OrganicMarketingPage() {
 
         {/* Error: Location Not Verified */}
         {gbpStatus === 'error-not-verified' && (
-          <div className="lg:col-span-2 relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#06B6D4]/20 shadow-2xl shadow-[#06B6D4]/10 p-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/5 to-transparent"></div>
+          <div className="lg:col-span-2 relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#14B8A6]/20 shadow-2xl shadow-[#14B8A6]/10 p-10">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#14B8A6]/5 to-transparent"></div>
             <div className="relative">
               <div className="flex items-start gap-6 mb-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#06B6D4]/50 flex-shrink-0">
+                <div className="w-14 h-14 bg-gradient-to-br from-[#14B8A6] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#14B8A6]/50 flex-shrink-0">
                   <Clock className="w-7 h-7 text-white" />
                 </div>
                 <div className="flex-1">
@@ -257,15 +257,15 @@ export function OrganicMarketingPage() {
                 </div>
               </div>
 
-              <div className="bg-[#1A1D23]/60 backdrop-blur-sm rounded-xl p-6 border border-[#06B6D4]/20 mb-6">
+              <div className="bg-[#1A1D23]/60 backdrop-blur-sm rounded-xl p-6 border border-[#14B8A6]/20 mb-6">
                 <div className="flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 text-[#06B6D4] flex-shrink-0 mt-0.5" />
+                  <AlertCircle className="w-5 h-5 text-[#14B8A6] flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-[#E8F1FF] mb-2">Verification Pending</h4>
                     <p className="text-[#94A3B8] text-sm mb-3">Your Google Business Profile location has not been verified yet. Data syncing will begin once verification is complete.</p>
-                    <div className="bg-[#06B6D4]/10 rounded-lg p-3 mb-3 border border-[#06B6D4]/20">
-                      <p className="text-sm text-[#06B6D4] mb-2">Verification methods:</p>
-                      <ul className="list-disc list-inside space-y-1 text-sm text-[#67E8F9]">
+                    <div className="bg-[#14B8A6]/10 rounded-lg p-3 mb-3 border border-[#14B8A6]/20">
+                      <p className="text-sm text-[#14B8A6] mb-2">Verification methods:</p>
+                      <ul className="list-disc list-inside space-y-1 text-sm text-[#5EEAD4]">
                         <li>Postcard verification (5-7 business days)</li>
                         <li>Phone verification (instant, if available)</li>
                         <li>Email verification (instant, if available)</li>
@@ -280,7 +280,7 @@ export function OrganicMarketingPage() {
                 href="https://business.google.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#06B6D4] to-[#0D9488] text-white shadow-xl shadow-[#06B6D4]/40 hover:shadow-2xl hover:shadow-[#06B6D4]/60 hover:-translate-y-0.5 transition-all font-medium"
+                className="group inline-flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#14B8A6] to-[#0D9488] text-white shadow-xl shadow-[#14B8A6]/40 hover:shadow-2xl hover:shadow-[#14B8A6]/60 hover:-translate-y-0.5 transition-all font-medium"
               >
                 <span>Complete Verification</span>
                 <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -290,11 +290,11 @@ export function OrganicMarketingPage() {
         )}
 
         {/* Website SEO Card */}
-        <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#3AB8FF]/20 transition-all duration-300 hover:-translate-y-1">
+        <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#14B8A6]/20 transition-all duration-300 hover:-translate-y-1">
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#3AB8FF] to-[#6366F1] rounded-2xl flex items-center justify-center shadow-lg shadow-[#3AB8FF]/50">
+              <div className="w-12 h-12 bg-gradient-to-br from-[#14B8A6] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#14B8A6]/50">
                 <Search className="w-6 h-6 text-white" />
               </div>
               <div>

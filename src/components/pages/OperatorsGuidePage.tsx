@@ -19,8 +19,8 @@ export function OperatorsGuidePage() {
       subtitle: 'Understanding your client acquisition system',
       buttonText: 'Learn More',
       url: '#',
-      color: 'from-[#06B6D4] to-[#0D9488]',
-      shadowColor: '#06B6D4',
+      color: 'from-[#64748B] to-[#475569]',
+      shadowColor: '#64748B',
     },
     {
       icon: BookOpen,
@@ -28,8 +28,8 @@ export function OperatorsGuidePage() {
       subtitle: 'Operating Fieldd to manage leads and bookings',
       buttonText: 'Watch Tutorial',
       url: '#',
-      color: 'from-[#06B6D4] to-[#0D9488]',
-      shadowColor: '#06B6D4',
+      color: 'from-[#64748B] to-[#475569]',
+      shadowColor: '#64748B',
     },
     {
       icon: Phone,
@@ -37,8 +37,8 @@ export function OperatorsGuidePage() {
       subtitle: 'How to answer calls/texts fast and close clients',
       buttonText: 'View Scripts',
       url: '#',
-      color: 'from-[#06B6D4] to-[#0D9488]',
-      shadowColor: '#06B6D4',
+      color: 'from-[#64748B] to-[#475569]',
+      shadowColor: '#64748B',
     },
     {
       icon: MessageSquare,
@@ -46,8 +46,8 @@ export function OperatorsGuidePage() {
       subtitle: 'How to close the lead into a booked job',
       buttonText: 'View Scripts',
       url: '#',
-      color: 'from-[#06B6D4] to-[#0D9488]',
-      shadowColor: '#06B6D4',
+      color: 'from-[#64748B] to-[#475569]',
+      shadowColor: '#64748B',
     },
     {
       icon: Star,
@@ -55,8 +55,8 @@ export function OperatorsGuidePage() {
       subtitle: 'How to ask for Google reviews in person',
       buttonText: 'View Scripts',
       url: '#',
-      color: 'from-[#06B6D4] to-[#0D9488]',
-      shadowColor: '#06B6D4',
+      color: 'from-[#64748B] to-[#475569]',
+      shadowColor: '#64748B',
     },
     {
       icon: Clock,
@@ -64,8 +64,8 @@ export function OperatorsGuidePage() {
       subtitle: 'What to say if a lead goes cold',
       buttonText: 'View Scripts',
       url: '#',
-      color: 'from-[#06B6D4] to-[#0D9488]',
-      shadowColor: '#06B6D4',
+      color: 'from-[#64748B] to-[#475569]',
+      shadowColor: '#64748B',
     },
     {
       icon: DollarSign,
@@ -73,8 +73,8 @@ export function OperatorsGuidePage() {
       subtitle: 'How to quote without discounting',
       buttonText: 'Read Guide',
       url: '#',
-      color: 'from-[#06B6D4] to-[#0D9488]',
-      shadowColor: '#06B6D4',
+      color: 'from-[#64748B] to-[#475569]',
+      shadowColor: '#64748B',
     },
     {
       icon: TrendingUp,
@@ -82,8 +82,8 @@ export function OperatorsGuidePage() {
       subtitle: 'How to upsell at the service appointment',
       buttonText: 'Read Guide',
       url: '#',
-      color: 'from-[#06B6D4] to-[#0D9488]',
-      shadowColor: '#06B6D4',
+      color: 'from-[#64748B] to-[#475569]',
+      shadowColor: '#64748B',
     },
     {
       icon: PhoneCall,
@@ -91,8 +91,8 @@ export function OperatorsGuidePage() {
       subtitle: 'How to upsell before the service',
       buttonText: 'Read Guide',
       url: '#',
-      color: 'from-[#06B6D4] to-[#0D9488]',
-      shadowColor: '#06B6D4',
+      color: 'from-[#64748B] to-[#475569]',
+      shadowColor: '#64748B',
     },
   ];
 
@@ -103,7 +103,7 @@ export function OperatorsGuidePage() {
         title="Operator's Guide"
         subtitle="We install the system. Here's how you run it."
         icon={<BookOpen className="w-8 h-8 text-white" />}
-        iconGradient="from-[#06B6D4] to-[#0D9488]"
+        iconGradient="from-[#64748B] to-[#475569]"
       />
 
       {/* Guide Cards Grid */}

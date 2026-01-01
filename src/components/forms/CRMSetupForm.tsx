@@ -49,7 +49,7 @@ export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
     }
   };
 
-  const inputClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] placeholder:text-[#64748B] focus:border-[#8B5CF6] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]/20 transition-all";
+  const inputClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] placeholder:text-[#64748B] focus:border-[#06B6D4] focus:outline-none focus:ring-2 focus:ring-[#06B6D4]/20 transition-all";
   const labelClasses = "flex items-center gap-2 text-[#94A3B8] text-sm mb-2";
 
   const canProceed = hasPurchased === 'yes';
@@ -59,14 +59,14 @@ export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
-          backgroundImage: `linear-gradient(90deg, #8B5CF6 1px, transparent 1px), linear-gradient(0deg, #8B5CF6 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(90deg, #06B6D4 1px, transparent 1px), linear-gradient(0deg, #06B6D4 1px, transparent 1px)`,
           backgroundSize: '60px 60px'
         }}></div>
       </div>
-      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-[#8B5CF6]/5 to-transparent pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-[#06B6D4]/5 to-transparent pointer-events-none"></div>
 
       <div className="relative z-10 max-w-[900px] mx-auto px-6 py-8">
-        <button onClick={onBack} className="flex items-center gap-2 text-[#8B5CF6] hover:text-[#A78BFA] mb-6 transition-colors">
+        <button onClick={onBack} className="flex items-center gap-2 text-[#06B6D4] hover:text-[#0D9488] mb-6 transition-colors">
           <ChevronLeft className="w-5 h-5" />
           Back to Checklist
         </button>
@@ -74,7 +74,7 @@ export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-3">
-            <div className="w-16 h-16 bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED] rounded-2xl flex items-center justify-center shadow-lg shadow-[#8B5CF6]/50">
+            <div className="w-16 h-16 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#06B6D4]/50">
               <Database className="w-8 h-8 text-white" />
             </div>
             <div>
@@ -88,7 +88,7 @@ export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
 
         {/* Form */}
         <div className="bg-gradient-to-br from-[#1A1D23] to-[#0F1115] rounded-2xl border border-[#293038] p-8 shadow-xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#8B5CF6]/5 via-transparent to-[#7C3AED]/5"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/5 via-transparent to-[#0D9488]/5"></div>
 
           <form className="relative space-y-6">
             {/* Selected Plan */}
@@ -106,11 +106,11 @@ export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
                     onClick={() => setSelectedPlan(plan.value)}
                     className={`p-4 rounded-xl border text-left transition-all ${
                       selectedPlan === plan.value
-                        ? 'bg-[#8B5CF6]/20 border-[#8B5CF6]'
-                        : 'bg-[#0D1114] border-[#293038] hover:border-[#8B5CF6]/50'
+                        ? 'bg-[#06B6D4]/20 border-[#06B6D4]'
+                        : 'bg-[#0D1114] border-[#293038] hover:border-[#06B6D4]/50'
                     }`}
                   >
-                    <div className={`font-semibold ${selectedPlan === plan.value ? 'text-[#8B5CF6]' : 'text-[#E8F1FF]'}`}>
+                    <div className={`font-semibold ${selectedPlan === plan.value ? 'text-[#06B6D4]' : 'text-[#E8F1FF]'}`}>
                       {plan.label}
                     </div>
                     <div className="text-[#94A3B8] text-sm">{plan.price}</div>
@@ -129,7 +129,7 @@ export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
                   className={`flex-1 px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
                     hasPurchased === 'yes'
                       ? 'bg-[#10B981]/20 border-[#10B981] text-[#10B981]'
-                      : 'bg-[#0D1114] border-[#293038] text-[#94A3B8] hover:border-[#8B5CF6]/50'
+                      : 'bg-[#0D1114] border-[#293038] text-[#94A3B8] hover:border-[#06B6D4]/50'
                   }`}
                 >
                   Yes
@@ -140,7 +140,7 @@ export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
                   className={`flex-1 px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
                     hasPurchased === 'no'
                       ? 'bg-[#EF4444]/20 border-[#EF4444] text-[#EF4444]'
-                      : 'bg-[#0D1114] border-[#293038] text-[#94A3B8] hover:border-[#8B5CF6]/50'
+                      : 'bg-[#0D1114] border-[#293038] text-[#94A3B8] hover:border-[#06B6D4]/50'
                   }`}
                 >
                   No
@@ -156,7 +156,7 @@ export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
                       href="https://fieldd.co/pricing"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 mt-2 text-[#8B5CF6] hover:text-[#A78BFA] text-sm"
+                      className="inline-flex items-center gap-2 mt-2 text-[#06B6D4] hover:text-[#0D9488] text-sm"
                     >
                       Go to Fieldd to Purchase <ExternalLink className="w-4 h-4" />
                     </a>
@@ -215,7 +215,7 @@ export function CRMSetupForm({ onBack, onSave }: CRMSetupFormProps) {
                 disabled={!canProceed || saving}
                 className={`w-full px-8 py-4 rounded-xl font-medium transition-all flex items-center justify-center gap-2 ${
                   canProceed
-                    ? 'bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white hover:shadow-lg hover:shadow-[#8B5CF6]/30 disabled:opacity-70'
+                    ? 'bg-gradient-to-r from-[#06B6D4] to-[#0D9488] text-white hover:shadow-lg hover:shadow-[#06B6D4]/30 disabled:opacity-70'
                     : 'bg-[#293038] text-[#64748B] cursor-not-allowed'
                 }`}
               >

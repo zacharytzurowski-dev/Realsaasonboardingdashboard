@@ -14,18 +14,18 @@ export function WebsitePage() {
         title="Your Website"
         subtitle="Track your website build progress and launch timeline"
         icon={<Globe className="w-8 h-8 text-white" />}
-        iconGradient="from-[#3AB8FF] to-[#5DAEFF]"
+        iconGradient="from-[#3B82F6] to-[#2563EB]"
       />
 
       {/* Main Website Status Card */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#293038] shadow-2xl shadow-[#3AB8FF]/10 mb-8">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/5 to-[#5DAEFF]/5"></div>
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#293038] shadow-2xl shadow-[#3B82F6]/10 mb-8">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#3B82F6]/5 to-[#2563EB]/5"></div>
         <div className="relative p-10">
           <div className="flex flex-col lg:flex-row items-start justify-between gap-6 mb-6">
             {/* Left side - Status Info */}
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#3AB8FF] to-[#5DAEFF] rounded-2xl flex items-center justify-center shadow-lg shadow-[#3AB8FF]/50">
+                <div className="w-14 h-14 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-2xl flex items-center justify-center shadow-lg shadow-[#3B82F6]/50">
                   <Globe className="w-7 h-7 text-white" />
                 </div>
                 <div>
@@ -37,8 +37,8 @@ export function WebsitePage() {
                         Active
                       </span>
                     ) : (
-                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#3AB8FF]/20 text-[#3AB8FF] text-sm border border-[#3AB8FF]/30">
-                        <div className="w-2 h-2 bg-[#3AB8FF] rounded-full mr-2 animate-pulse shadow-lg shadow-[#3AB8FF]/50"></div>
+                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#3B82F6]/20 text-[#3B82F6] text-sm border border-[#3B82F6]/30">
+                        <div className="w-2 h-2 bg-[#3B82F6] rounded-full mr-2 animate-pulse shadow-lg shadow-[#3B82F6]/50"></div>
                         Optimizing
                       </span>
                     )}
@@ -63,7 +63,7 @@ export function WebsitePage() {
 
             {/* Right side - Action Button */}
             <div className="flex items-start justify-center w-full lg:w-auto lg:min-w-[240px]">
-              <button className="group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#3AB8FF] to-[#5DAEFF] text-white shadow-xl shadow-[#3AB8FF]/40 hover:shadow-2xl hover:shadow-[#3AB8FF]/60 hover:-translate-y-0.5 transition-all font-medium w-full lg:w-auto whitespace-nowrap">
+              <button className="group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#3B82F6] to-[#2563EB] text-white shadow-xl shadow-[#3B82F6]/40 hover:shadow-2xl hover:shadow-[#3B82F6]/60 hover:-translate-y-0.5 transition-all font-medium w-full lg:w-auto whitespace-nowrap">
                 <Eye className="w-5 h-5" />
                 <span>View Website</span>
                 <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -145,10 +145,10 @@ export function WebsitePage() {
         </div>
 
         {/* Content Card */}
-        <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#3AB8FF]/20 transition-all duration-300 hover:-translate-y-1">
+        <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#3B82F6]/20 transition-all duration-300 hover:-translate-y-1">
           {/* Status indicator */}
           <div className="absolute top-6 right-6">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#3AB8FF] to-[#5DAEFF] rounded-xl flex items-center justify-center shadow-lg shadow-[#3AB8FF]/50">
+            <div className="w-10 h-10 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-xl flex items-center justify-center shadow-lg shadow-[#3B82F6]/50">
               <Edit className="w-5 h-5 text-white" />
             </div>
           </div>
@@ -156,8 +156,8 @@ export function WebsitePage() {
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-[#3AB8FF]/10 rounded-xl flex items-center justify-center border border-[#3AB8FF]/30">
-                <FileText className="w-6 h-6 text-[#3AB8FF]" />
+              <div className="w-12 h-12 bg-[#3B82F6]/10 rounded-xl flex items-center justify-center border border-[#3B82F6]/30">
+                <FileText className="w-6 h-6 text-[#3B82F6]" />
               </div>
               <h3 className="text-[#E8F1FF]">Content</h3>
             </div>
@@ -167,8 +167,8 @@ export function WebsitePage() {
                 Active
               </div>
             ) : (
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#3AB8FF]/20 text-[#3AB8FF] text-sm border border-[#3AB8FF]/30">
-                <div className="w-2 h-2 bg-[#3AB8FF] rounded-full mr-2 animate-pulse shadow-lg shadow-[#3AB8FF]/50"></div>
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#3B82F6]/20 text-[#3B82F6] text-sm border border-[#3B82F6]/30">
+                <div className="w-2 h-2 bg-[#3B82F6] rounded-full mr-2 animate-pulse shadow-lg shadow-[#3B82F6]/50"></div>
                 Optimizing
               </div>
             )}

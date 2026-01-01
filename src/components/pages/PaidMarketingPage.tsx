@@ -31,17 +31,17 @@ export function PaidMarketingPage() {
         title="Paid Marketing"
         subtitle="View track, and monitor your paid advertising campaigns"
         icon={<TrendingUp className="w-8 h-8 text-white" />}
-        iconGradient="from-[#10B981] to-[#059669]"
+        iconGradient="from-[#6366F1] to-[#4F46E5]"
       />
 
       {/* Google Ads - Hero Header Banner */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#293038] shadow-2xl shadow-[#10B981]/10 mb-8">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#10B981]/5 to-[#059669]/5"></div>
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#293038] shadow-2xl shadow-[#6366F1]/10 mb-8">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#6366F1]/5 to-[#4F46E5]/5"></div>
         <div className="relative p-10">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             {/* Left side - Header and Status */}
             <div className="flex items-start gap-6 flex-1">
-              <div className="w-14 h-14 bg-gradient-to-br from-[#10B981] to-[#059669] rounded-2xl flex items-center justify-center shadow-lg shadow-[#10B981]/50 flex-shrink-0">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#6366F1] to-[#4F46E5] rounded-2xl flex items-center justify-center shadow-lg shadow-[#6366F1]/50 flex-shrink-0">
                 <TrendingUp className="w-7 h-7 text-white" />
               </div>
               <div className="flex-1">
@@ -49,12 +49,12 @@ export function PaidMarketingPage() {
                 <p className="text-[#94A3B8] mb-3">View and track your high-converting paid ad campaigns built to drive leads...</p>
                 
                 {/* Connection Status Badge */}
-                <div className="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-[#1A1D23]/60 backdrop-blur-sm border border-[#10B981]/30">
-                  <CheckCircle className="w-5 h-5 text-[#10B981]" />
+                <div className="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-[#1A1D23]/60 backdrop-blur-sm border border-[#6366F1]/30">
+                  <CheckCircle className="w-5 h-5 text-[#6366F1]" />
                   <div className="flex items-center gap-2">
                     <span className="text-[#E8F1FF] text-sm">{googleAdsData.accountName}</span>
                     {googleAdsData.verified && (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-[#10B981]/20 text-[#10B981] text-xs border border-[#10B981]/30">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-[#6366F1]/20 text-[#6366F1] text-xs border border-[#6366F1]/30">
                         Verified
                       </span>
                     )}
@@ -69,7 +69,7 @@ export function PaidMarketingPage() {
                 href="https://ads.google.com/aw/overview"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#10B981] to-[#059669] text-white shadow-xl shadow-[#10B981]/40 hover:shadow-2xl hover:shadow-[#10B981]/60 hover:-translate-y-0.5 transition-all font-medium"
+                className="group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#6366F1] to-[#4F46E5] text-white shadow-xl shadow-[#6366F1]/40 hover:shadow-2xl hover:shadow-[#6366F1]/60 hover:-translate-y-0.5 transition-all font-medium"
               >
                 <span>Open Google Ads</span>
                 <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -82,11 +82,11 @@ export function PaidMarketingPage() {
       {/* External Platforms - LSA and Thumbtack */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Local Service Ads */}
-        <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#3AB8FF]/20 transition-all duration-300 hover:-translate-y-1">
+        <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#6366F1]/20 transition-all duration-300 hover:-translate-y-1">
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#3AB8FF] to-[#5DAEFF] rounded-2xl flex items-center justify-center shadow-lg shadow-[#3AB8FF]/50">
+              <div className="w-12 h-12 bg-gradient-to-br from-[#6366F1] to-[#4F46E5] rounded-2xl flex items-center justify-center shadow-lg shadow-[#6366F1]/50">
                 <Megaphone className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -100,8 +100,8 @@ export function PaidMarketingPage() {
                 Active
               </div>
             ) : (
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#3AB8FF]/20 text-[#3AB8FF] text-sm border border-[#3AB8FF]/30">
-                <div className="w-2 h-2 bg-[#3AB8FF] rounded-full mr-2 animate-pulse shadow-lg shadow-[#3AB8FF]/50"></div>
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#6366F1]/20 text-[#6366F1] text-sm border border-[#6366F1]/30">
+                <div className="w-2 h-2 bg-[#6366F1] rounded-full mr-2 animate-pulse shadow-lg shadow-[#6366F1]/50"></div>
                 Optimizing
               </div>
             )}
@@ -140,7 +140,7 @@ export function PaidMarketingPage() {
             href="https://ads.google.com/localservices/inbox"
             target="_blank"
             rel="noopener noreferrer"
-            className="group/btn flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#3AB8FF] to-[#5DAEFF] text-white px-6 py-3 rounded-2xl hover:shadow-xl hover:shadow-[#3AB8FF]/40 hover:-translate-y-0.5 transition-all shadow-md shadow-[#3AB8FF]/30 font-medium"
+            className="group/btn flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#6366F1] to-[#4F46E5] text-white px-6 py-3 rounded-2xl hover:shadow-xl hover:shadow-[#6366F1]/40 hover:-translate-y-0.5 transition-all shadow-md shadow-[#6366F1]/30 font-medium"
           >
             <span>Open LSA Platform</span>
             <ExternalLink className="w-4 h-4 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
@@ -148,11 +148,11 @@ export function PaidMarketingPage() {
         </div>
 
         {/* Thumbtack */}
-        <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#06B6D4]/20 transition-all duration-300 hover:-translate-y-1">
+        <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#6366F1]/20 transition-all duration-300 hover:-translate-y-1">
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#06B6D4]/50">
+              <div className="w-12 h-12 bg-gradient-to-br from-[#6366F1] to-[#4F46E5] rounded-2xl flex items-center justify-center shadow-lg shadow-[#6366F1]/50">
                 <Pin className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -166,8 +166,8 @@ export function PaidMarketingPage() {
                 Active
               </div>
             ) : (
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#06B6D4]/20 text-[#06B6D4] text-sm border border-[#06B6D4]/30">
-                <div className="w-2 h-2 bg-[#06B6D4] rounded-full mr-2 animate-pulse shadow-lg shadow-[#06B6D4]/50"></div>
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#6366F1]/20 text-[#6366F1] text-sm border border-[#6366F1]/30">
+                <div className="w-2 h-2 bg-[#6366F1] rounded-full mr-2 animate-pulse shadow-lg shadow-[#6366F1]/50"></div>
                 Optimizing
               </div>
             )}
@@ -206,7 +206,7 @@ export function PaidMarketingPage() {
             href="https://www.thumbtack.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group/btn flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#06B6D4] to-[#0D9488] text-white px-6 py-3 rounded-2xl hover:shadow-xl hover:shadow-[#06B6D4]/40 hover:-translate-y-0.5 transition-all shadow-md shadow-[#06B6D4]/30 font-medium"
+            className="group/btn flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#6366F1] to-[#4F46E5] text-white px-6 py-3 rounded-2xl hover:shadow-xl hover:shadow-[#6366F1]/40 hover:-translate-y-0.5 transition-all shadow-md shadow-[#6366F1]/30 font-medium"
           >
             <span>Open Thumbtack</span>
             <ExternalLink className="w-4 h-4 opacity-0 group-hover/btn:opacity-100 transition-opacity" />

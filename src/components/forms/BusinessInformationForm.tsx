@@ -124,23 +124,23 @@ export function BusinessInformationForm({ onBack, onSave }: BusinessInformationF
     }
   };
 
-  const inputClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] placeholder:text-[#64748B] focus:border-[#3AB8FF] focus:outline-none focus:ring-2 focus:ring-[#3AB8FF]/20 transition-all";
+  const inputClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] placeholder:text-[#64748B] focus:border-[#06B6D4] focus:outline-none focus:ring-2 focus:ring-[#06B6D4]/20 transition-all";
   const labelClasses = "flex items-center gap-2 text-[#94A3B8] text-sm mb-2";
-  const selectClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] focus:border-[#3AB8FF] focus:outline-none focus:ring-2 focus:ring-[#3AB8FF]/20 transition-all";
+  const selectClasses = "w-full px-4 py-3 rounded-xl bg-[#0D1114] border border-[#293038] text-[#E8F1FF] focus:border-[#06B6D4] focus:outline-none focus:ring-2 focus:ring-[#06B6D4]/20 transition-all";
 
   return (
     <div className="min-h-screen bg-[#0A0B0D] relative">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
-          backgroundImage: `linear-gradient(90deg, #3AB8FF 1px, transparent 1px), linear-gradient(0deg, #3AB8FF 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(90deg, #06B6D4 1px, transparent 1px), linear-gradient(0deg, #06B6D4 1px, transparent 1px)`,
           backgroundSize: '60px 60px'
         }}></div>
       </div>
-      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-[#3AB8FF]/5 to-transparent pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-[#06B6D4]/5 to-transparent pointer-events-none"></div>
 
       <div className="relative z-10 max-w-[900px] mx-auto px-6 py-8">
-        <button onClick={onBack} className="flex items-center gap-2 text-[#3AB8FF] hover:text-[#5DAEFF] mb-6 transition-colors">
+        <button onClick={onBack} className="flex items-center gap-2 text-[#06B6D4] hover:text-[#0D9488] mb-6 transition-colors">
           <ChevronLeft className="w-5 h-5" />
           Back to Checklist
         </button>
@@ -148,7 +148,7 @@ export function BusinessInformationForm({ onBack, onSave }: BusinessInformationF
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-3">
-            <div className="w-16 h-16 bg-gradient-to-br from-[#3AB8FF] to-[#00CFFF] rounded-2xl flex items-center justify-center shadow-lg shadow-[#3AB8FF]/50">
+            <div className="w-16 h-16 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#06B6D4]/50">
               <Building2 className="w-8 h-8 text-white" />
             </div>
             <div>
@@ -162,7 +162,7 @@ export function BusinessInformationForm({ onBack, onSave }: BusinessInformationF
 
         {/* Form */}
         <div className="bg-gradient-to-br from-[#1A1D23] to-[#0F1115] rounded-2xl border border-[#293038] p-8 shadow-xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/5 via-transparent to-[#8B5CF6]/5"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/5 via-transparent to-[#0D9488]/5"></div>
 
           <form className="relative space-y-6">
             {/* Business Name */}
@@ -377,18 +377,18 @@ export function BusinessInformationForm({ onBack, onSave }: BusinessInformationF
                 {teamMembers.map((member) => (
                   <div key={member.id} className="bg-[#0D1114] border border-[#293038] rounded-xl overflow-hidden">
                     <div onClick={() => toggleExpanded(member.id)} className="flex items-center gap-3 p-4 cursor-pointer group">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#3AB8FF]/20 to-[#8B5CF6]/20 flex items-center justify-center border border-[#3AB8FF]/30">
-                        <User className="w-5 h-5 text-[#3AB8FF]" />
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#06B6D4]/20 to-[#0D9488]/20 flex items-center justify-center border border-[#06B6D4]/30">
+                        <User className="w-5 h-5 text-[#06B6D4]" />
                       </div>
                       <div className="flex-1">
                         <div className="text-[#E8F1FF] font-medium">{member.name || 'New team member'}</div>
                         {member.role && (
-                          <div className="inline-flex items-center px-2 py-0.5 rounded-md bg-[#3AB8FF]/10 text-[#3AB8FF] text-xs mt-1 border border-[#3AB8FF]/20">
+                          <div className="inline-flex items-center px-2 py-0.5 rounded-md bg-[#06B6D4]/10 text-[#06B6D4] text-xs mt-1 border border-[#06B6D4]/20">
                             {member.role}
                           </div>
                         )}
                       </div>
-                      <div className="text-[#64748B] group-hover:text-[#3AB8FF] transition-colors">
+                      <div className="text-[#64748B] group-hover:text-[#06B6D4] transition-colors">
                         {member.isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                       </div>
                     </div>
@@ -401,7 +401,7 @@ export function BusinessInformationForm({ onBack, onSave }: BusinessInformationF
                             value={member.name}
                             onChange={(e) => updateTeamMember(member.id, 'name', e.target.value)}
                             placeholder="Enter name"
-                            className="w-full px-3 py-2 rounded-lg bg-[#1A1D23] border border-[#293038] text-[#E8F1FF] placeholder:text-[#64748B] focus:border-[#3AB8FF] focus:outline-none text-sm"
+                            className="w-full px-3 py-2 rounded-lg bg-[#1A1D23] border border-[#293038] text-[#E8F1FF] placeholder:text-[#64748B] focus:border-[#06B6D4] focus:outline-none text-sm"
                           />
                         </div>
                         <div>
@@ -409,7 +409,7 @@ export function BusinessInformationForm({ onBack, onSave }: BusinessInformationF
                           <select
                             value={member.role}
                             onChange={(e) => updateTeamMember(member.id, 'role', e.target.value)}
-                            className="w-full px-3 py-2 rounded-lg bg-[#1A1D23] border border-[#293038] text-[#E8F1FF] focus:border-[#3AB8FF] focus:outline-none text-sm"
+                            className="w-full px-3 py-2 rounded-lg bg-[#1A1D23] border border-[#293038] text-[#E8F1FF] focus:border-[#06B6D4] focus:outline-none text-sm"
                           >
                             <option value="">Select role</option>
                             <option value="Worker">Worker</option>
@@ -433,7 +433,7 @@ export function BusinessInformationForm({ onBack, onSave }: BusinessInformationF
                 <button
                   type="button"
                   onClick={addTeamMember}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 border-dashed border-[#293038] text-[#3AB8FF] hover:border-[#3AB8FF] hover:bg-[#3AB8FF]/5 transition-all"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 border-dashed border-[#293038] text-[#06B6D4] hover:border-[#06B6D4] hover:bg-[#06B6D4]/5 transition-all"
                 >
                   <Plus className="w-5 h-5" />
                   <span>Add Team Member</span>
@@ -447,7 +447,7 @@ export function BusinessInformationForm({ onBack, onSave }: BusinessInformationF
                 type="button"
                 onClick={handleSubmit}
                 disabled={saving}
-                className="w-full bg-gradient-to-r from-[#3AB8FF] via-[#5DAEFF] to-[#00CFFF] text-white px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-[#3AB8FF]/30 transition-all font-medium disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full bg-gradient-to-r from-[#06B6D4] via-[#0D9488] to-[#0D9488] text-white px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-[#06B6D4]/30 transition-all font-medium disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {saving ? (
                   <>

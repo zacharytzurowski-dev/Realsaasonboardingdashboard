@@ -126,7 +126,7 @@ export function OnboardingPage() {
         );
       case 'in-progress':
         return (
-          <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm bg-[#3AB8FF]/20 text-[#3AB8FF] border border-[#3AB8FF]/30 shadow-sm shadow-[#3AB8FF]/20">
+          <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm bg-[#06B6D4]/20 text-[#06B6D4] border border-[#06B6D4]/30 shadow-sm shadow-[#06B6D4]/20">
             <Clock className="w-4 h-4 mr-1" />
             In Progress
           </span>
@@ -174,17 +174,17 @@ export function OnboardingPage() {
 
       {/* Progress Overview - Neon Blue Progress Bar */}
       <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-[#1A1D23] to-[#1A1D23] border border-[#293038] shadow-md mb-6">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/3 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/3 to-transparent"></div>
         <div className="relative p-6">
           <div className="flex justify-between items-center mb-3">
             <h3 className="text-[#E8F1FF] font-medium">Overall Progress</h3>
-            <span className="text-[#3AB8FF] font-medium">
+            <span className="text-[#06B6D4] font-medium">
               {completedCount} of {steps.length} completed
             </span>
           </div>
           <div className="h-2.5 bg-[#21262D] rounded-full overflow-hidden shadow-inner">
             <div
-              className="h-full bg-gradient-to-r from-[#3AB8FF] via-[#5DAEFF] to-[#00CFFF] rounded-full transition-all duration-500 shadow-lg shadow-[#3AB8FF]/40"
+              className="h-full bg-gradient-to-r from-[#06B6D4] via-[#0D9488] to-[#06B6D4] rounded-full transition-all duration-500 shadow-lg shadow-[#06B6D4]/40"
               style={{ width: `${progressPercentage}%` }}
             />
           </div>
@@ -210,7 +210,7 @@ export function OnboardingPage() {
             <button
               key={step.id}
               onClick={() => handleStepClick(step.id)}
-              className="w-full bg-gradient-to-br from-[#1A1D23] to-[#1A1D23] rounded-xl p-6 border border-[#293038] shadow-md hover:shadow-lg hover:border-[#3AB8FF]/30 hover:-translate-y-1 transition-all text-left group"
+              className="w-full bg-gradient-to-br from-[#1A1D23] to-[#1A1D23] rounded-xl p-6 border border-[#293038] shadow-md hover:shadow-lg hover:border-[#06B6D4]/30 hover:-translate-y-1 transition-all text-left group"
             >
               <div className="flex items-center gap-5">
                 {/* Icon with Vibrant Gradient */}
@@ -231,7 +231,7 @@ export function OnboardingPage() {
                 {/* Arrow */}
                 <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
                   <svg
-                    className="w-6 h-6 text-[#3AB8FF]"
+                    className="w-6 h-6 text-[#06B6D4]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -263,8 +263,8 @@ export function OnboardingPage() {
           <button
             onClick={handleSubmit}
             disabled={submitting}
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-[#00D9FF] via-[#0EA5E9] to-[#3B82F6] text-white font-medium hover:shadow-lg hover:shadow-[#00D9FF]/30 hover:-translate-y-0.5 transition-all disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
-            style={{ boxShadow: '0 4px 14px rgba(0, 217, 255, 0.25)' }}
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-[#06B6D4] via-[#0D9488] to-[#06B6D4] text-white font-medium hover:shadow-lg hover:shadow-[#06B6D4]/30 hover:-translate-y-0.5 transition-all disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+            style={{ boxShadow: '0 4px 14px rgba(6, 182, 212, 0.25)' }}
           >
             {submitting ? (
               <>

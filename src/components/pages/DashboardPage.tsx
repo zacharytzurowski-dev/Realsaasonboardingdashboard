@@ -24,12 +24,12 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
 
   // Activity ticker messages
   const activities = [
-    { icon: Zap, message: 'Deploying automation workflows...', color: '#00D9FF' },
-    { icon: Palette, message: 'Importing brand assets...', color: '#8B5CF6' },
+    { icon: Zap, message: 'Deploying automation workflows...', color: '#14B8A6' },
+    { icon: Palette, message: 'Importing brand assets...', color: '#0D9488' },
     { icon: TrendingUp, message: 'Building Google Ads campaigns...', color: '#10B981' },
-    { icon: Calendar, message: 'Syncing booking calendar...', color: '#F59E0B' },
-    { icon: Database, message: 'Configuring CRM pipelines...', color: '#EC4899' },
-    { icon: Star, message: 'Setting up review automation...', color: '#FBBF24' },
+    { icon: Calendar, message: 'Syncing booking calendar...', color: '#14B8A6' },
+    { icon: Database, message: 'Configuring CRM pipelines...', color: '#0D9488' },
+    { icon: Star, message: 'Setting up review automation...', color: '#14B8A6' },
   ];
 
   const [currentActivityIndex, setCurrentActivityIndex] = useState(0);
@@ -71,7 +71,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
             {/* Header Text */}
             <div>
               <h1 className="text-3xl text-white tracking-tight">
-                Welcome back, <span className="bg-gradient-to-r from-[#00D9FF] to-[#0EA5E9] bg-clip-text text-transparent">{ownerName}</span>
+                Welcome back, <span className="bg-gradient-to-r from-[#14B8A6] to-[#0D9488] bg-clip-text text-transparent">{ownerName}</span>
               </h1>
               <p className="text-[#6B6C7B] mt-2">
                 LaunchOS builds your client acquisition system. Everything runs without you.
@@ -83,7 +83,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
           <div className="relative" ref={profileDropdownRef}>
             <button
               onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-              className="flex items-center gap-3 bg-[#151618] rounded-2xl px-5 py-3 border border-[#2A2B2E]/50 hover:border-[#00D9FF]/30 transition-all"
+              className="flex items-center gap-3 bg-[#151618] rounded-2xl px-5 py-3 border border-[#2A2B2E]/50 hover:border-[#14B8A6]/30 transition-all"
               style={{
                 boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
               }}
@@ -93,9 +93,9 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
                 <div className="text-xs text-[#8B8D98]">{businessName}</div>
               </div>
               <div
-                className="w-11 h-11 rounded-full bg-gradient-to-br from-[#00D9FF] to-[#0EA5E9] flex items-center justify-center text-white font-semibold"
+                className="w-11 h-11 rounded-full bg-gradient-to-br from-[#14B8A6] to-[#0D9488] flex items-center justify-center text-white font-semibold"
                 style={{
-                  boxShadow: '0 4px 16px rgba(0, 217, 255, 0.3)'
+                  boxShadow: '0 4px 16px rgba(20, 184, 166, 0.3)'
                 }}
               >
                 {(profile?.full_name?.[0] || user?.user_metadata?.full_name?.[0] || user?.email?.[0] || 'U').toUpperCase()}
@@ -108,11 +108,11 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
               <div 
                 className="absolute right-0 top-full mt-3 w-80 bg-[#151618] rounded-2xl border border-[#2A2B2E]/50 overflow-hidden z-50"
                 style={{
-                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 217, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
+                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(20, 184, 166, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
                 }}
               >
                 {/* Soft inner glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#00D9FF]/5 via-transparent to-[#8B5CF6]/5 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-[#14B8A6]/5 via-transparent to-[#0D9488]/5 pointer-events-none"></div>
 
                 <div className="relative p-3 space-y-1">
                   {/* Edit Account */}
@@ -121,10 +121,10 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
                       setIsProfileDropdownOpen(false);
                       navigate('/settings');
                     }}
-                    className="group w-full flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A]/50 border border-[#2A2B2E]/30 hover:border-[#00D9FF]/40 hover:bg-[#151618]/80 transition-all hover:-translate-y-0.5"
+                    className="group w-full flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A]/50 border border-[#2A2B2E]/30 hover:border-[#14B8A6]/40 hover:bg-[#151618]/80 transition-all hover:-translate-y-0.5"
                   >
                     <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center">
-                      <Settings className="w-5 h-5 text-[#00D9FF]" />
+                      <Settings className="w-5 h-5 text-[#14B8A6]" />
                     </div>
                     <div className="flex-1 text-left">
                       <div className="text-white">Edit Account</div>
@@ -159,7 +159,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-[#00D9FF]/5 via-transparent to-[#8B5CF6]/5 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#14B8A6]/5 via-transparent to-[#0D9488]/5 pointer-events-none"></div>
 
           <div className="relative">
             <DeploymentCountdown showFullDisplay={true} />
@@ -173,7 +173,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-[#00D9FF]/5 via-transparent to-[#8B5CF6]/5 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#14B8A6]/5 via-transparent to-[#0D9488]/5 pointer-events-none"></div>
           
           <div className="relative">
             {/* Header */}
@@ -182,7 +182,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
                 Next Steps to Activate Your System
               </h2>
               <div className="text-sm text-[#8B8D98]">
-                <span className="text-[#00D9FF]">{systemStatus === 'active' ? 5 : 2}</span> of 5 completed
+                <span className="text-[#14B8A6]">{systemStatus === 'active' ? 5 : 2}</span> of 5 completed
               </div>
             </div>
 
@@ -202,14 +202,14 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
                     className="group rounded-2xl p-4 transition-all duration-300 hover:shadow-lg relative overflow-hidden border border-[#2A2B2E]/30"
                     style={{
                       background: item.completed 
-                        ? 'linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%)'
+                        ? 'linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(13, 148, 136, 0.05) 100%)'
                         : 'transparent',
                       boxShadow: item.completed ? '0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.03)' : 'none'
                     }}
                   >
                     {/* Hover glow effect */}
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#00D9FF]/10 to-[#8B5CF6]/10 blur-xl"></div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#14B8A6]/10 to-[#0D9488]/10 blur-xl"></div>
                     </div>
                     
                     <div className="relative">
@@ -218,17 +218,17 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
                         <div className="text-2xl text-white tabular-nums relative">
                           {item.step}
                           {item.completed && (
-                            <CheckCircle className="absolute -top-1 -right-1 w-3 h-3 text-[#00D9FF]" />
+                            <CheckCircle className="absolute -top-1 -right-1 w-3 h-3 text-[#14B8A6]" />
                           )}
                         </div>
                         <Icon className={`w-5 h-5 ${
-                          item.completed ? 'text-[#00D9FF]' : 'text-[#6B6C7B]'
+                          item.completed ? 'text-[#14B8A6]' : 'text-[#6B6C7B]'
                         }`} />
                       </div>
                       
                       {/* Step Description */}
                       <p className={`text-xs uppercase tracking-wider mb-2 ${
-                        item.completed ? 'text-[#00D9FF]' : 'text-[#6B6C7B]'
+                        item.completed ? 'text-[#14B8A6]' : 'text-[#6B6C7B]'
                       }`}>
                         Step {item.step}
                       </p>
@@ -264,17 +264,17 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
                   onClick={() => navigate('/onboarding')}
                   className="group relative px-12 py-4 rounded-2xl transition-all duration-300 hover:scale-[1.02] flex items-center gap-3 overflow-hidden"
                   style={{
-                    boxShadow: '0 8px 24px rgba(0, 217, 255, 0.3)'
+                    boxShadow: '0 8px 24px rgba(20, 184, 166, 0.3)'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 217, 255, 0.4)';
+                    e.currentTarget.style.boxShadow = '0 12px 32px rgba(20, 184, 166, 0.4)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 217, 255, 0.3)';
+                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(20, 184, 166, 0.3)';
                   }}
                 >
                   {/* Button gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#00D9FF] via-[#0EA5E9] to-[#3B82F6]"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#14B8A6] via-[#0D9488] to-[#0D9488]"></div>
                   <span className="relative text-white">Complete Onboarding</span>
                   <ArrowRight className="relative w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -304,7 +304,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
           <span className="text-sm text-[#8B8D98] animate-fade-in">
             {activities[currentActivityIndex].message}
           </span>
-          <Loader2 className="w-4 h-4 text-[#00D9FF]/60 animate-spin" />
+          <Loader2 className="w-4 h-4 text-[#14B8A6]/60 animate-spin" />
         </div>
 
       </div>

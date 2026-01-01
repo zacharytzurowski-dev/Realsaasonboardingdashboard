@@ -9,12 +9,12 @@ interface ReviewSubmitPageProps {
 export function ReviewSubmitPage({ onBack, onEdit, onSubmit }: ReviewSubmitPageProps) {
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#293038] shadow-lg shadow-black/20 p-8">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/5 to-transparent pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/5 to-transparent pointer-events-none"></div>
       
       <div className="relative">
         <button
           onClick={onBack}
-          className="flex items-center gap-2 text-[#3AB8FF] hover:text-[#5DAEFF] mb-6 transition-colors"
+          className="flex items-center gap-2 text-[#06B6D4] hover:text-[#0D9488] mb-6 transition-colors"
         >
           <ChevronLeft className="w-5 h-5" />
           Back to Checklist
@@ -58,13 +58,13 @@ export function ReviewSubmitPage({ onBack, onEdit, onSubmit }: ReviewSubmitPageP
         <div className="space-y-4">
           {/* Business Information */}
           <div className="relative overflow-hidden border border-[#293038] rounded-xl p-6 bg-[#0D1114]">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/3 to-transparent pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/3 to-transparent pointer-events-none"></div>
             <div className="relative">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-[#E8F1FF]">Business Information</h3>
                 <button
                   onClick={() => onEdit(1)}
-                  className="flex items-center gap-2 text-[#3AB8FF] hover:text-[#5DAEFF] text-sm transition-colors"
+                  className="flex items-center gap-2 text-[#06B6D4] hover:text-[#0D9488] text-sm transition-colors"
                 >
                   <Edit className="w-4 h-4" />
                   Edit
@@ -97,13 +97,13 @@ export function ReviewSubmitPage({ onBack, onEdit, onSubmit }: ReviewSubmitPageP
 
           {/* Brand Guidelines */}
           <div className="relative overflow-hidden border border-[#293038] rounded-xl p-6 bg-[#0D1114]">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/3 to-transparent pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/3 to-transparent pointer-events-none"></div>
             <div className="relative">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-[#E8F1FF]">Brand Guidelines</h3>
                 <button
                   onClick={() => onEdit(2)}
-                  className="flex items-center gap-2 text-[#3AB8FF] hover:text-[#5DAEFF] text-sm transition-colors"
+                  className="flex items-center gap-2 text-[#06B6D4] hover:text-[#0D9488] text-sm transition-colors"
                 >
                   <Edit className="w-4 h-4" />
                   Edit
@@ -135,13 +135,13 @@ export function ReviewSubmitPage({ onBack, onEdit, onSubmit }: ReviewSubmitPageP
 
           {/* Target Audience */}
           <div className="relative overflow-hidden border border-[#293038] rounded-xl p-6 bg-[#0D1114]">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/3 to-transparent pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/3 to-transparent pointer-events-none"></div>
             <div className="relative">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-[#E8F1FF]">Target Audience</h3>
                 <button
                   onClick={() => onEdit(3)}
-                  className="flex items-center gap-2 text-[#3AB8FF] hover:text-[#5DAEFF] text-sm transition-colors"
+                  className="flex items-center gap-2 text-[#06B6D4] hover:text-[#0D9488] text-sm transition-colors"
                 >
                   <Edit className="w-4 h-4" />
                   Edit
@@ -166,13 +166,13 @@ export function ReviewSubmitPage({ onBack, onEdit, onSubmit }: ReviewSubmitPageP
 
           {/* Content Preferences */}
           <div className="relative overflow-hidden border border-[#293038] rounded-xl p-6 bg-[#0D1114]">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/3 to-transparent pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/3 to-transparent pointer-events-none"></div>
             <div className="relative">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-[#E8F1FF]">Content Preferences</h3>
                 <button
                   onClick={() => onEdit(4)}
-                  className="flex items-center gap-2 text-[#3AB8FF] hover:text-[#5DAEFF] text-sm transition-colors"
+                  className="flex items-center gap-2 text-[#06B6D4] hover:text-[#0D9488] text-sm transition-colors"
                 >
                   <Edit className="w-4 h-4" />
                   Edit
@@ -193,13 +193,13 @@ export function ReviewSubmitPage({ onBack, onEdit, onSubmit }: ReviewSubmitPageP
 
           {/* Ads & Tracking */}
           <div className="relative overflow-hidden border border-[#293038] rounded-xl p-6 bg-[#0D1114]">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/3 to-transparent pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/3 to-transparent pointer-events-none"></div>
             <div className="relative">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-[#E8F1FF]">Ads & Tracking Setup</h3>
                 <button
                   onClick={() => onEdit(5)}
-                  className="flex items-center gap-2 text-[#3AB8FF] hover:text-[#5DAEFF] text-sm transition-colors"
+                  className="flex items-center gap-2 text-[#06B6D4] hover:text-[#0D9488] text-sm transition-colors"
                 >
                   <Edit className="w-4 h-4" />
                   Edit
@@ -228,13 +228,13 @@ export function ReviewSubmitPage({ onBack, onEdit, onSubmit }: ReviewSubmitPageP
 
           {/* CRM Setup */}
           <div className="relative overflow-hidden border border-[#293038] rounded-xl p-6 bg-[#0D1114]">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/3 to-transparent pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/3 to-transparent pointer-events-none"></div>
             <div className="relative">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-[#E8F1FF]">CRM Setup</h3>
                 <button
                   onClick={() => onEdit(6)}
-                  className="flex items-center gap-2 text-[#3AB8FF] hover:text-[#5DAEFF] text-sm transition-colors"
+                  className="flex items-center gap-2 text-[#06B6D4] hover:text-[#0D9488] text-sm transition-colors"
                 >
                   <Edit className="w-4 h-4" />
                   Edit
@@ -259,14 +259,14 @@ export function ReviewSubmitPage({ onBack, onEdit, onSubmit }: ReviewSubmitPageP
           <label className="flex items-start gap-3 mb-6 cursor-pointer group">
             <input
               type="checkbox"
-              className="w-5 h-5 text-[#3AB8FF] bg-[#0D1114] border-[#293038] rounded mt-1 focus:ring-2 focus:ring-[#3AB8FF]/20 focus:ring-offset-0"
+              className="w-5 h-5 text-[#06B6D4] bg-[#0D1114] border-[#293038] rounded mt-1 focus:ring-2 focus:ring-[#06B6D4]/20 focus:ring-offset-0"
               defaultChecked
             />
             <span className="text-[#94A3B8] text-sm">
               I confirm that all information provided is accurate and I agree to the{' '}
-              <a href="#" className="text-[#3AB8FF] hover:text-[#5DAEFF] transition-colors">Terms of Service</a>
+              <a href="#" className="text-[#06B6D4] hover:text-[#0D9488] transition-colors">Terms of Service</a>
               {' '}and{' '}
-              <a href="#" className="text-[#3AB8FF] hover:text-[#5DAEFF] transition-colors">Privacy Policy</a>
+              <a href="#" className="text-[#06B6D4] hover:text-[#0D9488] transition-colors">Privacy Policy</a>
             </span>
           </label>
 
