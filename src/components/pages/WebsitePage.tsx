@@ -200,10 +200,10 @@ export function WebsitePage() {
         </div>
 
         {/* Launch Card */}
-        <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#8B5CF6]/20 transition-all duration-300 hover:-translate-y-1">
+        <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#06B6D4]/20 transition-all duration-300 hover:-translate-y-1">
           {/* Status indicator */}
           <div className="absolute top-6 right-6">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED] rounded-xl flex items-center justify-center shadow-lg shadow-[#8B5CF6]/50">
+            <div className="w-10 h-10 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-xl flex items-center justify-center shadow-lg shadow-[#06B6D4]/50">
               <Clock className="w-5 h-5 text-white" />
             </div>
           </div>
@@ -211,8 +211,8 @@ export function WebsitePage() {
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-[#8B5CF6]/10 rounded-xl flex items-center justify-center border border-[#8B5CF6]/30">
-                <Zap className="w-6 h-6 text-[#8B5CF6]" />
+              <div className="w-12 h-12 bg-[#06B6D4]/10 rounded-xl flex items-center justify-center border border-[#06B6D4]/30">
+                <Zap className="w-6 h-6 text-[#06B6D4]" />
               </div>
               <h3 className="text-[#E8F1FF]">Launch</h3>
             </div>
@@ -222,8 +222,8 @@ export function WebsitePage() {
                 Active
               </div>
             ) : (
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#8B5CF6]/20 text-[#8B5CF6] text-sm border border-[#8B5CF6]/30">
-                <div className="w-2 h-2 bg-[#8B5CF6] rounded-full mr-2 animate-pulse shadow-lg shadow-[#8B5CF6]/50"></div>
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#06B6D4]/20 text-[#06B6D4] text-sm border border-[#06B6D4]/30">
+                <div className="w-2 h-2 bg-[#06B6D4] rounded-full mr-2 animate-pulse shadow-lg shadow-[#06B6D4]/50"></div>
                 Optimizing
               </div>
             )}

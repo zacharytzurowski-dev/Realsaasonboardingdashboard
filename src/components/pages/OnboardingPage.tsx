@@ -24,42 +24,42 @@ const stepConfigs: OnboardingStepConfig[] = [
     title: 'Business Information',
     description: 'Tell us about your business, location, and services',
     icon: Building2,
-    color: 'from-blue-500 to-cyan-500',
+    color: 'from-cyan-500 to-teal-600',
   },
   {
     id: 2,
     title: 'Brand & Identity',
     description: 'Upload your logo, colors, and brand assets',
     icon: Palette,
-    color: 'from-purple-500 to-pink-500',
+    color: 'from-cyan-500 to-teal-600',
   },
   {
     id: 3,
     title: 'Target Audience',
     description: 'Define your ideal customer and market',
     icon: Users,
-    color: 'from-green-500 to-emerald-500',
+    color: 'from-cyan-500 to-teal-600',
   },
   {
     id: 4,
     title: 'Content & Messaging',
     description: 'Set your messaging style and content tone',
     icon: FileText,
-    color: 'from-orange-500 to-pink-500',
+    color: 'from-cyan-500 to-teal-600',
   },
   {
     id: 5,
     title: 'Existing Assets Audit',
     description: 'Review your current website, ads, and online presence',
     icon: ClipboardList,
-    color: 'from-amber-500 to-orange-500',
+    color: 'from-cyan-500 to-teal-600',
   },
   {
     id: 6,
     title: 'CRM Setup',
     description: 'Connect your Fieldd account for lead management',
     icon: Database,
-    color: 'from-violet-500 to-purple-500',
+    color: 'from-cyan-500 to-teal-600',
   },
 ];
 
@@ -196,35 +196,15 @@ export function OnboardingPage() {
         {steps.map((step) => {
           const Icon = step.icon;
 
-          // Map colors to dark theme gradients
+          // Map colors to dark theme gradients - all teal
           const colorMap: { [key: string]: { gradient: string; shadow: string } } = {
-            'from-blue-500 to-cyan-500': {
-              gradient: 'from-[#3AB8FF] to-[#00CFFF]',
-              shadow: 'shadow-[#3AB8FF]/30'
-            },
-            'from-purple-500 to-pink-500': {
-              gradient: 'from-[#8B5CF6] to-[#EC4899]',
-              shadow: 'shadow-[#8B5CF6]/30'
-            },
-            'from-green-500 to-emerald-500': {
-              gradient: 'from-[#10B981] to-[#059669]',
-              shadow: 'shadow-[#10B981]/30'
-            },
-            'from-orange-500 to-pink-500': {
-              gradient: 'from-[#F59E0B] to-[#EC4899]',
-              shadow: 'shadow-[#F59E0B]/30'
-            },
-            'from-indigo-500 to-purple-500': {
-              gradient: 'from-[#6366F1] to-[#8B5CF6]',
-              shadow: 'shadow-[#6366F1]/30'
-            },
-            'from-violet-500 to-purple-500': {
-              gradient: 'from-[#7C3AED] to-[#8B5CF6]',
-              shadow: 'shadow-[#7C3AED]/30'
+            'from-cyan-500 to-teal-600': {
+              gradient: 'from-[#06B6D4] to-[#0D9488]',
+              shadow: 'shadow-[#06B6D4]/30'
             },
           };
 
-          const colorTheme = colorMap[step.color] || { gradient: 'from-[#3AB8FF] to-[#00CFFF]', shadow: 'shadow-[#3AB8FF]/30' };
+          const colorTheme = colorMap[step.color] || { gradient: 'from-[#06B6D4] to-[#0D9488]', shadow: 'shadow-[#06B6D4]/30' };
 
           return (
             <button

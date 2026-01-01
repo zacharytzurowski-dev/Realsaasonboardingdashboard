@@ -148,11 +148,11 @@ export function PaidMarketingPage() {
         </div>
 
         {/* Thumbtack */}
-        <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#8B5CF6]/20 transition-all duration-300 hover:-translate-y-1">
+        <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#06B6D4]/20 transition-all duration-300 hover:-translate-y-1">
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#8B5CF6] to-[#EC4899] rounded-2xl flex items-center justify-center shadow-lg shadow-[#8B5CF6]/50">
+              <div className="w-12 h-12 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#06B6D4]/50">
                 <Pin className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -166,8 +166,8 @@ export function PaidMarketingPage() {
                 Active
               </div>
             ) : (
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#8B5CF6]/20 text-[#8B5CF6] text-sm border border-[#8B5CF6]/30">
-                <div className="w-2 h-2 bg-[#8B5CF6] rounded-full mr-2 animate-pulse shadow-lg shadow-[#8B5CF6]/50"></div>
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#06B6D4]/20 text-[#06B6D4] text-sm border border-[#06B6D4]/30">
+                <div className="w-2 h-2 bg-[#06B6D4] rounded-full mr-2 animate-pulse shadow-lg shadow-[#06B6D4]/50"></div>
                 Optimizing
               </div>
             )}
@@ -206,7 +206,7 @@ export function PaidMarketingPage() {
             href="https://www.thumbtack.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group/btn flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#8B5CF6] to-[#EC4899] text-white px-6 py-3 rounded-2xl hover:shadow-xl hover:shadow-[#8B5CF6]/40 hover:-translate-y-0.5 transition-all shadow-md shadow-[#8B5CF6]/30 font-medium"
+            className="group/btn flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#06B6D4] to-[#0D9488] text-white px-6 py-3 rounded-2xl hover:shadow-xl hover:shadow-[#06B6D4]/40 hover:-translate-y-0.5 transition-all shadow-md shadow-[#06B6D4]/30 font-medium"
           >
             <span>Open Thumbtack</span>
             <ExternalLink className="w-4 h-4 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
