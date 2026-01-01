@@ -100,8 +100,12 @@ export interface Step5FormData {
   hasInstagram: string
   instagramUrl: string
   hasNextdoor: string
+  nextdoorEmail: string
+  nextdoorPassword: string
   hasYelp: string
   yelpUrl: string
+  yelpEmail: string
+  yelpPassword: string
   hasCRM: string
   crmName: string
 }

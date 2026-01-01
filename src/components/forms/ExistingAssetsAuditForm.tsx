@@ -39,8 +39,12 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
   const [hasInstagram, setHasInstagram] = useState('');
   const [instagramUrl, setInstagramUrl] = useState('');
   const [hasNextdoor, setHasNextdoor] = useState('');
+  const [nextdoorEmail, setNextdoorEmail] = useState('');
+  const [nextdoorPassword, setNextdoorPassword] = useState('');
   const [hasYelp, setHasYelp] = useState('');
   const [yelpUrl, setYelpUrl] = useState('');
+  const [yelpEmail, setYelpEmail] = useState('');
+  const [yelpPassword, setYelpPassword] = useState('');
   const [hasCRM, setHasCRM] = useState('');
   const [crmName, setCrmName] = useState('');
 
@@ -67,8 +71,12 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
       setHasInstagram(existingData.hasInstagram || '');
       setInstagramUrl(existingData.instagramUrl || '');
       setHasNextdoor(existingData.hasNextdoor || '');
+      setNextdoorEmail(existingData.nextdoorEmail || '');
+      setNextdoorPassword(existingData.nextdoorPassword || '');
       setHasYelp(existingData.hasYelp || '');
       setYelpUrl(existingData.yelpUrl || '');
+      setYelpEmail(existingData.yelpEmail || '');
+      setYelpPassword(existingData.yelpPassword || '');
       setHasCRM(existingData.hasCRM || '');
       setCrmName(existingData.crmName || '');
     }
@@ -97,8 +105,12 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
       hasInstagram,
       instagramUrl,
       hasNextdoor,
+      nextdoorEmail,
+      nextdoorPassword,
       hasYelp,
       yelpUrl,
+      yelpEmail,
+      yelpPassword,
       hasCRM,
       crmName,
     };
@@ -170,7 +182,6 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
                   <option value="">Select...</option>
                   <option value="no">No</option>
                   <option value="yes-replace">Yes - Replace it</option>
-                  <option value="yes-keep">Yes - Keep it</option>
                 </select>
               </div>
 
@@ -409,45 +420,81 @@ export function ExistingAssetsAuditForm({ onBack, onSave }: ExistingAssetsAuditF
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className={labelClasses}>Nextdoor Account?</label>
-                  <div className="flex gap-4">
-                    <button type="button" onClick={() => setHasNextdoor('yes')}
-                      className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasNextdoor === 'yes' ? 'bg-[#10B981]/20 border-[#10B981] text-[#10B981]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
-                      Yes
-                    </button>
-                    <button type="button" onClick={() => setHasNextdoor('no')}
-                      className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasNextdoor === 'no' ? 'bg-[#0D1114] border-[#293038] text-[#94A3B8]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
-                      No
-                    </button>
+              <div>
+                <label className={labelClasses}>Nextdoor Account?</label>
+                <div className="flex gap-4">
+                  <button type="button" onClick={() => setHasNextdoor('yes')}
+                    className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasNextdoor === 'yes' ? 'bg-[#10B981]/20 border-[#10B981] text-[#10B981]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
+                    Yes
+                  </button>
+                  <button type="button" onClick={() => setHasNextdoor('no')}
+                    className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasNextdoor === 'no' ? 'bg-[#EF4444]/20 border-[#EF4444] text-[#EF4444]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
+                    No
+                  </button>
+                </div>
+              </div>
+
+              {hasNextdoor === 'yes' && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className={labelClasses}>Nextdoor Email</label>
+                    <input
+                      type="email"
+                      placeholder="email@example.com"
+                      className={inputClasses}
+                      value={nextdoorEmail}
+                      onChange={(e) => setNextdoorEmail(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className={labelClasses}>Nextdoor Password</label>
+                    <input
+                      type="text"
+                      placeholder="Password"
+                      className={inputClasses}
+                      value={nextdoorPassword}
+                      onChange={(e) => setNextdoorPassword(e.target.value)}
+                    />
                   </div>
                 </div>
-                <div>
-                  <label className={labelClasses}>Yelp Page?</label>
-                  <div className="flex gap-4">
-                    <button type="button" onClick={() => setHasYelp('yes')}
-                      className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasYelp === 'yes' ? 'bg-[#10B981]/20 border-[#10B981] text-[#10B981]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
-                      Yes
-                    </button>
-                    <button type="button" onClick={() => setHasYelp('no')}
-                      className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasYelp === 'no' ? 'bg-[#0D1114] border-[#293038] text-[#94A3B8]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
-                      No
-                    </button>
-                  </div>
+              )}
+
+              <div>
+                <label className={labelClasses}>Yelp Page?</label>
+                <div className="flex gap-4">
+                  <button type="button" onClick={() => setHasYelp('yes')}
+                    className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasYelp === 'yes' ? 'bg-[#10B981]/20 border-[#10B981] text-[#10B981]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
+                    Yes
+                  </button>
+                  <button type="button" onClick={() => setHasYelp('no')}
+                    className={`flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-all ${hasYelp === 'no' ? 'bg-[#EF4444]/20 border-[#EF4444] text-[#EF4444]' : 'bg-[#0D1114] border-[#293038] text-[#94A3B8]'}`}>
+                    No
+                  </button>
                 </div>
               </div>
 
               {hasYelp === 'yes' && (
-                <div>
-                  <label className={labelClasses}>Yelp Page URL</label>
-                  <input
-                    type="url"
-                    placeholder="https://yelp.com/..."
-                    className={inputClasses}
-                    value={yelpUrl}
-                    onChange={(e) => setYelpUrl(e.target.value)}
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className={labelClasses}>Yelp Email</label>
+                    <input
+                      type="email"
+                      placeholder="email@example.com"
+                      className={inputClasses}
+                      value={yelpEmail}
+                      onChange={(e) => setYelpEmail(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className={labelClasses}>Yelp Password</label>
+                    <input
+                      type="text"
+                      placeholder="Password"
+                      className={inputClasses}
+                      value={yelpPassword}
+                      onChange={(e) => setYelpPassword(e.target.value)}
+                    />
+                  </div>
                 </div>
               )}
 
