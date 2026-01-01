@@ -47,7 +47,7 @@ export function WebsitePage() {
               </div>
               
               <div className="space-y-3">
-                <p className="text-[#94A3B8]">Your website draft is ready for review. Preview the design and provide feedback.</p>
+                <p className="text-[#94A3B8]">View and track your high-converting SEO-optimized website built to book clients...</p>
                 <div className="flex items-center gap-4 text-sm text-[#94A3B8]">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
