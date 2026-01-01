@@ -135,7 +135,11 @@ export function WebsitePage() {
             </div>
             <div className="flex items-center justify-between py-3">
               <span className="text-[#94A3B8]">Last Updated</span>
-              <span className="text-[#E8F1FF]">Dec 5, 2025</span>
+              {systemStatus === 'active' ? (
+                <span className="text-[#E8F1FF]">Today</span>
+              ) : (
+                <span className="text-[#E8F1FF]">Dec 5, 2025</span>
+              )}
             </div>
           </div>
         </div>
@@ -174,11 +178,19 @@ export function WebsitePage() {
           <div className="space-y-4">
             <div className="flex items-center justify-between py-3 border-b border-[#293038]">
               <span className="text-[#94A3B8]">Pages Written</span>
-              <span className="text-[#E8F1FF]">5 of 8</span>
+              {systemStatus === 'active' ? (
+                <span className="text-[#10B981] flex items-center gap-1">Completed <Check className="w-3 h-3" /></span>
+              ) : (
+                <span className="text-[#E8F1FF]">5 of 8</span>
+              )}
             </div>
             <div className="flex items-center justify-between py-3 border-b border-[#293038]">
               <span className="text-[#94A3B8]">SEO Score</span>
-              <span className="text-[#E8F1FF]">78/100</span>
+              {systemStatus === 'active' ? (
+                <span className="text-[#10B981] flex items-center gap-1">Active <Check className="w-3 h-3" /></span>
+              ) : (
+                <span className="text-[#E8F1FF]">78/100</span>
+              )}
             </div>
             <div className="flex items-center justify-between py-3">
               <span className="text-[#94A3B8]">Images Added</span>
@@ -221,15 +233,27 @@ export function WebsitePage() {
           <div className="space-y-4">
             <div className="flex items-center justify-between py-3 border-b border-[#293038]">
               <span className="text-[#94A3B8]">Launch Date</span>
-              <span className="text-[#E8F1FF]">Dec 18, 2025</span>
+              {systemStatus === 'active' ? (
+                <span className="text-[#10B981] flex items-center gap-1">Completed <Check className="w-3 h-3" /></span>
+              ) : (
+                <span className="text-[#E8F1FF]">Dec 18, 2025</span>
+              )}
             </div>
             <div className="flex items-center justify-between py-3 border-b border-[#293038]">
               <span className="text-[#94A3B8]">Readiness Score</span>
-              <span className="text-[#E8F1FF]">65/100</span>
+              {systemStatus === 'active' ? (
+                <span className="text-[#E8F1FF]">100/100</span>
+              ) : (
+                <span className="text-[#E8F1FF]">65/100</span>
+              )}
             </div>
             <div className="flex items-center justify-between py-3">
               <span className="text-[#94A3B8]">Days Until Launch</span>
-              <span className="text-[#E8F1FF]">8 days</span>
+              {systemStatus === 'active' ? (
+                <span className="text-[#10B981] flex items-center gap-1">Launched <Check className="w-3 h-3" /></span>
+              ) : (
+                <span className="text-[#E8F1FF]">8 days</span>
+              )}
             </div>
           </div>
         </div>
