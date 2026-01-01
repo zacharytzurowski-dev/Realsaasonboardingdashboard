@@ -105,8 +105,8 @@ export function WebsitePage() {
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-[#10B981]/10 rounded-xl flex items-center justify-center border border-[#10B981]/30">
-                <Sparkles className="w-6 h-6 text-[#10B981]" />
+              <div className="w-12 h-12 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-xl flex items-center justify-center shadow-lg shadow-[#3B82F6]/50">
+                <Sparkles className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-[#E8F1FF]">Design</h3>
             </div>
@@ -156,8 +156,8 @@ export function WebsitePage() {
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-[#3B82F6]/10 rounded-xl flex items-center justify-center border border-[#3B82F6]/30">
-                <FileText className="w-6 h-6 text-[#3B82F6]" />
+              <div className="w-12 h-12 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-xl flex items-center justify-center shadow-lg shadow-[#3B82F6]/50">
+                <FileText className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-[#E8F1FF]">Content</h3>
             </div>
@@ -211,8 +211,8 @@ export function WebsitePage() {
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-[#06B6D4]/10 rounded-xl flex items-center justify-center border border-[#06B6D4]/30">
-                <Zap className="w-6 h-6 text-[#06B6D4]" />
+              <div className="w-12 h-12 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-xl flex items-center justify-center shadow-lg shadow-[#3B82F6]/50">
+                <Zap className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-[#E8F1FF]">Launch</h3>
             </div>
