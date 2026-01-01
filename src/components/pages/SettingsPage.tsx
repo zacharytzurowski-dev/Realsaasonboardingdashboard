@@ -1,11 +1,34 @@
+import { useState } from 'react';
 import { User, Lock, CreditCard, Save, X, ChevronRight, Mail, Phone, Building, Wallet, Calendar, CheckCircle, Receipt } from 'lucide-react';
 import { PageHero } from '../PageHero';
 import { useProfile } from '../../contexts/ProfileContext';
 import { useAuth } from '../../contexts/AuthContext';
+import { supabase } from '../../lib/supabase';
 
 export function SettingsPage() {
   const { profile, formData } = useProfile();
   const { user } = useAuth();
+  const [passwordResetSent, setPasswordResetSent] = useState(false);
+  const [passwordResetLoading, setPasswordResetLoading] = useState(false);
+
+  const handlePasswordReset = async () => {
+    if (!user?.email) return;
+
+    setPasswordResetLoading(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(user.email);
+      if (error) {
+        alert('Error sending password reset email: ' + error.message);
+      } else {
+        setPasswordResetSent(true);
+        alert('Password reset email sent! Check your inbox.');
+      }
+    } catch (err) {
+      alert('An error occurred. Please try again.');
+    } finally {
+      setPasswordResetLoading(false);
+    }
+  };
 
   // Get real user data with fallbacks
   const fullName = profile?.full_name || user?.user_metadata?.full_name || 'Not provided';
@@ -127,7 +150,10 @@ export function SettingsPage() {
           {/* Security Options Grid */}
           <div className="grid grid-cols-1 gap-4">
             {/* Change Password */}
-            <button className="group relative p-5 rounded-2xl bg-[#0A0A0A] border border-[#2A2B2E]/50 hover:border-[#10B981]/40 transition-all text-left hover:-translate-y-1"
+            <button
+              onClick={handlePasswordReset}
+              disabled={passwordResetLoading || passwordResetSent}
+              className="group relative p-5 rounded-2xl bg-[#0A0A0A] border border-[#2A2B2E]/50 hover:border-[#10B981]/40 transition-all text-left hover:-translate-y-1 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
               style={{
                 boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.02)'
               }}
@@ -137,8 +163,12 @@ export function SettingsPage() {
                 <Lock className="w-5 h-5 text-[#10B981]" />
                 <ChevronRight className="w-4 h-4 text-[#8B8D98] opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-              <p className="relative text-white mb-1">Change Password</p>
-              <p className="relative text-[#8B8D98] text-sm">Update your password</p>
+              <p className="relative text-white mb-1">
+                {passwordResetLoading ? 'Sending...' : passwordResetSent ? 'Email Sent ✓' : 'Change Password'}
+              </p>
+              <p className="relative text-[#8B8D98] text-sm">
+                {passwordResetSent ? 'Check your inbox for reset link' : 'Send password reset email'}
+              </p>
             </button>
           </div>
         </div>
