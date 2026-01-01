@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Home, CheckCircle, Globe, DollarSign, TrendingUp, Settings, Menu, X, ExternalLink } from 'lucide-react';
+import { Home, CheckCircle, Globe, DollarSign, TrendingUp, Settings, Menu, X, ExternalLink, BookOpen } from 'lucide-react';
 import { useProfile } from '../contexts/ProfileContext';
 import { useIntercom } from '../contexts/IntercomContext';
 
@@ -20,7 +20,6 @@ export function Sidebar() {
     { icon: Globe, label: 'Website', page: 'website' },
     { icon: DollarSign, label: 'Paid Marketing', page: 'paid-marketing' },
     { icon: TrendingUp, label: 'Organic Marketing', page: 'organic-marketing' },
-    { icon: Settings, label: 'Settings', page: 'settings' },
   ];
 
   const handleNavigation = (page: string) => {
@@ -114,6 +113,54 @@ export function Sidebar() {
             >
               <ExternalLink className="w-5 h-5" />
               <span>CRM</span>
+            </button>
+
+            {/* Operator's Guide */}
+            <button
+              onClick={() => handleNavigation('operators-guide')}
+              className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                currentPage === 'operators-guide'
+                  ? 'bg-[#151618] text-white'
+                  : 'text-[#8B8D98] hover:bg-[#151618] hover:text-white'
+              }`}
+              style={currentPage === 'operators-guide' ? {
+                boxShadow: '0 0 20px rgba(0, 217, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+              } : undefined}
+            >
+              {currentPage === 'operators-guide' && (
+                <div
+                  className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-[#00D9FF] rounded-r-full"
+                  style={{
+                    boxShadow: '0 0 10px rgba(0, 217, 255, 0.6)'
+                  }}
+                />
+              )}
+              <BookOpen className="w-5 h-5 relative z-10" />
+              <span className="relative z-10">Operator's Guide</span>
+            </button>
+
+            {/* Settings */}
+            <button
+              onClick={() => handleNavigation('settings')}
+              className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                currentPage === 'settings'
+                  ? 'bg-[#151618] text-white'
+                  : 'text-[#8B8D98] hover:bg-[#151618] hover:text-white'
+              }`}
+              style={currentPage === 'settings' ? {
+                boxShadow: '0 0 20px rgba(0, 217, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+              } : undefined}
+            >
+              {currentPage === 'settings' && (
+                <div
+                  className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-[#00D9FF] rounded-r-full"
+                  style={{
+                    boxShadow: '0 0 10px rgba(0, 217, 255, 0.6)'
+                  }}
+                />
+              )}
+              <Settings className="w-5 h-5 relative z-10" />
+              <span className="relative z-10">Settings</span>
             </button>
           </nav>
 
