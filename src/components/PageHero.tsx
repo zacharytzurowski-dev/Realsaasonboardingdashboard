@@ -5,23 +5,22 @@ interface PageHeroProps {
   subtitle: string;
   icon?: ReactNode;
   iconGradient?: string;
-  shadowColor?: string;
   children?: ReactNode;
 }
 
-// Map gradients to shadow colors
-const getShadowColor = (gradient: string): string => {
-  if (gradient.includes('#6366F1')) return '99, 102, 241'; // Indigo
-  if (gradient.includes('#3B82F6')) return '59, 130, 246'; // Blue
-  if (gradient.includes('#14B8A6')) return '20, 184, 166'; // Teal-500
-  if (gradient.includes('#06B6D4')) return '6, 182, 212'; // Cyan
-  if (gradient.includes('#10B981')) return '16, 185, 129'; // Green
-  if (gradient.includes('#64748B')) return '100, 116, 139'; // Slate
-  return '6, 182, 212'; // Default cyan
+// Map gradients to shadow hex colors for Tailwind classes
+const getShadowHex = (gradient: string): string => {
+  if (gradient.includes('#6366F1')) return '#6366F1'; // Indigo
+  if (gradient.includes('#3B82F6')) return '#3B82F6'; // Blue
+  if (gradient.includes('#14B8A6')) return '#14B8A6'; // Teal-500
+  if (gradient.includes('#06B6D4')) return '#06B6D4'; // Cyan
+  if (gradient.includes('#10B981')) return '#10B981'; // Green
+  if (gradient.includes('#64748B')) return '#64748B'; // Slate
+  return '#06B6D4'; // Default cyan
 };
 
-export function PageHero({ title, subtitle, icon, iconGradient = 'from-[#06B6D4] to-[#0D9488]', shadowColor, children }: PageHeroProps) {
-  const rgb = shadowColor || getShadowColor(iconGradient);
+export function PageHero({ title, subtitle, icon, iconGradient = 'from-[#06B6D4] to-[#0D9488]', children }: PageHeroProps) {
+  const shadowHex = getShadowHex(iconGradient);
 
   return (
     <div className="mb-8">
@@ -36,7 +35,7 @@ export function PageHero({ title, subtitle, icon, iconGradient = 'from-[#06B6D4]
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: `linear-gradient(135deg, rgba(${rgb}, 0.05) 0%, transparent 50%, rgba(${rgb}, 0.03) 100%)`
+            background: `linear-gradient(135deg, ${shadowHex}0D 0%, transparent 50%, ${shadowHex}08 100%)`
           }}
         ></div>
 
@@ -48,12 +47,12 @@ export function PageHero({ title, subtitle, icon, iconGradient = 'from-[#06B6D4]
         />
 
         <div className="relative flex items-center gap-6">
-          {/* Icon with gradient background and dynamic shadow */}
+          {/* Icon with gradient background and colored shadow glow */}
           {icon && (
             <div
-              className={`w-16 h-16 bg-gradient-to-br ${iconGradient} rounded-2xl flex items-center justify-center flex-shrink-0`}
+              className={`w-16 h-16 bg-gradient-to-br ${iconGradient} rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg`}
               style={{
-                boxShadow: `0 8px 24px rgba(${rgb}, 0.4), 0 0 40px rgba(${rgb}, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2)`
+                boxShadow: `0 10px 40px -10px ${shadowHex}80, 0 4px 20px -5px ${shadowHex}60`
               }}
             >
               {icon}

@@ -196,15 +196,15 @@ export function OnboardingPage() {
         {steps.map((step) => {
           const Icon = step.icon;
 
-          // Map colors to dark theme gradients - all teal
+          // Map colors to dark theme gradients - all cyan/teal
           const colorMap: { [key: string]: { gradient: string; shadow: string } } = {
             'from-cyan-500 to-teal-600': {
               gradient: 'from-[#06B6D4] to-[#0D9488]',
-              shadow: 'shadow-[#06B6D4]/30'
+              shadow: 'shadow-[#06B6D4]/50'
             },
           };
 
-          const colorTheme = colorMap[step.color] || { gradient: 'from-[#06B6D4] to-[#0D9488]', shadow: 'shadow-[#06B6D4]/30' };
+          const colorTheme = colorMap[step.color] || { gradient: 'from-[#06B6D4] to-[#0D9488]', shadow: 'shadow-[#06B6D4]/50' };
 
           return (
             <button
@@ -213,8 +213,8 @@ export function OnboardingPage() {
               className="w-full bg-gradient-to-br from-[#1A1D23] to-[#1A1D23] rounded-xl p-6 border border-[#293038] shadow-md hover:shadow-lg hover:border-[#06B6D4]/30 hover:-translate-y-1 transition-all text-left group"
             >
               <div className="flex items-center gap-5">
-                {/* Icon with Vibrant Gradient */}
-                <div className={`w-14 h-14 bg-gradient-to-br ${colorTheme.gradient} rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md ${colorTheme.shadow} group-hover:scale-110 transition-transform`}>
+                {/* Icon with Vibrant Gradient + Glow */}
+                <div className={`w-14 h-14 bg-gradient-to-br ${colorTheme.gradient} rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg ${colorTheme.shadow} group-hover:scale-110 transition-transform`}>
                   <Icon className="w-7 h-7 text-white" />
                 </div>
 
