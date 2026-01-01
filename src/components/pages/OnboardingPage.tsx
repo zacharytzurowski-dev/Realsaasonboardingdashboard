@@ -167,7 +167,7 @@ export function OnboardingPage() {
       {/* Page Hero */}
       <PageHero
         title="Onboarding Checklist"
-        subtitle="Complete these steps to launch your marketing package"
+        subtitle="Complete these steps to launch your system"
         icon={<CheckCircle2 className="w-8 h-8 text-white" />}
         iconGradient="from-[#10B981] to-[#059669]"
       />

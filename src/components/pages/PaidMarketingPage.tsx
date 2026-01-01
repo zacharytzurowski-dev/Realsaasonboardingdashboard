@@ -29,7 +29,7 @@ export function PaidMarketingPage() {
       {/* Page Hero */}
       <PageHero
         title="Paid Marketing"
-        subtitle="Monitor and optimize your paid advertising campaigns"
+        subtitle="View track, and monitor your paid advertising campaigns"
         icon={<TrendingUp className="w-8 h-8 text-white" />}
         iconGradient="from-[#10B981] to-[#059669]"
       />
