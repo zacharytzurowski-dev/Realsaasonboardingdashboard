@@ -19,12 +19,17 @@ declare global {
 }
 
 export function IntercomProvider({ children }: { children: React.ReactNode }) {
+  console.log("INTERCOM PROVIDER MOUNTED");
+
   const { user } = useAuth();
   const { profile } = useProfile();
   const initialized = useRef(false);
 
   useEffect(() => {
+    console.log("INTERCOM useEffect - user:", user?.email, "profile:", profile?.full_name);
+
     if (!user) {
+      console.log("INTERCOM: No user, skipping init");
       // Shutdown Intercom if user logs out
       if (window.Intercom && initialized.current) {
         window.Intercom('shutdown');
@@ -36,6 +41,7 @@ export function IntercomProvider({ children }: { children: React.ReactNode }) {
     // Initialize Intercom with user data
     if (!initialized.current) {
       initialized.current = true;
+      console.log("INTERCOM: Calling Intercom() SDK init with app_id:", INTERCOM_APP_ID);
 
       Intercom({
         app_id: INTERCOM_APP_ID,
@@ -44,6 +50,8 @@ export function IntercomProvider({ children }: { children: React.ReactNode }) {
         name: profile?.full_name || profile?.business_name || user.user_metadata?.full_name || 'User',
         created_at: user.created_at ? Math.floor(new Date(user.created_at).getTime() / 1000) : undefined,
       });
+
+      console.log("INTERCOM: SDK init called successfully");
     } else if (window.Intercom) {
       // Update Intercom if already initialized
       window.Intercom('update', {
