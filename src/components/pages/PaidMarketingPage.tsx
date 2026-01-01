@@ -112,7 +112,7 @@ export function PaidMarketingPage() {
             <div className="flex items-center justify-between py-3 border-b border-[#293038]">
               <span className="text-[#94A3B8]">Setup Status</span>
               {systemStatus === 'active' ? (
-                <span className="text-[#10B981] flex items-center gap-1">Active <Check className="w-3 h-3" /></span>
+                <span className="text-[#E8F1FF] flex items-center gap-1">Active <Check className="w-3 h-3" /></span>
               ) : (
                 <span className="text-[#E8F1FF]">In Progress</span>
               )}
@@ -120,7 +120,7 @@ export function PaidMarketingPage() {
             <div className="flex items-center justify-between py-3 border-b border-[#293038]">
               <span className="text-[#94A3B8]">Background Check</span>
               {systemStatus === 'active' ? (
-                <span className="text-[#10B981] flex items-center gap-1">Passed <Check className="w-3 h-3" /></span>
+                <span className="text-[#E8F1FF] flex items-center gap-1">Passed <Check className="w-3 h-3" /></span>
               ) : (
                 <span className="text-[#E8F1FF]">Pending</span>
               )}
@@ -128,7 +128,7 @@ export function PaidMarketingPage() {
             <div className="flex items-center justify-between py-3">
               <span className="text-[#94A3B8]">Google Guarantee</span>
               {systemStatus === 'active' ? (
-                <span className="text-[#10B981] flex items-center gap-1">Active <Check className="w-3 h-3" /></span>
+                <span className="text-[#E8F1FF] flex items-center gap-1">Active <Check className="w-3 h-3" /></span>
               ) : (
                 <span className="text-[#E8F1FF]">Not Eligible Yet</span>
               )}
@@ -178,7 +178,7 @@ export function PaidMarketingPage() {
             <div className="flex items-center justify-between py-3 border-b border-[#293038]">
               <span className="text-[#94A3B8]">Profile Status</span>
               {systemStatus === 'active' ? (
-                <span className="text-[#10B981] flex items-center gap-1">Active <Check className="w-3 h-3" /></span>
+                <span className="text-[#E8F1FF] flex items-center gap-1">Active <Check className="w-3 h-3" /></span>
               ) : (
                 <span className="text-[#E8F1FF]">Setting Up</span>
               )}
@@ -186,7 +186,7 @@ export function PaidMarketingPage() {
             <div className="flex items-center justify-between py-3 border-b border-[#293038]">
               <span className="text-[#94A3B8]">Response Rate</span>
               {systemStatus === 'active' ? (
-                <span className="text-[#10B981]">Open Thumbtack</span>
+                <span className="text-[#E8F1FF]">Open Thumbtack</span>
               ) : (
                 <span className="text-[#E8F1FF]">--</span>
               )}
@@ -194,7 +194,7 @@ export function PaidMarketingPage() {
             <div className="flex items-center justify-between py-3">
               <span className="text-[#94A3B8]">Avg. Response Time</span>
               {systemStatus === 'active' ? (
-                <span className="text-[#10B981]">Open Thumbtack</span>
+                <span className="text-[#E8F1FF]">Open Thumbtack</span>
               ) : (
                 <span className="text-[#E8F1FF]">--</span>
               )}
