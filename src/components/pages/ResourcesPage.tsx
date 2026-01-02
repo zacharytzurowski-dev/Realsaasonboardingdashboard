@@ -88,8 +88,8 @@ export function ResourcesPage() {
         title="Resources"
         subtitle="Everything you need to succeed"
         icon={<BookOpen className="w-7 h-7 text-white" />}
-        iconGradient="from-[#8B5CF6] to-[#6366F1]"
-        shadowColor="#8B5CF6"
+        gradientFrom="#8B5CF6"
+        gradientTo="#6366F1"
       />
 
       {/* Collapsible Resource Sections */}

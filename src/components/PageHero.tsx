@@ -4,8 +4,8 @@ interface PageHeroProps {
   title: string;
   subtitle: string;
   icon?: ReactNode;
-  iconGradient?: string;
-  shadowColor?: string;
+  gradientFrom?: string;
+  gradientTo?: string;
   children?: ReactNode;
 }
 
@@ -13,17 +13,19 @@ export function PageHero({
   title,
   subtitle,
   icon,
-  iconGradient = 'from-[#00D9FF] to-[#0EA5E9]',
-  shadowColor = '#00D9FF',
+  gradientFrom = '#00D9FF',
+  gradientTo = '#0EA5E9',
   children
 }: PageHeroProps) {
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#293038] shadow-2xl mb-8"
-      style={{ boxShadow: `0 25px 50px -12px ${shadowColor}1a` }}
+    <div
+      className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#293038] shadow-2xl mb-8"
+      style={{ boxShadow: `0 25px 50px -12px ${gradientFrom}1a` }}
     >
-      <div className="absolute inset-0 bg-gradient-to-br pointer-events-none"
+      <div
+        className="absolute inset-0 pointer-events-none"
         style={{
-          background: `linear-gradient(to bottom right, ${shadowColor}0d, transparent)`
+          background: `linear-gradient(to bottom right, ${gradientFrom}0d, ${gradientTo}0d)`
         }}
       ></div>
       <div className="relative p-10">
@@ -31,9 +33,10 @@ export function PageHero({
           {/* Icon with gradient background */}
           {icon && (
             <div
-              className={`w-14 h-14 bg-gradient-to-br ${iconGradient} rounded-2xl flex items-center justify-center flex-shrink-0`}
+              className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
               style={{
-                boxShadow: `0 10px 15px -3px ${shadowColor}80, 0 4px 6px -4px ${shadowColor}80`
+                background: `linear-gradient(to bottom right, ${gradientFrom}, ${gradientTo})`,
+                boxShadow: `0 10px 15px -3px ${gradientFrom}80, 0 4px 6px -4px ${gradientFrom}80`
               }}
             >
               {icon}
