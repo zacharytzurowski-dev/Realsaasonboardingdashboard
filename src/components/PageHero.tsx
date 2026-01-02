@@ -33,7 +33,7 @@ export function PageHero({
           {/* Icon with gradient background */}
           {icon && (
             <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+              className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
               style={{
                 background: `linear-gradient(to bottom right, ${gradientFrom}, ${gradientTo})`,
                 boxShadow: `0 10px 15px -3px ${gradientFrom}80, 0 4px 6px -4px ${gradientFrom}80`
