@@ -25,8 +25,8 @@ export function PaidMarketingPage() {
         title="Paid Marketing"
         subtitle="Monitor and optimize your paid advertising campaigns"
         icon={<TrendingUp className="w-7 h-7 text-white" />}
-        gradientFrom="#10B981"
-        gradientTo="#059669"
+        gradientFrom="#6366F1"
+        gradientTo="#4F46E5"
       />
 
       {/* Google Ads - Hero Header Banner */}
