@@ -30,19 +30,19 @@ export function PaidMarketingPage() {
       />
 
       {/* Google Ads - Hero Header Banner */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#293038] shadow-2xl shadow-[#10B981]/10 mb-8">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#10B981]/5 to-[#059669]/5"></div>
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#293038] shadow-2xl shadow-[#6366F1]/10 mb-8">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#6366F1]/5 to-[#4F46E5]/5"></div>
         <div className="relative p-10">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             {/* Left side - Header and Status */}
             <div className="flex items-start gap-6 flex-1">
-              <div className="w-14 h-14 bg-gradient-to-br from-[#10B981] to-[#059669] rounded-2xl flex items-center justify-center shadow-lg shadow-[#10B981]/50 flex-shrink-0">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#6366F1] to-[#4F46E5] rounded-2xl flex items-center justify-center shadow-lg shadow-[#6366F1]/50 flex-shrink-0">
                 <TrendingUp className="w-7 h-7 text-white" />
               </div>
               <div className="flex-1">
                 <h2 className="text-[#E8F1FF] mb-2">Google Ads</h2>
                 <p className="text-[#94A3B8] mb-3">Real-time performance metrics and campaign insights</p>
-                
+
                 {/* Connection Status Badge */}
                 <div className="inline-flex items-center gap-3 px-4 py-2 rounded-xl bg-[#1A1D23]/60 backdrop-blur-sm border border-[#10B981]/30">
                   <CheckCircle className="w-5 h-5 text-[#10B981]" />
@@ -64,7 +64,7 @@ export function PaidMarketingPage() {
                 href="https://ads.google.com/aw/overview"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#10B981] to-[#059669] text-white shadow-xl shadow-[#10B981]/40 hover:shadow-2xl hover:shadow-[#10B981]/60 hover:-translate-y-0.5 transition-all font-medium"
+                className="group flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#6366F1] to-[#4F46E5] text-white shadow-xl shadow-[#6366F1]/40 hover:shadow-2xl hover:shadow-[#6366F1]/60 hover:-translate-y-0.5 transition-all font-medium"
               >
                 <span>Open Google Ads</span>
                 <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
