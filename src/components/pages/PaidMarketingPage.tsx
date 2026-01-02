@@ -36,7 +36,13 @@ export function PaidMarketingPage() {
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             {/* Left side - Header and Status */}
             <div className="flex items-start gap-6 flex-1">
-              <div className="w-14 h-14 bg-gradient-to-br from-[#6366F1] to-[#4F46E5] rounded-2xl flex items-center justify-center shadow-lg shadow-[#6366F1]/50 flex-shrink-0">
+              <div
+                className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+                style={{
+                  background: 'linear-gradient(to bottom right, #6366F1, #4F46E5)',
+                  boxShadow: '0 10px 15px -3px #6366F180'
+                }}
+              >
                 <TrendingUp className="w-7 h-7 text-white" />
               </div>
               <div className="flex-1">
@@ -81,7 +87,13 @@ export function PaidMarketingPage() {
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#3AB8FF] to-[#5DAEFF] rounded-2xl flex items-center justify-center shadow-lg shadow-[#3AB8FF]/50">
+              <div
+                className="w-12 h-12 rounded-2xl flex items-center justify-center"
+                style={{
+                  background: 'linear-gradient(to bottom right, #3AB8FF, #5DAEFF)',
+                  boxShadow: '0 10px 15px -3px #3AB8FF80'
+                }}
+              >
                 <Megaphone className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -128,7 +140,13 @@ export function PaidMarketingPage() {
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#8B5CF6] to-[#EC4899] rounded-2xl flex items-center justify-center shadow-lg shadow-[#8B5CF6]/50">
+              <div
+                className="w-12 h-12 rounded-2xl flex items-center justify-center"
+                style={{
+                  background: 'linear-gradient(to bottom right, #8B5CF6, #EC4899)',
+                  boxShadow: '0 10px 15px -3px #8B5CF680'
+                }}
+              >
                 <Pin className="w-6 h-6 text-white" />
               </div>
               <div>

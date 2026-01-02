@@ -38,8 +38,9 @@ export function SettingsPage() {
           {/* Header */}
           <div className="flex items-start gap-6 mb-8">
             <div
-              className="w-16 h-16 bg-gradient-to-br from-[#00D9FF] to-[#0EA5E9] rounded-2xl flex items-center justify-center flex-shrink-0"
+              className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
               style={{
+                background: 'linear-gradient(to bottom right, #00D9FF, #0EA5E9)',
                 boxShadow: '0 8px 24px rgba(0, 217, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
               }}
             >
@@ -121,8 +122,9 @@ export function SettingsPage() {
           {/* Header */}
           <div className="flex items-start gap-6 mb-8">
             <div
-              className="w-16 h-16 bg-gradient-to-br from-[#10B981] to-[#059669] rounded-2xl flex items-center justify-center flex-shrink-0"
+              className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
               style={{
+                background: 'linear-gradient(to bottom right, #10B981, #059669)',
                 boxShadow: '0 8px 24px rgba(16, 185, 129, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
               }}
             >
@@ -167,8 +169,9 @@ export function SettingsPage() {
           {/* Header */}
           <div className="flex items-start gap-6 mb-8">
             <div
-              className="w-16 h-16 bg-gradient-to-br from-[#F97316] to-[#EC4899] rounded-2xl flex items-center justify-center flex-shrink-0"
+              className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
               style={{
+                background: 'linear-gradient(to bottom right, #F97316, #EC4899)',
                 boxShadow: '0 8px 24px rgba(249, 115, 22, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
               }}
             >

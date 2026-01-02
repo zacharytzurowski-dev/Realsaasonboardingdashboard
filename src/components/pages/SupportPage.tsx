@@ -10,7 +10,8 @@ export function SupportPage() {
       title: 'Live Chat',
       description: 'Get instant help from our support team',
       availability: 'Available 24/7',
-      color: 'from-[#3AB8FF] to-[#00CFFF]',
+      gradientFrom: '#3AB8FF',
+      gradientTo: '#00CFFF',
       shadowColor: '#3AB8FF',
       action: 'Start Chat',
     },
@@ -19,7 +20,8 @@ export function SupportPage() {
       title: 'Email Support',
       description: 'Send us a detailed message',
       availability: 'Response within 4 hours',
-      color: 'from-[#8B5CF6] to-[#6366F1]',
+      gradientFrom: '#8B5CF6',
+      gradientTo: '#6366F1',
       shadowColor: '#8B5CF6',
       action: 'Send Email',
     },
@@ -28,7 +30,8 @@ export function SupportPage() {
       title: 'Phone Support',
       description: 'Speak directly with a specialist',
       availability: 'Mon-Fri, 9am-6pm EST',
-      color: 'from-[#10B981] to-[#059669]',
+      gradientFrom: '#10B981',
+      gradientTo: '#059669',
       shadowColor: '#10B981',
       action: 'Call Now',
     },
@@ -90,8 +93,9 @@ export function SupportPage() {
               {/* Glowing Icon with Neon Shadow */}
               <div className="relative mb-6">
                 <div
-                  className={`w-20 h-20 bg-gradient-to-br ${option.color} rounded-[20px] flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 duration-300`}
+                  className="w-20 h-20 rounded-[20px] flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 duration-300"
                   style={{
+                    background: `linear-gradient(to bottom right, ${option.gradientFrom}, ${option.gradientTo})`,
                     boxShadow: `0 20px 60px -10px ${option.shadowColor}60, 0 0 40px ${option.shadowColor}20`,
                   }}
                 >
@@ -112,8 +116,9 @@ export function SupportPage() {
 
                 {/* LaunchOS Gradient Button */}
                 <button
-                  className={`group/btn w-full bg-gradient-to-r ${option.color} text-white px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all font-medium`}
+                  className="group/btn w-full text-white px-6 py-4 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all font-medium"
                   style={{
+                    background: `linear-gradient(to right, ${option.gradientFrom}, ${option.gradientTo})`,
                     boxShadow: `0 10px 30px -5px ${option.shadowColor}40`,
                   }}
                   onMouseEnter={(e) => {
@@ -194,8 +199,9 @@ export function SupportPage() {
           <div className="flex items-center gap-6">
             {/* Glowing Red/Pink Icon */}
             <div
-              className="w-16 h-16 bg-gradient-to-br from-[#EF4444] to-[#EC4899] rounded-2xl flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 duration-300"
+              className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 duration-300"
               style={{
+                background: 'linear-gradient(to bottom right, #EF4444, #EC4899)',
                 boxShadow: '0 20px 60px -10px #EF444460, 0 0 40px #EF444420',
               }}
             >

@@ -6,7 +6,8 @@ interface ResourceSection {
   icon: any;
   title: string;
   description: string;
-  color: string;
+  gradientFrom: string;
+  gradientTo: string;
   shadowColor: string;
   items: { name: string; url?: string }[];
 }
@@ -27,7 +28,8 @@ export function ResourcesPage() {
       icon: Video,
       title: 'Video Tutorials',
       description: 'Learn how to use your dashboard and manage your marketing',
-      color: 'from-[#EF4444] to-[#EC4899]',
+      gradientFrom: '#EF4444',
+      gradientTo: '#EC4899',
       shadowColor: '#EF4444',
       items: [
         { name: 'Dashboard Overview', url: '#' },
@@ -41,7 +43,8 @@ export function ResourcesPage() {
       icon: FileText,
       title: 'Documentation',
       description: 'Step-by-step guides and best practices',
-      color: 'from-[#3AB8FF] to-[#00CFFF]',
+      gradientFrom: '#3AB8FF',
+      gradientTo: '#00CFFF',
       shadowColor: '#3AB8FF',
       items: [
         { name: 'Getting Started Guide', url: '#' },
@@ -55,7 +58,8 @@ export function ResourcesPage() {
       icon: Download,
       title: 'Downloads',
       description: 'Brand assets and marketing materials',
-      color: 'from-[#8B5CF6] to-[#6366F1]',
+      gradientFrom: '#8B5CF6',
+      gradientTo: '#6366F1',
       shadowColor: '#8B5CF6',
       items: [
         { name: 'Logo Files (ZIP)', url: '#' },
@@ -69,7 +73,8 @@ export function ResourcesPage() {
       icon: BookOpen,
       title: 'Knowledge Base',
       description: 'Common questions and troubleshooting',
-      color: 'from-[#10B981] to-[#059669]',
+      gradientFrom: '#10B981',
+      gradientTo: '#059669',
       shadowColor: '#10B981',
       items: [
         { name: 'How to Update My Profile', url: '#' },
@@ -112,8 +117,12 @@ export function ResourcesPage() {
               >
                 <div className="flex items-center gap-6">
                   {/* Colored Icon */}
-                  <div className={`w-16 h-16 bg-gradient-to-br ${resource.color} rounded-2xl flex items-center justify-center shadow-lg transition-transform group-hover:scale-110 duration-300`}
-                    style={{ boxShadow: `0 10px 30px -5px ${resource.shadowColor}40` }}
+                  <div
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg transition-transform group-hover:scale-110 duration-300"
+                    style={{
+                      background: `linear-gradient(to bottom right, ${resource.gradientFrom}, ${resource.gradientTo})`,
+                      boxShadow: `0 10px 30px -5px ${resource.shadowColor}40`
+                    }}
                   >
                     <Icon className="w-8 h-8 text-white" />
                   </div>
@@ -201,7 +210,13 @@ export function ResourcesPage() {
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             {/* Left side */}
             <div className="flex items-start gap-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#10B981] to-[#059669] rounded-2xl flex items-center justify-center shadow-lg shadow-[#10B981]/50 flex-shrink-0">
+              <div
+                className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
+                style={{
+                  background: 'linear-gradient(to bottom right, #10B981, #059669)',
+                  boxShadow: '0 10px 15px -3px #10B98180'
+                }}
+              >
                 <BookOpen className="w-8 h-8 text-white" />
               </div>
               <div>

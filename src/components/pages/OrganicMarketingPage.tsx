@@ -59,7 +59,13 @@ export function OrganicMarketingPage() {
                 <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
                   {/* Left side - Header and Status */}
                   <div className="flex items-start gap-6 flex-1">
-                    <div className="w-14 h-14 bg-gradient-to-br from-[#F59E0B] to-[#D97706] rounded-2xl flex items-center justify-center shadow-lg shadow-[#F59E0B]/50 flex-shrink-0">
+                    <div
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+                      style={{
+                        background: 'linear-gradient(to bottom right, #14B8A6, #0D9488)',
+                        boxShadow: '0 10px 15px -3px #14B8A680'
+                      }}
+                    >
                       <MapPin className="w-7 h-7 text-white" />
                     </div>
                     <div className="flex-1">
@@ -164,7 +170,13 @@ export function OrganicMarketingPage() {
             <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/3 to-transparent"></div>
             <div className="relative">
               <div className="flex items-start gap-6 mb-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#64748B] to-[#475569] rounded-2xl flex items-center justify-center shadow-lg shadow-[#64748B]/30 flex-shrink-0">
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+                  style={{
+                    background: 'linear-gradient(to bottom right, #64748B, #475569)',
+                    boxShadow: '0 10px 15px -3px #64748B4d'
+                  }}
+                >
                   <MapPin className="w-7 h-7 text-white" />
                 </div>
                 <div className="flex-1">
@@ -211,7 +223,13 @@ export function OrganicMarketingPage() {
             <div className="absolute inset-0 bg-gradient-to-br from-[#EF4444]/5 to-transparent"></div>
             <div className="relative">
               <div className="flex items-start gap-6 mb-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#EF4444] to-[#DC2626] rounded-2xl flex items-center justify-center shadow-lg shadow-[#EF4444]/50 flex-shrink-0">
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+                  style={{
+                    background: 'linear-gradient(to bottom right, #EF4444, #DC2626)',
+                    boxShadow: '0 10px 15px -3px #EF444480'
+                  }}
+                >
                   <AlertCircle className="w-7 h-7 text-white" />
                 </div>
                 <div className="flex-1">
@@ -256,7 +274,13 @@ export function OrganicMarketingPage() {
             <div className="absolute inset-0 bg-gradient-to-br from-[#FBBF24]/5 to-transparent"></div>
             <div className="relative">
               <div className="flex items-start gap-6 mb-6">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#FBBF24] to-[#F59E0B] rounded-2xl flex items-center justify-center shadow-lg shadow-[#FBBF24]/50 flex-shrink-0">
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+                  style={{
+                    background: 'linear-gradient(to bottom right, #FBBF24, #F59E0B)',
+                    boxShadow: '0 10px 15px -3px #FBBF2480'
+                  }}
+                >
                   <Clock className="w-7 h-7 text-white" />
                 </div>
                 <div className="flex-1">
@@ -302,7 +326,13 @@ export function OrganicMarketingPage() {
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#3AB8FF] to-[#6366F1] rounded-2xl flex items-center justify-center shadow-lg shadow-[#3AB8FF]/50">
+              <div
+                className="w-12 h-12 rounded-2xl flex items-center justify-center"
+                style={{
+                  background: 'linear-gradient(to bottom right, #3AB8FF, #6366F1)',
+                  boxShadow: '0 10px 15px -3px #3AB8FF80'
+                }}
+              >
                 <Search className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -346,7 +376,13 @@ export function OrganicMarketingPage() {
           {/* Header */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#10B981] to-[#059669] rounded-2xl flex items-center justify-center shadow-lg shadow-[#10B981]/50">
+              <div
+                className="w-12 h-12 rounded-2xl flex items-center justify-center"
+                style={{
+                  background: 'linear-gradient(to bottom right, #10B981, #059669)',
+                  boxShadow: '0 10px 15px -3px #10B98180'
+                }}
+              >
                 <Users className="w-6 h-6 text-white" />
               </div>
               <div>

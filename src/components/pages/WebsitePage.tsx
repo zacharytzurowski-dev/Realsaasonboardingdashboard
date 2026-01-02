@@ -36,7 +36,13 @@ export function WebsitePage() {
             {/* Left side - Status Info */}
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-[#3AB8FF] to-[#5DAEFF] rounded-2xl flex items-center justify-center shadow-lg shadow-[#3AB8FF]/50">
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                  style={{
+                    background: 'linear-gradient(to bottom right, #3B82F6, #2563EB)',
+                    boxShadow: '0 10px 15px -3px #3B82F680'
+                  }}
+                >
                   <Globe className="w-7 h-7 text-white" />
                 </div>
                 <div>
@@ -101,7 +107,13 @@ export function WebsitePage() {
         <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#10B981]/20 transition-all duration-300 hover:-translate-y-1">
           {/* Status indicator */}
           <div className="absolute top-6 right-6">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#10B981] to-[#059669] rounded-xl flex items-center justify-center shadow-lg shadow-[#10B981]/50">
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center"
+              style={{
+                background: 'linear-gradient(to bottom right, #3B82F6, #2563EB)',
+                boxShadow: '0 10px 15px -3px #3B82F680'
+              }}
+            >
               <Check className="w-5 h-5 text-white" />
             </div>
           </div>
@@ -141,7 +153,13 @@ export function WebsitePage() {
         <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#3AB8FF]/20 transition-all duration-300 hover:-translate-y-1">
           {/* Status indicator */}
           <div className="absolute top-6 right-6">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#3AB8FF] to-[#5DAEFF] rounded-xl flex items-center justify-center shadow-lg shadow-[#3AB8FF]/50">
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center"
+              style={{
+                background: 'linear-gradient(to bottom right, #3B82F6, #2563EB)',
+                boxShadow: '0 10px 15px -3px #3B82F680'
+              }}
+            >
               <Edit className="w-5 h-5 text-white" />
             </div>
           </div>
@@ -181,7 +199,13 @@ export function WebsitePage() {
         <div className="group relative bg-[#1A1D23] rounded-[24px] p-8 border border-[#293038] shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-[#8B5CF6]/20 transition-all duration-300 hover:-translate-y-1">
           {/* Status indicator */}
           <div className="absolute top-6 right-6">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED] rounded-xl flex items-center justify-center shadow-lg shadow-[#8B5CF6]/50">
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center"
+              style={{
+                background: 'linear-gradient(to bottom right, #3B82F6, #2563EB)',
+                boxShadow: '0 10px 15px -3px #3B82F680'
+              }}
+            >
               <Clock className="w-5 h-5 text-white" />
             </div>
           </div>

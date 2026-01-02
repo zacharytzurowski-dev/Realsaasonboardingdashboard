@@ -301,7 +301,13 @@ export function OnboardingPage() {
       <div className="mt-6 relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#1A1D23] rounded-xl p-6 border border-[#293038] shadow-md">
         <div className="absolute inset-0 bg-gradient-to-br from-[#3AB8FF]/5 to-transparent"></div>
         <div className="relative flex items-start gap-4">
-          <div className="w-12 h-12 bg-gradient-to-br from-[#3AB8FF] to-[#00CFFF] rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-[#3AB8FF]/30">
+          <div
+            className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+            style={{
+              background: 'linear-gradient(to bottom right, #3AB8FF, #00CFFF)',
+              boxShadow: '0 6px 12px -3px #3AB8FF4d'
+            }}
+          >
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
