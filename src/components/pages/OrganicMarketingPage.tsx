@@ -29,7 +29,7 @@ export function OrganicMarketingPage() {
       {/* Page Hero */}
       <div className="mb-8">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 bg-gradient-to-br from-[#14B8A6] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#14B8A6]/50">
+          <div className="w-14 h-14 bg-gradient-to-br from-[#14B8A6] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#14B8A6]/50 flex-shrink-0">
             <MapPin className="w-7 h-7 text-white" />
           </div>
           <div>

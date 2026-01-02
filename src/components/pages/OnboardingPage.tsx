@@ -163,7 +163,7 @@ export function OnboardingPage() {
       {/* Page Hero */}
       <div className="mb-8">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#06B6D4]/50">
+          <div className="w-14 h-14 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#06B6D4]/50 flex-shrink-0">
             <CheckCircle2 className="w-7 h-7 text-white" />
           </div>
           <div>

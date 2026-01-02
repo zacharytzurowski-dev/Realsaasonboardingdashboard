@@ -9,7 +9,7 @@ export function WebsitePage() {
       {/* Page Hero */}
       <div className="mb-8">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-2xl flex items-center justify-center shadow-lg shadow-[#3B82F6]/50">
+          <div className="w-14 h-14 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-2xl flex items-center justify-center shadow-lg shadow-[#3B82F6]/50 flex-shrink-0">
             <Globe className="w-7 h-7 text-white" />
           </div>
           <div>
