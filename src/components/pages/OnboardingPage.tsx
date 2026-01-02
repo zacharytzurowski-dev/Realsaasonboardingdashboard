@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { CheckCircle2, Circle, Building2, Palette, Users, FileText, Megaphone, Database, Clock } from 'lucide-react';
-import { PageHero } from '../PageHero';
 import { BusinessInformationForm } from '../forms/BusinessInformationForm';
 import { BrandGuidelinesForm } from '../forms/BrandGuidelinesForm';
 import { TargetAudienceForm } from '../forms/TargetAudienceForm';
@@ -162,12 +161,17 @@ export function OnboardingPage() {
   return (
     <div>
       {/* Page Hero */}
-      <PageHero
-        title="Onboarding Checklist"
-        subtitle="Complete these steps to launch your marketing package"
-        icon={<CheckCircle2 className="w-8 h-8 text-white" />}
-        iconGradient="from-[#10B981] to-[#059669]"
-      />
+      <div className="mb-8">
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#06B6D4]/50">
+            <CheckCircle2 className="w-7 h-7 text-white" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-semibold text-[#E8F1FF]">Onboarding Checklist</h1>
+            <p className="text-[#94A3B8]">Complete these steps to launch your marketing package</p>
+          </div>
+        </div>
+      </div>
 
       {/* Progress Overview - Neon Blue Progress Bar */}
       <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-[#1A1D23] to-[#1A1D23] border border-[#293038] shadow-md mb-6">

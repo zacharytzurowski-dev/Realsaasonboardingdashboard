@@ -1,16 +1,20 @@
 import { User, Lock, CreditCard, Save, X, ChevronRight, Mail, Phone, Building, Wallet, Calendar, CheckCircle, Receipt } from 'lucide-react';
-import { PageHero } from '../PageHero';
 
 export function SettingsPage() {
   return (
     <div>
       {/* Page Hero */}
-      <PageHero
-        title="Settings"
-        subtitle="Manage your account and preferences"
-        icon={<User className="w-8 h-8 text-white" />}
-        iconGradient="from-[#00D9FF] to-[#0EA5E9]"
-      />
+      <div className="mb-8">
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 bg-gradient-to-br from-[#64748B] to-[#475569] rounded-2xl flex items-center justify-center shadow-lg shadow-[#64748B]/50">
+            <User className="w-7 h-7 text-white" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-semibold text-[#E8F1FF]">Settings</h1>
+            <p className="text-[#94A3B8]">Manage your account and preferences</p>
+          </div>
+        </div>
+      </div>
 
       {/* Profile Settings */}
       <div 

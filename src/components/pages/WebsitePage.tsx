@@ -1,5 +1,4 @@
 import { Globe, ExternalLink, Eye, Edit, Check, Clock, FileText, TrendingUp, Sparkles, Calendar, Zap } from 'lucide-react';
-import { PageHero } from '../PageHero';
 
 export function WebsitePage() {
   // Project data
@@ -8,12 +7,17 @@ export function WebsitePage() {
   return (
     <div>
       {/* Page Hero */}
-      <PageHero
-        title="Your Website"
-        subtitle="Track your website build progress and launch timeline"
-        icon={<Globe className="w-8 h-8 text-white" />}
-        iconGradient="from-[#3AB8FF] to-[#5DAEFF]"
-      />
+      <div className="mb-8">
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-2xl flex items-center justify-center shadow-lg shadow-[#3B82F6]/50">
+            <Globe className="w-7 h-7 text-white" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-semibold text-[#E8F1FF]">Your Website</h1>
+            <p className="text-[#94A3B8]">Track your website build progress and launch timeline</p>
+          </div>
+        </div>
+      </div>
 
       {/* Main Website Status Card */}
       <div className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#293038] shadow-2xl shadow-[#3AB8FF]/10 mb-8">

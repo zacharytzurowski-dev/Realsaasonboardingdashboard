@@ -1,6 +1,5 @@
 import { MapPin, Search, Users, ExternalLink, Star, Eye, Phone, MessageCircle, TrendingUp, AlertCircle, CheckCircle, RefreshCw, Clock, Zap } from 'lucide-react';
 import { useState } from 'react';
-import { PageHero } from '../PageHero';
 
 export function OrganicMarketingPage() {
   // GBP Connection States: 'connected' | 'not-connected' | 'error-permissions' | 'error-not-verified'
@@ -28,12 +27,17 @@ export function OrganicMarketingPage() {
   return (
     <div>
       {/* Page Hero */}
-      <PageHero
-        title="Organic Marketing"
-        subtitle="Grow your online presence organically"
-        icon={<MapPin className="w-8 h-8 text-white" />}
-        iconGradient="from-[#F59E0B] to-[#D97706]"
-      />
+      <div className="mb-8">
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 bg-gradient-to-br from-[#14B8A6] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#14B8A6]/50">
+            <MapPin className="w-7 h-7 text-white" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-semibold text-[#E8F1FF]">Organic Marketing</h1>
+            <p className="text-[#94A3B8]">Grow your online presence organically</p>
+          </div>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Google Business Profile - Connected State */}
