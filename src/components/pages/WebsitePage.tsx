@@ -7,14 +7,17 @@ export function WebsitePage() {
   return (
     <div>
       {/* Page Hero */}
-      <div className="mb-8">
-        <div className="flex items-center gap-4">
-          <div className="w-14 h-14 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-2xl flex items-center justify-center shadow-lg shadow-[#3B82F6]/50 flex-shrink-0">
-            <Globe className="w-7 h-7 text-white" />
-          </div>
-          <div>
-            <h1 className="text-2xl font-semibold text-[#E8F1FF]">Your Website</h1>
-            <p className="text-[#94A3B8]">Track your website build progress and launch timeline</p>
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#293038] shadow-2xl shadow-[#3B82F6]/10 mb-8">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#3B82F6]/5 to-[#2563EB]/5"></div>
+        <div className="relative p-10">
+          <div className="flex items-start gap-6">
+            <div className="w-14 h-14 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-2xl flex items-center justify-center shadow-lg shadow-[#3B82F6]/50 flex-shrink-0">
+              <Globe className="w-7 h-7 text-white" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-semibold text-[#E8F1FF]">Your Website</h1>
+              <p className="text-[#94A3B8]">Track your website build progress and launch timeline</p>
+            </div>
           </div>
         </div>
       </div>

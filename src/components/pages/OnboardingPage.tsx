@@ -161,14 +161,17 @@ export function OnboardingPage() {
   return (
     <div>
       {/* Page Hero */}
-      <div className="mb-8">
-        <div className="flex items-center gap-4">
-          <div className="w-14 h-14 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#06B6D4]/50 flex-shrink-0">
-            <CheckCircle2 className="w-7 h-7 text-white" />
-          </div>
-          <div>
-            <h1 className="text-2xl font-semibold text-[#E8F1FF]">Onboarding Checklist</h1>
-            <p className="text-[#94A3B8]">Complete these steps to launch your marketing package</p>
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#293038] shadow-2xl shadow-[#06B6D4]/10 mb-8">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/5 to-[#0D9488]/5"></div>
+        <div className="relative p-10">
+          <div className="flex items-start gap-6">
+            <div className="w-14 h-14 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#06B6D4]/50 flex-shrink-0">
+              <CheckCircle2 className="w-7 h-7 text-white" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-semibold text-[#E8F1FF]">Onboarding Checklist</h1>
+              <p className="text-[#94A3B8]">Complete these steps to launch your marketing package</p>
+            </div>
           </div>
         </div>
       </div>

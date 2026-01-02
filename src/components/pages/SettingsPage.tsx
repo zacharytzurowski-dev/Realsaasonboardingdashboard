@@ -4,14 +4,17 @@ export function SettingsPage() {
   return (
     <div>
       {/* Page Hero */}
-      <div className="mb-8">
-        <div className="flex items-center gap-4">
-          <div className="w-14 h-14 bg-gradient-to-br from-[#64748B] to-[#475569] rounded-2xl flex items-center justify-center shadow-lg shadow-[#64748B]/50 flex-shrink-0">
-            <User className="w-7 h-7 text-white" />
-          </div>
-          <div>
-            <h1 className="text-2xl font-semibold text-[#E8F1FF]">Settings</h1>
-            <p className="text-[#94A3B8]">Manage your account and preferences</p>
+      <div className="relative overflow-hidden bg-gradient-to-br from-[#1A1D23] to-[#21262D] rounded-[24px] border border-[#293038] shadow-2xl shadow-[#64748B]/10 mb-8">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#64748B]/5 to-[#475569]/5"></div>
+        <div className="relative p-10">
+          <div className="flex items-start gap-6">
+            <div className="w-14 h-14 bg-gradient-to-br from-[#64748B] to-[#475569] rounded-2xl flex items-center justify-center shadow-lg shadow-[#64748B]/50 flex-shrink-0">
+              <User className="w-7 h-7 text-white" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-semibold text-[#E8F1FF]">Settings</h1>
+              <p className="text-[#94A3B8]">Manage your account and preferences</p>
+            </div>
           </div>
         </div>
       </div>
