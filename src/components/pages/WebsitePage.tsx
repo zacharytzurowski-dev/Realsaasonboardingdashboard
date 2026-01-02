@@ -11,7 +11,13 @@ export function WebsitePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#3B82F6]/5 to-[#2563EB]/5"></div>
         <div className="relative p-10">
           <div className="flex items-start gap-6">
-            <div className="w-14 h-14 bg-gradient-to-br from-[#3B82F6] to-[#2563EB] rounded-2xl flex items-center justify-center shadow-lg shadow-[#3B82F6]/50 flex-shrink-0">
+            <div
+              className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+              style={{
+                background: 'linear-gradient(to bottom right, #3B82F6, #2563EB)',
+                boxShadow: '0 10px 15px -3px #3B82F680'
+              }}
+            >
               <Globe className="w-7 h-7 text-white" />
             </div>
             <div>

@@ -8,7 +8,13 @@ export function SettingsPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#64748B]/5 to-[#475569]/5"></div>
         <div className="relative p-10">
           <div className="flex items-start gap-6">
-            <div className="w-14 h-14 bg-gradient-to-br from-[#64748B] to-[#475569] rounded-2xl flex items-center justify-center shadow-lg shadow-[#64748B]/50 flex-shrink-0">
+            <div
+              className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+              style={{
+                background: 'linear-gradient(to bottom right, #64748B, #475569)',
+                boxShadow: '0 10px 15px -3px #64748B80'
+              }}
+            >
               <User className="w-7 h-7 text-white" />
             </div>
             <div>

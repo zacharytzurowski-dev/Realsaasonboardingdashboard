@@ -165,7 +165,13 @@ export function OnboardingPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/5 to-[#0D9488]/5"></div>
         <div className="relative p-10">
           <div className="flex items-start gap-6">
-            <div className="w-14 h-14 bg-gradient-to-br from-[#06B6D4] to-[#0D9488] rounded-2xl flex items-center justify-center shadow-lg shadow-[#06B6D4]/50 flex-shrink-0">
+            <div
+              className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+              style={{
+                background: 'linear-gradient(to bottom right, #06B6D4, #0D9488)',
+                boxShadow: '0 10px 15px -3px #06B6D480'
+              }}
+            >
               <CheckCircle2 className="w-7 h-7 text-white" />
             </div>
             <div>
