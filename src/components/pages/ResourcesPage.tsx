@@ -87,8 +87,9 @@ export function ResourcesPage() {
       <PageHero
         title="Resources"
         subtitle="Everything you need to succeed"
-        icon={<BookOpen className="w-8 h-8 text-white" />}
+        icon={<BookOpen className="w-7 h-7 text-white" />}
         iconGradient="from-[#8B5CF6] to-[#6366F1]"
+        shadowColor="#8B5CF6"
       />
 
       {/* Collapsible Resource Sections */}
