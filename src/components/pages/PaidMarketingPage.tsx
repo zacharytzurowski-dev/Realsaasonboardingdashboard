@@ -24,8 +24,9 @@ export function PaidMarketingPage() {
       <PageHero
         title="Paid Marketing"
         subtitle="Monitor and optimize your paid advertising campaigns"
-        icon={<TrendingUp className="w-8 h-8 text-white" />}
+        icon={<TrendingUp className="w-7 h-7 text-white" />}
         iconGradient="from-[#10B981] to-[#059669]"
+        shadowColor="#10B981"
       />
 
       {/* Google Ads - Hero Header Banner */}
