@@ -1,4 +1,4 @@
-import { Clock, CheckCircle, Sparkles, Globe, TrendingUp, Zap, Rocket, ArrowRight, Palette, FileText, Calendar, Database, Star, Loader2, Settings, HelpCircle, ChevronDown, Check } from 'lucide-react';
+import { Clock, CheckCircle, Sparkles, Globe, TrendingUp, Zap, Rocket, ArrowRight, Palette, FileText, Calendar, Database, Star, Loader2, Settings, HelpCircle, ChevronDown, Check, LogOut } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeploymentCountdown } from '../DeploymentCountdown';
@@ -14,15 +14,13 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
   const { profile, onboardingSubmitted, systemStatus, formData } = useProfile();
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { showIntercom } = useIntercom();
 
-  // Owner information from profile or auth user
   const ownerName = profile?.full_name || user?.user_metadata?.full_name || 'User';
   const businessName = formData?.step1_business_info?.businessName || profile?.business_name || 'Your Business';
 
-  // Activity ticker messages
   const activities = [
     { icon: Zap, message: 'Deploying automation workflows...', color: '#14B8A6' },
     { icon: Palette, message: 'Importing brand assets...', color: '#0D9488' },
@@ -41,110 +39,84 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
     return () => clearInterval(activityTimer);
   }, []);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target as Node)) {
         setIsProfileDropdownOpen(false);
       }
     };
-
-    if (isProfileDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    if (isProfileDropdownOpen) document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isProfileDropdownOpen]);
+
+  const handleLogout = async () => {
+    setIsProfileDropdownOpen(false);
+    await signOut();
+    navigate('/login');
+  };
 
   return (
     <div className="min-h-screen relative">
+      {/* Grid/Plaid Background */}
+      <div 
+        className="fixed inset-0 pointer-events-none z-0" 
+        style={{ 
+          marginLeft: '256px',
+          opacity: 0.05,
+          backgroundImage: 'linear-gradient(90deg, #14B8A6 1px, transparent 1px), linear-gradient(0deg, #14B8A6 1px, transparent 1px)', 
+          backgroundSize: '60px 60px' 
+        }}
+      ></div>
+      
       <div className="relative z-10 max-w-[1600px] mx-auto space-y-8">
         
-        {/* Top Header Section - Welcome Hero */}
+        {/* Top Header Section */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-5">
-            {/* Logo with Glow */}
-            <img src="data:image/webp;base64,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" alt="LaunchOS" className="h-12 w-12" />
-            
-            {/* Header Text */}
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(145deg, #5eead4 0%, #2dd4bf 20%, #14B8A6 45%, #0D9488 65%, #0f766e 80%, #115e59 100%)', boxShadow: '0 10px 30px -5px rgba(20, 184, 166, 0.5), inset 0 2px 3px rgba(255,255,255,0.3), inset 0 -3px 6px rgba(17, 94, 89, 0.4)' }}>
+              <Rocket className="w-7 h-7 text-white drop-shadow-md" />
+            </div>
             <div>
-              <h1 className="text-3xl text-white tracking-tight">
-                Welcome back, <span className="bg-gradient-to-r from-[#14B8A6] to-[#0D9488] bg-clip-text text-transparent">{ownerName}</span>
+              <h1 className="text-3xl text-[#E8F1FF] tracking-tight">
+                Welcome back, <span style={{ background: "linear-gradient(90deg, #5eead4, #2dd4bf, #14B8A6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", filter: "drop-shadow(0 0 8px rgba(20,184,166,0.4))" }}>{ownerName}</span>
               </h1>
-              <p className="text-[#6B6C7B] mt-2">
-                LaunchOS builds your client acquisition system. Everything runs without you.
-              </p>
+              <p className="text-[#7a8494] mt-2">LaunchOS builds your client acquisition system. Everything runs without you.</p>
             </div>
           </div>
 
           {/* User Profile */}
           <div className="relative" ref={profileDropdownRef}>
-            <button
-              onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-              className="flex items-center gap-3 bg-[#151618] rounded-2xl px-5 py-3 border border-[#2A2B2E]/50 hover:border-[#14B8A6]/30 transition-all"
-              style={{
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
-              }}
-            >
+            <button onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)} className="flex items-center gap-3 rounded-2xl px-5 py-3 border border-[#252a33] hover:border-[#14B8A6]/30 transition-all bg-gradient-to-br from-[#14161a] to-[#1a1d24]" style={{ boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)' }}>
               <div className="text-right">
-                <div className="text-sm text-white">{ownerName}</div>
-                <div className="text-xs text-[#8B8D98]">{businessName}</div>
+                <div className="text-sm text-[#E8F1FF]">{ownerName}</div>
+                <div className="text-xs text-[#7a8494]">{businessName}</div>
               </div>
-              <div
-                className="w-11 h-11 rounded-full bg-gradient-to-br from-[#14B8A6] to-[#0D9488] flex items-center justify-center text-white font-semibold"
-                style={{
-                  boxShadow: '0 4px 16px rgba(20, 184, 166, 0.3)'
-                }}
-              >
+              <div className="w-11 h-11 rounded-full flex items-center justify-center text-white font-semibold" style={{ background: 'linear-gradient(145deg, #5eead4 0%, #2dd4bf 20%, #14B8A6 45%, #0D9488 65%, #0f766e 80%, #115e59 100%)', boxShadow: '0 4px 16px rgba(20, 184, 166, 0.4)' }}>
                 {(profile?.full_name?.[0] || user?.user_metadata?.full_name?.[0] || user?.email?.[0] || 'U').toUpperCase()}
               </div>
-              <ChevronDown className={`w-4 h-4 text-[#8B8D98] transition-transform ${isProfileDropdownOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-4 h-4 text-[#7a8494] transition-transform ${isProfileDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
-            {/* Profile Dropdown Panel */}
             {isProfileDropdownOpen && (
-              <div 
-                className="absolute right-0 top-full mt-3 w-80 bg-[#151618] rounded-2xl border border-[#2A2B2E]/50 overflow-hidden z-50"
-                style={{
-                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(20, 184, 166, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
-                }}
-              >
-                {/* Soft inner glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#14B8A6]/5 via-transparent to-[#0D9488]/5 pointer-events-none"></div>
-
+              <div className="absolute right-0 top-full mt-3 w-80 bg-gradient-to-br from-[#14161a] to-[#1a1d24] rounded-2xl border border-[#252a33] overflow-hidden z-50" style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(20, 184, 166, 0.08)' }}>
+                <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, transparent 50%)' }}></div>
                 <div className="relative p-3 space-y-1">
-                  {/* Edit Account */}
-                  <button
-                    onClick={() => {
-                      setIsProfileDropdownOpen(false);
-                      navigate('/settings');
-                    }}
-                    className="group w-full flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A]/50 border border-[#2A2B2E]/30 hover:border-[#14B8A6]/40 hover:bg-[#151618]/80 transition-all hover:-translate-y-0.5"
-                  >
-                    <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center">
-                      <Settings className="w-5 h-5 text-[#14B8A6]" />
-                    </div>
-                    <div className="flex-1 text-left">
-                      <div className="text-white">Edit Account</div>
-                    </div>
+                  <button onClick={() => { setIsProfileDropdownOpen(false); navigate('/settings'); }} className="group w-full flex items-center gap-4 p-4 rounded-xl border border-[#252a33] hover:border-[#14B8A6]/40 transition-all hover:-translate-y-0.5" style={{ background: 'rgba(15, 17, 21, 0.6)' }}>
+                    <Settings className="w-5 h-5 text-[#14B8A6]" />
+                    <div className="flex-1 text-left"><div className="text-[#E8F1FF]">Edit Account</div></div>
                   </button>
-
-                  {/* Contact Support */}
-                  <button
-                    onClick={() => {
-                      setIsProfileDropdownOpen(false);
-                      showIntercom();
-                    }}
-                    className="group w-full flex items-center gap-4 p-4 rounded-xl bg-[#0A0A0A]/50 border border-[#2A2B2E]/30 hover:border-[#06B6D4]/40 hover:bg-[#151618]/80 transition-all hover:-translate-y-0.5"
-                  >
-                    <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center">
-                      <HelpCircle className="w-5 h-5 text-[#06B6D4]" />
-                    </div>
-                    <div className="flex-1 text-left">
-                      <div className="text-white">Contact Support</div>
-                    </div>
+                  <button onClick={() => { setIsProfileDropdownOpen(false); showIntercom(); }} className="group w-full flex items-center gap-4 p-4 rounded-xl border border-[#252a33] hover:border-[#38bdf8]/40 transition-all hover:-translate-y-0.5" style={{ background: 'rgba(15, 17, 21, 0.6)' }}>
+                    <HelpCircle className="w-5 h-5 text-[#38bdf8]" />
+                    <div className="flex-1 text-left"><div className="text-[#E8F1FF]">Contact Support</div></div>
+                  </button>
+                  
+                  {/* Divider */}
+                  <div className="h-px my-2" style={{ background: 'linear-gradient(to right, transparent, #252a33, transparent)' }}></div>
+                  
+                  {/* Logout Button */}
+                  <button onClick={handleLogout} className="group w-full flex items-center gap-4 p-4 rounded-xl border border-[#252a33] hover:border-[#ef4444]/40 transition-all hover:-translate-y-0.5" style={{ background: 'rgba(15, 17, 21, 0.6)' }}>
+                    <LogOut className="w-5 h-5 text-[#ef4444]" />
+                    <div className="flex-1 text-left"><div className="text-[#E8F1FF]">Log Out</div></div>
                   </button>
                 </div>
               </div>
@@ -153,40 +125,21 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
         </div>
 
         {/* 72-Hour Deployment Progress Module */}
-        <div
-          className="bg-[#151618] rounded-3xl border border-[#2A2B2E]/50 p-8 overflow-hidden relative"
-          style={{
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-[#14B8A6]/5 via-transparent to-[#0D9488]/5 pointer-events-none"></div>
-
-          <div className="relative">
-            <DeploymentCountdown showFullDisplay={true} />
-          </div>
+        <div className="bg-gradient-to-br from-[#14161a] to-[#1a1d24] rounded-3xl border border-[#252a33] p-8 overflow-hidden relative" style={{ boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 10px 30px -10px rgba(20, 184, 166, 0.1)' }}>
+          <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, transparent 50%)' }}></div>
+          <div className="relative"><DeploymentCountdown showFullDisplay={true} /></div>
         </div>
 
         {/* Next Steps Panel */}
-        <div 
-          className="bg-[#151618] rounded-3xl border border-[#2A2B2E]/50 p-8 overflow-hidden relative"
-          style={{
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-[#14B8A6]/5 via-transparent to-[#0D9488]/5 pointer-events-none"></div>
+        <div className="bg-gradient-to-br from-[#14161a] to-[#1a1d24] rounded-3xl border border-[#252a33] p-8 overflow-hidden relative" style={{ boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.6)' }}>
+          <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.03) 0%, transparent 50%)' }}></div>
           
           <div className="relative">
-            {/* Header */}
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl text-white tracking-tight">
-                Next Steps to Activate Your System
-              </h2>
-              <div className="text-sm text-[#8B8D98]">
-                <span className="text-[#14B8A6]">{systemStatus === 'active' ? 5 : 2}</span> of 5 completed
-              </div>
+              <h2 className="text-xl text-[#E8F1FF] tracking-tight">Next Steps to Activate Your System</h2>
+              <div className="text-sm text-[#7a8494]"><span className="text-[#14B8A6]">{systemStatus === 'active' ? 5 : 2}</span> of 5 completed</div>
             </div>
 
-            {/* Step Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
               {[
                 { step: 1, text: 'Upload your business info & brand assets', icon: FileText, completed: true },
@@ -197,93 +150,37 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
               ].map((item) => {
                 const Icon = item.icon;
                 return (
-                  <div 
-                    key={item.step} 
-                    className="group rounded-2xl p-4 transition-all duration-300 hover:shadow-lg relative overflow-hidden border border-[#2A2B2E]/30"
-                    style={{
-                      background: item.completed 
-                        ? 'linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(13, 148, 136, 0.05) 100%)'
-                        : 'transparent',
-                      boxShadow: item.completed ? '0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.03)' : 'none'
-                    }}
-                  >
-                    {/* Hover glow effect */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#14B8A6]/10 to-[#0D9488]/10 blur-xl"></div>
-                    </div>
-                    
+                  <div key={item.step} className="group rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden border border-[#252a33] hover:border-[#14B8A6]/25" style={{ background: item.completed ? 'linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, rgba(13, 148, 136, 0.03) 100%)' : 'rgba(15, 17, 21, 0.5)', boxShadow: '0 10px 30px -10px rgba(0,0,0,0.4)' }}>
                     <div className="relative">
-                      {/* Step Number */}
                       <div className="flex items-center gap-3 mb-3">
-                        <div className="text-2xl text-white tabular-nums relative">
+                        <div className="text-2xl text-[#E8F1FF] tabular-nums relative">
                           {item.step}
-                          {item.completed && (
-                            <CheckCircle className="absolute -top-1 -right-1 w-3 h-3 text-[#14B8A6]" />
-                          )}
+                          {item.completed && <CheckCircle className="absolute -top-1 -right-1 w-3 h-3 text-[#14B8A6]" />}
                         </div>
-                        <Icon className={`w-5 h-5 ${
-                          item.completed ? 'text-[#14B8A6]' : 'text-[#6B6C7B]'
-                        }`} />
+                        <Icon className={`w-5 h-5 ${item.completed ? 'text-[#14B8A6]' : 'text-[#7a8494]'}`} />
                       </div>
-                      
-                      {/* Step Description */}
-                      <p className={`text-xs uppercase tracking-wider mb-2 ${
-                        item.completed ? 'text-[#14B8A6]' : 'text-[#6B6C7B]'
-                      }`}>
-                        Step {item.step}
-                      </p>
-                      <p className={`text-sm leading-relaxed ${
-                        item.completed ? 'text-white' : 'text-[#8B8D98]'
-                      }`}>
-                        {item.text}
-                      </p>
+                      <p className={`text-xs uppercase tracking-wider mb-2 ${item.completed ? 'text-[#14B8A6]' : 'text-[#7a8494]'}`}>Step {item.step}</p>
+                      <p className={`text-sm leading-relaxed ${item.completed ? 'text-[#c5cdd8]' : 'text-[#7a8494]'}`}>{item.text}</p>
                     </div>
                   </div>
                 );
               })}
             </div>
 
-            {/* Complete Onboarding Button */}
             <div className="flex flex-col items-center">
               {onboardingSubmitted ? (
-                // Onboarding submitted - show green completed status
-                <div
-                  className="relative px-12 py-4 rounded-2xl flex items-center gap-3 overflow-hidden cursor-default"
-                  style={{
-                    boxShadow: '0 8px 24px rgba(16, 185, 129, 0.3)'
-                  }}
-                >
-                  {/* Button gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#10B981] via-[#059669] to-[#10B981]"></div>
-                  <Check className="relative w-5 h-5 text-white" />
-                  <span className="relative text-white">Onboarding Complete</span>
+                <div className="relative px-12 py-4 rounded-2xl flex items-center gap-3 overflow-hidden cursor-default" style={{ background: 'linear-gradient(145deg, #6ee7b7 0%, #34d399 20%, #10B981 45%, #059669 65%, #047857 80%, #065f46 100%)', boxShadow: '0 10px 30px -5px rgba(16, 185, 129, 0.5), inset 0 2px 2px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(6, 95, 70, 0.3)' }}>
+                  <Check className="w-5 h-5 text-white" />
+                  <span className="text-white font-medium">Onboarding Complete</span>
                 </div>
               ) : (
-                // Onboarding not submitted - show blue button linking to onboarding
-                <button
-                  onClick={() => navigate('/onboarding')}
-                  className="group relative px-12 py-4 rounded-2xl transition-all duration-300 hover:scale-[1.02] flex items-center gap-3 overflow-hidden"
-                  style={{
-                    boxShadow: '0 8px 24px rgba(20, 184, 166, 0.3)'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = '0 12px 32px rgba(20, 184, 166, 0.4)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(20, 184, 166, 0.3)';
-                  }}
-                >
-                  {/* Button gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#14B8A6] via-[#0D9488] to-[#0D9488]"></div>
-                  <span className="relative text-white">Complete Onboarding</span>
-                  <ArrowRight className="relative w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
+                <button onClick={() => navigate('/onboarding')} className="group relative px-12 py-4 rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 flex items-center gap-3 overflow-hidden" style={{ background: 'linear-gradient(145deg, #5eead4 0%, #2dd4bf 15%, #14B8A6 40%, #0D9488 60%, #0f766e 80%, #115e59 100%)', boxShadow: '0 15px 35px -8px rgba(20, 184, 166, 0.55), inset 0 2px 2px rgba(255,255,255,0.2), inset 0 -3px 6px rgba(17, 94, 89, 0.3)' }}>
+                  <span className="text-white font-medium">Complete Onboarding</span>
+                  <ArrowRight className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
                 </button>
               )}
-              {/* Caption */}
-              <p className="text-xs text-[#6B6C7B] mt-4 text-center max-w-md">
-                {onboardingSubmitted
-                  ? 'Your system is being deployed. Check the countdown timer above for progress.'
-                  : 'Completing onboarding unlocks your full system and deploys remaining subsystems automatically.'}
+              <p className="text-xs text-[#7a8494] mt-4 text-center max-w-md">
+                {onboardingSubmitted ? 'Your system is being deployed. Check the countdown timer above for progress.' : 'Completing onboarding unlocks your full system and deploys remaining subsystems automatically.'}
               </p>
             </div>
           </div>
@@ -292,21 +189,13 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
         {/* Real-Time Activity Ticker */}
         <div className="relative flex items-center justify-center gap-3 py-2 overflow-hidden">
           {activities[currentActivityIndex].icon && (
-            <div className="relative">
-              <div className="relative w-5 h-5 rounded-lg flex items-center justify-center" style={{ color: activities[currentActivityIndex].color }}>
-                {(() => {
-                  const Icon = activities[currentActivityIndex].icon;
-                  return <Icon className="w-5 h-5" />;
-                })()}
-              </div>
+            <div className="relative w-5 h-5 flex items-center justify-center" style={{ color: activities[currentActivityIndex].color }}>
+              {(() => { const Icon = activities[currentActivityIndex].icon; return <Icon className="w-5 h-5" />; })()}
             </div>
           )}
-          <span className="text-sm text-[#8B8D98] animate-fade-in">
-            {activities[currentActivityIndex].message}
-          </span>
+          <span className="text-sm text-[#7a8494] animate-fade-in">{activities[currentActivityIndex].message}</span>
           <Loader2 className="w-4 h-4 text-[#14B8A6]/60 animate-spin" />
         </div>
-
       </div>
     </div>
   );

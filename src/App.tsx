@@ -32,14 +32,14 @@ function ProtectedApp() {
     <ProfileProvider>
       <IntercomProvider>
       <div className="min-h-screen bg-[#080808] relative overflow-hidden">
-        {/* Subtle grid pattern background */}
-        <div className="fixed inset-0 opacity-[0.03] pointer-events-none"
+        {/* Grid/Plaid pattern background with gradient fade */}
+        <div 
+          className="fixed inset-0 pointer-events-none"
           style={{
-            backgroundImage: `
-              linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
+            backgroundImage: 'linear-gradient(90deg, #14B8A6 1px, transparent 1px), linear-gradient(0deg, #14B8A6 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+            mask: 'linear-gradient(135deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.03) 30%, rgba(0,0,0,0.01) 60%, transparent 100%)',
+            WebkitMask: 'linear-gradient(135deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.03) 30%, rgba(0,0,0,0.01) 60%, transparent 100%)'
           }}
         />
 

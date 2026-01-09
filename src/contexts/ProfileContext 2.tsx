@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState, useCallback } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from './AuthContext'
-import { Loader2 } from 'lucide-react'
 
 export type SystemStatus = 'optimizing' | 'active'
 export type StepStatus = 'completed' | 'in-progress' | 'not-started'
@@ -367,18 +366,6 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setSubmitting(false)
     }
-  }
-
-  // Show loading screen while fetching profile data
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#080808] flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="w-10 h-10 text-[#38bdf8] animate-spin" />
-          <p className="text-[#7a8494] text-sm">Loading your dashboard...</p>
-        </div>
-      </div>
-    )
   }
 
   return (
