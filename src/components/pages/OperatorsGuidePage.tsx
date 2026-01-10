@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BookOpen, Cog, Phone, MessageSquare, Star, Clock, DollarSign, TrendingUp, PhoneCall, ChevronRight } from 'lucide-react';
+import { BookOpen, Cog, Phone, MessageSquare, Star, Clock, DollarSign, TrendingUp, PhoneCall, ChevronRight, Play } from 'lucide-react';
 import { PageHero } from '../PageHero';
 import { SlideOutPanel } from '../SlideOutPanel';
 
@@ -69,33 +69,104 @@ export function OperatorsGuidePage() {
         title="How LaunchOS Works"
       >
         <div className="space-y-6">
-          <p className="text-[#c5cdd8] leading-relaxed">
-            LaunchOS is your automated client acquisition system. We handle the marketing, you handle the service.
-          </p>
-
-          <div className="space-y-4">
-            <h3 className="text-[#E8F1FF] font-medium">The System Has 3 Parts:</h3>
-
-            <div className="p-4 rounded-xl border border-[#252a33]" style={{ background: 'rgba(20, 184, 166, 0.05)' }}>
-              <h4 className="text-[#14B8A6] font-medium mb-2">1. Lead Generation</h4>
-              <p className="text-[#7a8494] text-sm">Google Ads, SEO, and social media bring leads directly to your booking system.</p>
-            </div>
-
-            <div className="p-4 rounded-xl border border-[#252a33]" style={{ background: 'rgba(56, 189, 248, 0.05)' }}>
-              <h4 className="text-[#38bdf8] font-medium mb-2">2. Automated Follow-up</h4>
-              <p className="text-[#7a8494] text-sm">Email and SMS sequences nurture leads who don't book immediately.</p>
-            </div>
-
-            <div className="p-4 rounded-xl border border-[#252a33]" style={{ background: 'rgba(139, 92, 246, 0.05)' }}>
-              <h4 className="text-[#8B5CF6] font-medium mb-2">3. Review Automation</h4>
-              <p className="text-[#7a8494] text-sm">After each job, we automatically request Google reviews to boost your visibility.</p>
+          {/* Video Placeholder */}
+          <div className="relative rounded-xl border border-[#252a33] overflow-hidden cursor-pointer group" style={{ background: 'linear-gradient(135deg, #0f1115 0%, #1a1d24 100%)' }}>
+            <div className="aspect-video flex flex-col items-center justify-center gap-3">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center transition-transform group-hover:scale-110" style={{ background: 'rgba(0, 212, 170, 0.15)', border: '2px solid rgba(0, 212, 170, 0.3)' }}>
+                <Play className="w-7 h-7 text-[#00D4AA] ml-1" />
+              </div>
+              <p className="text-[#7a8494] text-sm">Video: How LaunchOS Works (3 min)</p>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#0f1115] border border-[#252a33]">
-            <p className="text-[#7a8494] text-sm">
-              <span className="text-[#E8F1FF] font-medium">Your only job:</span> Answer leads quickly, show up on time, and do great work. The system handles everything else.
+          {/* Quick Summary */}
+          <div>
+            <h3 className="text-[#E8F1FF] font-medium mb-3">Quick Summary</h3>
+            <p className="text-[#c5cdd8] text-sm leading-relaxed mb-3">
+              Once you complete onboarding, we build your entire marketing system — your website, your ads, your profiles — all custom to your business, your brand, your service area.
             </p>
+            <p className="text-[#c5cdd8] text-sm leading-relaxed">
+              In 72 hours, everything goes live. We'll send you a message with all your logins and instructions for each platform.
+            </p>
+          </div>
+
+          {/* Your System Includes */}
+          <div>
+            <h3 className="text-[#E8F1FF] font-medium mb-3">Your System Includes:</h3>
+            <div className="space-y-2">
+              {[
+                { label: 'Website', desc: 'Books jobs for you. SEO built in.' },
+                { label: 'Google Ads', desc: 'Top of search results. Pay per click.' },
+                { label: 'Local Service Ads', desc: 'Google Guaranteed badge. Pay per lead.' },
+                { label: 'Thumbtack', desc: 'Local marketplace. Pay per lead.' },
+                { label: 'Nextdoor', desc: 'Free neighborhood exposure.' },
+                { label: 'Google Business Profile', desc: 'Free Google Maps listing.' },
+                { label: 'CRM', desc: 'Manage leads and bookings. See "How to Use Your CRM."' },
+                { label: 'This Portal', desc: 'Your central hub for everything.' },
+              ].map((item, idx) => (
+                <div key={idx} className="flex gap-3 text-sm">
+                  <span className="text-[#00D4AA] font-medium whitespace-nowrap">{item.label}</span>
+                  <span className="text-[#7a8494]">— {item.desc}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Where Leads Come From Table */}
+          <div>
+            <h3 className="text-[#E8F1FF] font-medium mb-3">Where Leads Come From & How to Respond:</h3>
+            <div className="rounded-xl border border-[#252a33] overflow-hidden">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr style={{ background: 'rgba(0, 212, 170, 0.08)' }}>
+                    <th className="text-left text-[#00D4AA] font-medium px-3 py-2 border-b border-[#252a33]">Source</th>
+                    <th className="text-left text-[#00D4AA] font-medium px-3 py-2 border-b border-[#252a33]">How Leads Reach You</th>
+                    <th className="text-left text-[#00D4AA] font-medium px-3 py-2 border-b border-[#252a33]">Where to Respond</th>
+                  </tr>
+                </thead>
+                <tbody className="text-[#c5cdd8]">
+                  {[
+                    { source: 'Website', how: 'Booking or contact form', where: 'Email or CRM' },
+                    { source: 'Google Ads', how: 'Calls, emails, bookings', where: 'Phone, Email, or CRM' },
+                    { source: 'Local Service Ads', how: 'Calls or messages', where: 'Phone or LSA app' },
+                    { source: 'Thumbtack', how: 'Quote requests', where: 'Thumbtack app' },
+                    { source: 'Nextdoor', how: 'Messages', where: 'Nextdoor app' },
+                    { source: 'Google Business Profile', how: 'Calls or website clicks', where: 'Phone' },
+                  ].map((row, idx) => (
+                    <tr key={idx} className="border-b border-[#252a33] last:border-b-0" style={{ background: idx % 2 === 0 ? 'rgba(15, 17, 21, 0.5)' : 'transparent' }}>
+                      <td className="px-3 py-2 text-[#E8F1FF]">{row.source}</td>
+                      <td className="px-3 py-2">{row.how}</td>
+                      <td className="px-3 py-2">{row.where}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Your Job From Here */}
+          <div>
+            <h3 className="text-[#E8F1FF] font-medium mb-3">Your Job From Here:</h3>
+            <div className="space-y-2">
+              <div className="flex items-center gap-3">
+                <span className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium text-[#00D4AA]" style={{ background: 'rgba(0, 212, 170, 0.15)' }}>1</span>
+                <span className="text-[#c5cdd8] text-sm">Answer fast</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium text-[#00D4AA]" style={{ background: 'rgba(0, 212, 170, 0.15)' }}>2</span>
+                <span className="text-[#c5cdd8] text-sm">Book the job</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium text-[#00D4AA]" style={{ background: 'rgba(0, 212, 170, 0.15)' }}>3</span>
+                <span className="text-[#c5cdd8] text-sm">Do great work</span>
+              </div>
+            </div>
+            <p className="text-[#7a8494] text-sm mt-3">Everything else is handled.</p>
+          </div>
+
+          {/* Closing Statement */}
+          <div className="pt-4 border-t border-[#252a33]">
+            <p className="text-[#00D4AA] text-sm italic">This is your system. Let's fill your schedule.</p>
           </div>
         </div>
       </SlideOutPanel>
