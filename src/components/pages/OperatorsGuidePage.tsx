@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { BookOpen, Cog, Phone, MessageSquare, Star, Clock, DollarSign, TrendingUp, PhoneCall, ChevronRight } from 'lucide-react';
 import { PageHero } from '../PageHero';
 import { HowLaunchOSWorksGuide } from '../guides/HowLaunchOSWorksGuide';
+import { HowToUseYourCRMGuide } from '../guides/HowToUseYourCRMGuide';
+import { LeadResponseScriptsGuide } from '../guides/LeadResponseScriptsGuide';
+import { SalesScriptsGuide } from '../guides/SalesScriptsGuide';
 
 interface GuideCard {
   id: string;
@@ -31,6 +34,15 @@ export function OperatorsGuidePage() {
   // Show full-page guide content when a guide is active
   if (activeGuide === 'how-launchos-works') {
     return <HowLaunchOSWorksGuide onBack={handleBack} />;
+  }
+  if (activeGuide === 'how-to-use-crm') {
+    return <HowToUseYourCRMGuide onBack={handleBack} />;
+  }
+  if (activeGuide === 'lead-response-scripts') {
+    return <LeadResponseScriptsGuide onBack={handleBack} />;
+  }
+  if (activeGuide === 'sales-scripts') {
+    return <SalesScriptsGuide onBack={handleBack} />;
   }
 
   // Show the card grid
