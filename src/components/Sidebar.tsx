@@ -45,7 +45,7 @@ export function Sidebar() {
       </button>
 
       {/* Sidebar */}
-      <div className={`fixed left-0 top-0 h-full bg-[#0A0A0A] border-r border-[#1A1B1E] transition-all duration-300 z-40 w-64 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
+      <div className={`fixed left-0 top-0 h-full bg-[#212121] border-r border-[#333333] transition-all duration-300 z-40 w-64 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
         style={{
           backdropFilter: 'blur(20px)',
           boxShadow: '4px 0 20px rgba(0, 0, 0, 0.5)'

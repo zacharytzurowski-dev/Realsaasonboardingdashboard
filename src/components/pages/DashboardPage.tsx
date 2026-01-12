@@ -57,18 +57,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
 
   return (
     <div className="min-h-screen relative">
-      {/* Grid/Plaid Background */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-0" 
-        style={{ 
-          marginLeft: '256px',
-          opacity: 0.05,
-          backgroundImage: 'linear-gradient(90deg, #14B8A6 1px, transparent 1px), linear-gradient(0deg, #14B8A6 1px, transparent 1px)', 
-          backgroundSize: '60px 60px' 
-        }}
-      ></div>
-      
-      <div className="relative z-10 max-w-[1600px] mx-auto space-y-8">
+      <div className="relative z-10 max-w-[1600px] mx-auto space-y-12">
         
         {/* Top Header Section */}
         <div className="flex items-center justify-between">
@@ -135,7 +124,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
               <div className="text-sm text-[#7a8494]"><span className="text-[#14B8A6]">{systemStatus === 'active' ? 5 : 2}</span> of 5 completed</div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
               {[
                 { step: 1, text: 'Upload your business info & brand assets', icon: FileText, completed: true },
                 { step: 2, text: 'Preview your new business hub', icon: Globe, completed: true },
