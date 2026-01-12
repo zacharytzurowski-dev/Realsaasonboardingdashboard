@@ -72,23 +72,15 @@ export function Sidebar() {
                 <button
                   key={item.label}
                   onClick={() => handleNavigation(item.page)}
-                  className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                  className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
                     isActive
-                      ? 'bg-[#151618] text-white'
+                      ? 'bg-[#1a1a1a] text-white'
                       : 'text-[#8B8D98] hover:text-[#a8aab5]'
                   }`}
-                  style={isActive ? {
-                    boxShadow: '0 0 20px rgba(0, 217, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
-                  } : undefined}
                 >
-                  {/* Active indicator glow - left edge */}
+                  {/* Active indicator - left edge */}
                   {isActive && (
-                    <div
-                      className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-[#00D9FF] rounded-r-full"
-                      style={{
-                        boxShadow: '0 0 10px rgba(0, 217, 255, 0.6)'
-                      }}
-                    />
+                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-[#00D9FF] rounded-r-full" />
                   )}
                   <Icon className={`w-5 h-5 relative z-10 ${useGreenHighlight ? 'text-[#10B981]' : ''}`} />
                   <span className="relative z-10">{item.label}</span>
@@ -108,22 +100,14 @@ export function Sidebar() {
             {/* Operator's Guide */}
             <button
               onClick={() => handleNavigation('operators-guide')}
-              className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+              className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
                 currentPage === 'operators-guide'
-                  ? 'bg-[#151618] text-white'
+                  ? 'bg-[#1a1a1a] text-white'
                   : 'text-[#8B8D98] hover:text-[#a8aab5]'
               }`}
-              style={currentPage === 'operators-guide' ? {
-                boxShadow: '0 0 20px rgba(0, 217, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
-              } : undefined}
             >
               {currentPage === 'operators-guide' && (
-                <div
-                  className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-[#00D9FF] rounded-r-full"
-                  style={{
-                    boxShadow: '0 0 10px rgba(0, 217, 255, 0.6)'
-                  }}
-                />
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-[#00D9FF] rounded-r-full" />
               )}
               <BookOpen className="w-5 h-5 relative z-10" />
               <span className="relative z-10">Operator's Guide</span>
@@ -132,22 +116,14 @@ export function Sidebar() {
             {/* Settings */}
             <button
               onClick={() => handleNavigation('settings')}
-              className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+              className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
                 currentPage === 'settings'
-                  ? 'bg-[#151618] text-white'
+                  ? 'bg-[#1a1a1a] text-white'
                   : 'text-[#8B8D98] hover:text-[#a8aab5]'
               }`}
-              style={currentPage === 'settings' ? {
-                boxShadow: '0 0 20px rgba(0, 217, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
-              } : undefined}
             >
               {currentPage === 'settings' && (
-                <div
-                  className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-[#00D9FF] rounded-r-full"
-                  style={{
-                    boxShadow: '0 0 10px rgba(0, 217, 255, 0.6)'
-                  }}
-                />
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-[#00D9FF] rounded-r-full" />
               )}
               <Settings className="w-5 h-5 relative z-10" />
               <span className="relative z-10">Settings</span>
