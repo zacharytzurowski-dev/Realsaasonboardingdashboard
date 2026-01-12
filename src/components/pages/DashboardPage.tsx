@@ -1,4 +1,4 @@
-import { Clock, CheckCircle, Sparkles, Globe, TrendingUp, Zap, Rocket, ArrowRight, Palette, FileText, Calendar, Database, Star, Loader2, Settings, HelpCircle, ChevronDown, Check, LogOut } from 'lucide-react';
+import { Clock, CheckCircle, Sparkles, Globe, TrendingUp, Zap, ArrowRight, Palette, FileText, Calendar, Database, Star, Loader2, Settings, HelpCircle, ChevronDown, Check, LogOut } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeploymentCountdown } from '../DeploymentCountdown';
@@ -72,16 +72,11 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
         
         {/* Top Header Section */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-5">
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(145deg, #5eead4 0%, #2dd4bf 20%, #14B8A6 45%, #0D9488 65%, #0f766e 80%, #115e59 100%)', boxShadow: '0 10px 30px -5px rgba(20, 184, 166, 0.5), inset 0 2px 3px rgba(255,255,255,0.3), inset 0 -3px 6px rgba(17, 94, 89, 0.4)' }}>
-              <Rocket className="w-7 h-7 text-white drop-shadow-md" />
-            </div>
-            <div>
-              <h1 className="text-3xl text-[#E8F1FF] tracking-tight">
-                Welcome back, <span style={{ background: "linear-gradient(90deg, #5eead4, #2dd4bf, #14B8A6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", filter: "drop-shadow(0 0 8px rgba(20,184,166,0.4))" }}>{ownerName}</span>
-              </h1>
-              <p className="text-[#7a8494] mt-2">LaunchOS builds your client acquisition system. Everything runs without you.</p>
-            </div>
+          <div>
+            <h1 className="text-3xl text-[#E8F1FF] tracking-tight">
+              Welcome back, <span style={{ background: "linear-gradient(90deg, #5eead4, #2dd4bf, #14B8A6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", filter: "drop-shadow(0 0 8px rgba(20,184,166,0.4))" }}>{ownerName}</span>
+            </h1>
+            <p className="text-[#7a8494] mt-2">LaunchOS builds your client acquisition system. Everything runs without you.</p>
           </div>
 
           {/* User Profile */}
