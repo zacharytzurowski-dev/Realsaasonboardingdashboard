@@ -65,6 +65,8 @@ function ProtectedApp() {
               <Route path="/settings" element={<SettingsPage />} />
               <Route path="/resources" element={<ResourcesPage />} />
               <Route path="/operators-guide" element={<OperatorsGuidePage />} />
+              {/* Catch-all route - redirect unknown paths to dashboard */}
+              <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
           </div>
         </main>
