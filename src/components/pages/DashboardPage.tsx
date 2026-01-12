@@ -52,7 +52,7 @@ export function DashboardPage() {
             Welcome back, {ownerName}
           </h1>
           <p className="text-[#6B7280] mt-1">
-            Your client acquisition system is being configured.
+            LaunchOS builds your client acquisition system. Everything runs without you.
           </p>
         </div>
 
