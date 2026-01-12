@@ -5,6 +5,11 @@ import { HowLaunchOSWorksGuide } from '../guides/HowLaunchOSWorksGuide';
 import { HowToUseYourCRMGuide } from '../guides/HowToUseYourCRMGuide';
 import { LeadResponseScriptsGuide } from '../guides/LeadResponseScriptsGuide';
 import { SalesScriptsGuide } from '../guides/SalesScriptsGuide';
+import { ReviewRequestScriptsGuide } from '../guides/ReviewRequestScriptsGuide';
+import { FollowUpSequencesGuide } from '../guides/FollowUpSequencesGuide';
+import { PricingGuidanceGuide } from '../guides/PricingGuidanceGuide';
+import { UpsellInPersonGuide } from '../guides/UpsellInPersonGuide';
+import { UpsellOnTheCallGuide } from '../guides/UpsellOnTheCallGuide';
 
 interface GuideCard {
   id: string;
@@ -43,6 +48,21 @@ export function OperatorsGuidePage() {
   }
   if (activeGuide === 'sales-scripts') {
     return <SalesScriptsGuide onBack={handleBack} />;
+  }
+  if (activeGuide === 'review-request-scripts') {
+    return <ReviewRequestScriptsGuide onBack={handleBack} />;
+  }
+  if (activeGuide === 'follow-up-sequences') {
+    return <FollowUpSequencesGuide onBack={handleBack} />;
+  }
+  if (activeGuide === 'pricing-guidance') {
+    return <PricingGuidanceGuide onBack={handleBack} />;
+  }
+  if (activeGuide === 'upsell-in-person') {
+    return <UpsellInPersonGuide onBack={handleBack} />;
+  }
+  if (activeGuide === 'upsell-on-call') {
+    return <UpsellOnTheCallGuide onBack={handleBack} />;
   }
 
   // Show the card grid
