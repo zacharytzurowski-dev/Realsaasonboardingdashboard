@@ -75,9 +75,7 @@ export function Sidebar() {
                   className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
                     isActive
                       ? 'bg-[#151618] text-white'
-                      : useGreenHighlight
-                      ? 'bg-[#10B981]/10 text-[#10B981]'
-                      : 'text-[#8B8D98] hover:bg-[#151618] hover:text-white'
+                      : 'text-[#8B8D98] hover:text-[#a8aab5]'
                   }`}
                   style={isActive ? {
                     boxShadow: '0 0 20px rgba(0, 217, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
@@ -85,22 +83,14 @@ export function Sidebar() {
                 >
                   {/* Active indicator glow - left edge */}
                   {isActive && (
-                    <div 
+                    <div
                       className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-[#00D9FF] rounded-r-full"
                       style={{
                         boxShadow: '0 0 10px rgba(0, 217, 255, 0.6)'
                       }}
                     />
                   )}
-                  {useGreenHighlight && (
-                    <div 
-                      className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-[#10B981] rounded-r-full"
-                      style={{
-                        boxShadow: '0 0 10px rgba(16, 185, 129, 0.6)'
-                      }}
-                    />
-                  )}
-                  <Icon className="w-5 h-5 relative z-10" />
+                  <Icon className={`w-5 h-5 relative z-10 ${useGreenHighlight ? 'text-[#10B981]' : ''}`} />
                   <span className="relative z-10">{item.label}</span>
                 </button>
               );
@@ -109,7 +99,7 @@ export function Sidebar() {
             {/* CRM Link */}
             <button
               onClick={handleCRMClick}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-[#8B8D98] hover:bg-[#151618] hover:text-white"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-[#8B8D98] hover:text-[#a8aab5]"
             >
               <ExternalLink className="w-5 h-5" />
               <span>CRM</span>
@@ -121,7 +111,7 @@ export function Sidebar() {
               className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
                 currentPage === 'operators-guide'
                   ? 'bg-[#151618] text-white'
-                  : 'text-[#8B8D98] hover:bg-[#151618] hover:text-white'
+                  : 'text-[#8B8D98] hover:text-[#a8aab5]'
               }`}
               style={currentPage === 'operators-guide' ? {
                 boxShadow: '0 0 20px rgba(0, 217, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
@@ -145,7 +135,7 @@ export function Sidebar() {
               className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
                 currentPage === 'settings'
                   ? 'bg-[#151618] text-white'
-                  : 'text-[#8B8D98] hover:bg-[#151618] hover:text-white'
+                  : 'text-[#8B8D98] hover:text-[#a8aab5]'
               }`}
               style={currentPage === 'settings' ? {
                 boxShadow: '0 0 20px rgba(0, 217, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
