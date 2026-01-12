@@ -162,37 +162,132 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
 
     try {
       // Fetch profile data
-      const { data: profileData, error: profileError } = await supabase
+      let { data: profileData, error: profileError } = await supabase
         .from('profiles')
         .select('id, full_name, business_name')
         .eq('id', user.id)
         .single()
 
-      if (profileError) {
-        console.log('Profile fetch error (may not exist yet):', profileError.message)
-        setProfile(null)
+      // If profile doesn't exist (PGRST116 = row not found), create it
+      if (profileError && profileError.code === 'PGRST116') {
+        console.log('Profile not found, creating for new user...')
+        const { data: newProfile, error: createError } = await supabase
+          .from('profiles')
+          .upsert({
+            id: user.id,
+            full_name: user.user_metadata?.full_name || null,
+            business_name: null
+          }, { onConflict: 'id' })
+          .select()
+          .single()
+
+        if (createError) {
+          console.log('Could not create profile (RLS may be blocking):', createError.message)
+          // Set a fallback profile so the UI still works
+          setProfile({
+            id: user.id,
+            full_name: user.user_metadata?.full_name || null,
+            business_name: null
+          })
+        } else {
+          setProfile(newProfile)
+        }
+      } else if (profileError) {
+        console.log('Profile fetch error:', profileError.message)
+        // Set a fallback profile so the UI still works
+        setProfile({
+          id: user.id,
+          full_name: user.user_metadata?.full_name || null,
+          business_name: null
+        })
       } else {
         setProfile(profileData)
       }
 
       // Fetch onboarding progress with all fields
-      const { data: progressData, error: progressError } = await supabase
+      let { data: progressData, error: progressError } = await supabase
         .from('onboarding_progress')
         .select('id, step_1_status, step_2_status, step_3_status, step_4_status, step_5_status, step_6_status, form_data, onboarding_completed_at, activation_deadline')
         .eq('id', user.id)
         .single()
 
-      if (progressError) {
-        console.log('Onboarding progress fetch error (may not exist yet):', progressError.message)
-        setOnboardingProgress(null)
+      // If onboarding progress doesn't exist, create it
+      if (progressError && progressError.code === 'PGRST116') {
+        console.log('Onboarding progress not found, creating for new user...')
+        const { data: newProgress, error: createError } = await supabase
+          .from('onboarding_progress')
+          .upsert({
+            id: user.id,
+            step_1_status: 'not-started',
+            step_2_status: 'not-started',
+            step_3_status: 'not-started',
+            step_4_status: 'not-started',
+            step_5_status: 'not-started',
+            step_6_status: 'not-started',
+            form_data: {},
+            onboarding_completed_at: null,
+            activation_deadline: null
+          }, { onConflict: 'id' })
+          .select()
+          .single()
+
+        if (createError) {
+          console.log('Could not create onboarding progress (RLS may be blocking):', createError.message)
+          // Set a fallback so the UI still works
+          setOnboardingProgress({
+            id: user.id,
+            step_1_status: 'not-started',
+            step_2_status: 'not-started',
+            step_3_status: 'not-started',
+            step_4_status: 'not-started',
+            step_5_status: 'not-started',
+            step_6_status: 'not-started',
+            form_data: {},
+            onboarding_completed_at: null,
+            activation_deadline: null
+          })
+        } else {
+          setOnboardingProgress(newProgress)
+        }
+      } else if (progressError) {
+        console.log('Onboarding progress fetch error:', progressError.message)
+        // Set a fallback so the UI still works
+        setOnboardingProgress({
+          id: user.id,
+          step_1_status: 'not-started',
+          step_2_status: 'not-started',
+          step_3_status: 'not-started',
+          step_4_status: 'not-started',
+          step_5_status: 'not-started',
+          step_6_status: 'not-started',
+          form_data: {},
+          onboarding_completed_at: null,
+          activation_deadline: null
+        })
       } else {
         console.log('Onboarding progress loaded:', progressData)
         setOnboardingProgress(progressData)
       }
     } catch (err) {
       console.error('Error fetching data:', err)
-      setProfile(null)
-      setOnboardingProgress(null)
+      // Set fallback values so the UI still works
+      setProfile({
+        id: user.id,
+        full_name: user.user_metadata?.full_name || null,
+        business_name: null
+      })
+      setOnboardingProgress({
+        id: user.id,
+        step_1_status: 'not-started',
+        step_2_status: 'not-started',
+        step_3_status: 'not-started',
+        step_4_status: 'not-started',
+        step_5_status: 'not-started',
+        step_6_status: 'not-started',
+        form_data: {},
+        onboarding_completed_at: null,
+        activation_deadline: null
+      })
     } finally {
       setLoading(false)
     }
