@@ -57,17 +57,6 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
 
   return (
     <div className="min-h-screen relative">
-      {/* Grid/Plaid Background */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-0" 
-        style={{ 
-          marginLeft: '256px',
-          opacity: 0.05,
-          backgroundImage: 'linear-gradient(90deg, #14B8A6 1px, transparent 1px), linear-gradient(0deg, #14B8A6 1px, transparent 1px)', 
-          backgroundSize: '60px 60px' 
-        }}
-      ></div>
-      
       <div className="relative z-10 max-w-[1600px] mx-auto space-y-10">
         
         {/* Top Header Section */}
