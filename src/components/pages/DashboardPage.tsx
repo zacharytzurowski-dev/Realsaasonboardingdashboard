@@ -82,7 +82,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
       <div className="relative z-10 max-w-[1600px] mx-auto space-y-8">
         
         {/* Top Header Section - Welcome Hero */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-5">
             {/* Logo with Glow */}
             <LaunchOSLogo size={56} withGlow={true} />
@@ -313,7 +313,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
 
         {/* Next Steps Panel */}
         <div
-          className="mt-4 bg-[#151618] rounded-3xl border border-[#2A2B2E]/50 p-8 overflow-hidden relative"
+          className="mt-8 bg-[#151618] rounded-3xl border border-[#2A2B2E]/50 p-8 overflow-hidden relative"
           style={{
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03)'
           }}
