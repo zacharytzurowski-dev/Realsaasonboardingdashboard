@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Home, CheckCircle, Globe, DollarSign, TrendingUp, Settings, Menu, X, ExternalLink } from 'lucide-react';
 import { LaunchOSLogo } from './LaunchOSLogo';
 
@@ -10,6 +11,21 @@ interface SidebarProps {
 }
 
 export function Sidebar({ isOpen, setIsOpen, currentPage, setCurrentPage, onboardingComplete }: SidebarProps) {
+  const [clickedItem, setClickedItem] = useState<string | null>(null);
+
+  const handleNavClick = (page: string) => {
+    setClickedItem(page);
+    setCurrentPage(page);
+    setTimeout(() => setClickedItem(null), 200);
+  };
+
+  const handleExternalClick = (id: string, url: string) => {
+    setClickedItem(id);
+    setTimeout(() => {
+      setClickedItem(null);
+      window.open(url, '_blank');
+    }, 200);
+  };
   const navItems = [
     { icon: Home, label: 'Dashboard', page: 'dashboard' },
     { icon: CheckCircle, label: 'Onboarding', page: 'onboarding', highlightGreen: !onboardingComplete },
@@ -19,9 +35,6 @@ export function Sidebar({ isOpen, setIsOpen, currentPage, setCurrentPage, onboar
     { icon: Settings, label: 'Settings', page: 'settings' },
   ];
 
-  const handleCRMClick = () => {
-    window.open('https://fieldd.co', '_blank');
-  };
 
   return (
     <>
@@ -59,13 +72,14 @@ export function Sidebar({ isOpen, setIsOpen, currentPage, setCurrentPage, onboar
               const Icon = item.icon;
               const isActive = currentPage === item.page;
               const useGreenHighlight = item.highlightGreen && !isActive;
-              
+              const isClicked = clickedItem === item.page;
+
               return (
                 <button
                   key={item.label}
-                  onClick={() => setCurrentPage(item.page)}
-                  className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all $
-                    {isActive
+                  onClick={() => handleNavClick(item.page)}
+                  className={`group relative w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                    isActive
                       ? 'bg-[#151618] text-white'
                       : useGreenHighlight
                       ? 'bg-[#10B981]/10 text-[#10B981]'
@@ -77,7 +91,7 @@ export function Sidebar({ isOpen, setIsOpen, currentPage, setCurrentPage, onboar
                 >
                   {/* Active indicator glow - left edge */}
                   {isActive && (
-                    <div 
+                    <div
                       className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-[#00D9FF] rounded-r-full"
                       style={{
                         boxShadow: '0 0 10px rgba(0, 217, 255, 0.6)'
@@ -85,14 +99,19 @@ export function Sidebar({ isOpen, setIsOpen, currentPage, setCurrentPage, onboar
                     />
                   )}
                   {useGreenHighlight && (
-                    <div 
+                    <div
                       className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-[#10B981] rounded-r-full"
                       style={{
                         boxShadow: '0 0 10px rgba(16, 185, 129, 0.6)'
                       }}
                     />
                   )}
-                  <Icon className="w-5 h-5 relative z-10" />
+                  <Icon
+                    className="w-5 h-5 relative z-10"
+                    style={isClicked ? {
+                      animation: 'iconShake 200ms ease-in-out'
+                    } : undefined}
+                  />
                   <span className="relative z-10">{item.label}</span>
                 </button>
               );
@@ -100,10 +119,15 @@ export function Sidebar({ isOpen, setIsOpen, currentPage, setCurrentPage, onboar
             
             {/* CRM Link */}
             <button
-              onClick={handleCRMClick}
+              onClick={() => handleExternalClick('crm', 'https://fieldd.co')}
               className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-[#8B8D98] hover:bg-[#151618] hover:text-white"
             >
-              <ExternalLink className="w-5 h-5" />
+              <ExternalLink
+                className="w-5 h-5"
+                style={clickedItem === 'crm' ? {
+                  animation: 'iconShake 200ms ease-in-out'
+                } : undefined}
+              />
               <span>CRM</span>
             </button>
           </nav>
