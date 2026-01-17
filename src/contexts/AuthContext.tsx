@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import { sendWelcomeEmail } from '../lib/email'
 import type { User } from '@supabase/supabase-js'
 
 interface AuthContextType {
@@ -40,6 +41,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       },
     })
     if (error) throw error
+
+    // Send welcome email (non-blocking)
+    const firstName = fullName.split(' ')[0]
+    sendWelcomeEmail({ email, firstName })
   }
 
   const signIn = async (email: string, password: string) => {
