@@ -68,10 +68,10 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
         }}
       ></div>
       
-      <div className="relative z-10 max-w-[1600px] mx-auto space-y-10">
+      <div className="relative z-10 max-w-[1600px] mx-auto space-y-24">
         
         {/* Top Header Section */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-10">
           <div>
             <h1 className="text-3xl text-[#E8F1FF] tracking-tight">
               Welcome back, <span style={{ background: "linear-gradient(90deg, #5eead4, #2dd4bf, #14B8A6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", filter: "drop-shadow(0 0 8px rgba(20,184,166,0.4))" }}>{ownerName}</span>
@@ -120,13 +120,13 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
         </div>
 
         {/* 72-Hour Deployment Progress Module */}
-        <div className="bg-gradient-to-br from-[#14161a] to-[#1a1d24] rounded-3xl border border-[#252a33] p-8 overflow-hidden relative" style={{ boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 10px 30px -10px rgba(20, 184, 166, 0.1)' }}>
+        <div className="mb-8 bg-gradient-to-br from-[#14161a] to-[#1a1d24] rounded-3xl border border-[#252a33] p-8 overflow-hidden relative" style={{ boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.6), 0 10px 30px -10px rgba(20, 184, 166, 0.1)' }}>
           <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, transparent 50%)' }}></div>
           <div className="relative"><DeploymentCountdown showFullDisplay={true} /></div>
         </div>
 
         {/* Next Steps Panel */}
-        <div className="bg-gradient-to-br from-[#14161a] to-[#1a1d24] rounded-3xl border border-[#252a33] p-8 overflow-hidden relative" style={{ boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.6)' }}>
+        <div className="mt-16 bg-gradient-to-br from-[#14161a] to-[#1a1d24] rounded-3xl border border-[#252a33] p-8 overflow-hidden relative" style={{ boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.6)' }}>
           <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.03) 0%, transparent 50%)' }}></div>
           
           <div className="relative">
@@ -182,7 +182,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
         </div>
 
         {/* Real-Time Activity Ticker */}
-        <div className="relative flex items-center justify-center gap-3 py-2 overflow-hidden">
+        <div className="mt-8 relative flex items-center justify-center gap-3 py-2 overflow-hidden">
           {activities[currentActivityIndex].icon && (
             <div className="relative w-5 h-5 flex items-center justify-center" style={{ color: activities[currentActivityIndex].color }}>
               {(() => { const Icon = activities[currentActivityIndex].icon; return <Icon className="w-5 h-5" />; })()}
