@@ -79,7 +79,7 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
 
   return (
     <div className="min-h-screen relative">
-      <div className="relative z-10 max-w-[1600px] mx-auto space-y-8">
+      <div className="relative z-10 max-w-[1600px] mx-auto space-y-12">
         
         {/* Top Header Section - Welcome Hero */}
         <div className="flex items-center justify-between mb-4">
