@@ -9,6 +9,7 @@ import { PaidMarketingPage } from './components/pages/PaidMarketingPage'
 import { OrganicMarketingPage } from './components/pages/OrganicMarketingPage'
 import { SettingsPage } from './components/pages/SettingsPage'
 import { ResourcesPage } from './components/pages/ResourcesPage'
+import { AuditPage } from './components/pages/AuditPage'
 
 function ProtectedApp() {
   const { user, loading } = useAuth()
@@ -38,6 +39,7 @@ function ProtectedApp() {
           <Route path="/organic-marketing" element={<OrganicMarketingPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/resources" element={<ResourcesPage />} />
+          <Route path="/audit" element={<AuditPage />} />
         </Routes>
       </main>
     </div>

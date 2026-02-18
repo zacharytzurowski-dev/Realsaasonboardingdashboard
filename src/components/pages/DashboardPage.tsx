@@ -291,16 +291,12 @@ export function DashboardPage({ onNavigate }: DashboardPageProps) {
 
             {/* Progress Bar */}
             <div className="relative">
-              <div className="h-2 bg-[#0A0A0A] rounded-full overflow-hidden border border-[#2A2B2E]/50">
-                <div 
-                  className="h-full bg-gradient-to-r from-[#00D9FF] via-[#0EA5E9] to-[#3B82F6] rounded-full transition-all duration-1000 relative"
-                  style={{ 
-                    width: `${progressPercentage}%`,
-                    boxShadow: '0 0 20px rgba(0, 217, 255, 0.4)'
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#00D9FF] to-[#3B82F6] blur-sm opacity-50"></div>
-                </div>
+              <div className="absolute inset-0 rounded-full" style={{ boxShadow: `0 0 16px rgba(0, 217, 255, ${progressPercentage > 0 ? 0.3 : 0})`, transition: 'box-shadow 1s' }}></div>
+              <div className="h-2.5 bg-[#0A0A0A] rounded-full overflow-hidden border border-[#2A2B2E]/50 relative">
+                <div
+                  className="h-full bg-gradient-to-r from-[#00D9FF] via-[#0EA5E9] to-[#3B82F6] rounded-full transition-all duration-1000"
+                  style={{ width: `${progressPercentage}%` }}
+                />
               </div>
               <div className="flex items-center justify-between mt-2 text-xs text-[#6B6C7B]">
                 <span>Started</span>
